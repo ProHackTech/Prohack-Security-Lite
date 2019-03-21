@@ -1,6 +1,6 @@
 <h1 align="center">
 	<br>
-	<img src="https://github.com/ProHackTech/Prohack-Security-Lite/logo.png" alt="ProHack-Security-Lite Logo">
+	<img src="https://raw.githubusercontent.com/ProHackTech/Prohack-Security-Lite/master/logo.png" alt="ProHack-Security-Lite Logo">
 	<br>
 	Prohack Security Lite
 </h1>
