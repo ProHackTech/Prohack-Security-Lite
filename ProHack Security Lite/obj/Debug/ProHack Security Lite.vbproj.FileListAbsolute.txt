@@ -14,3 +14,5 @@ C:\Users\da74\Documents\GitHub\ProHack-Security-Lite\ProHack Security Lite\obj\D
 C:\Users\da74\Documents\GitHub\ProHack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack Security Lite.pdb
 C:\Users\da74\Documents\GitHub\ProHack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.malware_scanner.resources
 C:\Users\da74\Documents\GitHub\ProHack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.form_loading.resources
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.malware_informer.resources
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.UC_Detected.resources
