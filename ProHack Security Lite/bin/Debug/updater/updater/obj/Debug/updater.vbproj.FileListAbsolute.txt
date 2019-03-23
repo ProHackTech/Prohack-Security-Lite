@@ -1,0 +1,24 @@
+C:\Users\da74\source\repos\updater\updater\bin\Debug\updater.exe.config
+C:\Users\da74\source\repos\updater\updater\bin\Debug\updater.exe
+C:\Users\da74\source\repos\updater\updater\bin\Debug\updater.pdb
+C:\Users\da74\source\repos\updater\updater\bin\Debug\updater.xml
+C:\Users\da74\source\repos\updater\updater\obj\Debug\updater.vbprojAssemblyReference.cache
+C:\Users\da74\source\repos\updater\updater\obj\Debug\updater.mainWindow.resources
+C:\Users\da74\source\repos\updater\updater\obj\Debug\updater.Resources.resources
+C:\Users\da74\source\repos\updater\updater\obj\Debug\updater.vbproj.GenerateResource.cache
+C:\Users\da74\source\repos\updater\updater\obj\Debug\updater.vbproj.CoreCompileInputs.cache
+C:\Users\da74\source\repos\updater\updater\obj\Debug\updater.exe
+C:\Users\da74\source\repos\updater\updater\obj\Debug\updater.xml
+C:\Users\da74\source\repos\updater\updater\obj\Debug\updater.pdb
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\updater\updater\bin\Debug\updater.exe.config
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\updater\updater\bin\Debug\updater.exe
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\updater\updater\bin\Debug\updater.pdb
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\updater\updater\bin\Debug\updater.xml
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\updater\updater\obj\Debug\updater.vbprojAssemblyReference.cache
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\updater\updater\obj\Debug\updater.mainWindow.resources
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\updater\updater\obj\Debug\updater.Resources.resources
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\updater\updater\obj\Debug\updater.vbproj.GenerateResource.cache
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\updater\updater\obj\Debug\updater.vbproj.CoreCompileInputs.cache
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\updater\updater\obj\Debug\updater.exe
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\updater\updater\obj\Debug\updater.xml
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\updater\updater\obj\Debug\updater.pdb
