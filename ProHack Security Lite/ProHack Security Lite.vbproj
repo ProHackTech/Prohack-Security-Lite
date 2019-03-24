@@ -14,9 +14,11 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
@@ -79,6 +81,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="form_loading.Designer.vb">
       <DependentUpon>form_loading.vb</DependentUpon>
     </Compile>
@@ -120,6 +123,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ProMSG.Designer.vb">
+      <DependentUpon>ProMSG.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProMSG.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UC_Detected.Designer.vb">
       <DependentUpon>UC_Detected.vb</DependentUpon>
     </Compile>
@@ -145,6 +154,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProMSG.resx">
+      <DependentUpon>ProMSG.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_Detected.resx">
       <DependentUpon>UC_Detected.vb</DependentUpon>

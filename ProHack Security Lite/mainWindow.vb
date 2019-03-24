@@ -1,7 +1,5 @@
 ﻿Imports System.Data.OleDb
 Imports System.IO
-Imports System.Security.Cryptography
-Imports System.Text
 Imports System.Threading
 
 Public Class mainWindow
@@ -323,7 +321,7 @@ Public Class mainWindow
         Dim connection As New OleDbConnection("Provider=Search.CollatorDSO;Extended Properties=""Application=Windows""")
         For Each extension As String In file_extensions
             If Not String.IsNullOrEmpty(extension) Then
-                Dim query As String = "SELECT System.ItemUrl FROM SystemIndex WHERE System.ItemName LIKE '%" + extension + "'"
+                Dim query As String = "SELECT System.ItemUrl FROM SystemIndex WHERE System.ItemName Like '%" + extension + "'"
                 connection.Open()
                 Dim command As New OleDbCommand(query, connection)
 
