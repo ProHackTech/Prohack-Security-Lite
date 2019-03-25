@@ -42,6 +42,7 @@ Public Class mainWindow
         Loop Until line Is Nothing
         reader.Close()
         reader.Dispose()
+        bgWorker_Update.ReportProgress(25)
 
         ' get latest version from online file
         Dim address As String = "https://prohack.tech/Products/Security-Lite/versions.txt"
@@ -52,6 +53,7 @@ Public Class mainWindow
         latestVersion = Int(tempVersion)
         reader.Close()
         reader.Dispose()
+        bgWorker_Update.ReportProgress(50)
 
         ' compare versions
         If curVersion < latestVersion Then
@@ -83,6 +85,7 @@ Public Class mainWindow
             Catch ex As Exception
                 MsgBox(ex.Message.ToString)
             End Try
+            bgWorker_Update.ReportProgress(75)
 
             'download latest version compressed
             Dim latest_saveAs As String = folderRoot & "latest.zip"
@@ -102,6 +105,7 @@ Public Class mainWindow
                 MsgBox("Error download update!")
                 Exit Sub
             End Try
+            bgWorker_Update.ReportProgress(100)
         Else
             MsgBox("You have the latest version!")
         End If

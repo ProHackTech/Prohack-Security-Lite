@@ -3,7 +3,6 @@ C:\Users\da74\Documents\GitHub\ProHack-Security-Lite\ProHack Security Lite\bin\D
 C:\Users\da74\Documents\GitHub\ProHack-Security-Lite\ProHack Security Lite\bin\Debug\ProHack Security Lite.pdb
 C:\Users\da74\Documents\GitHub\ProHack-Security-Lite\ProHack Security Lite\bin\Debug\ProHack Security Lite.xml
 C:\Users\da74\Documents\GitHub\ProHack-Security-Lite\ProHack Security Lite\bin\Debug\MaterialSkin.dll
-C:\Users\da74\Documents\GitHub\ProHack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack Security Lite.vbprojAssemblyReference.cache
 C:\Users\da74\Documents\GitHub\ProHack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.mainWindow.resources
 C:\Users\da74\Documents\GitHub\ProHack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.Resources.resources
 C:\Users\da74\Documents\GitHub\ProHack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack Security Lite.vbproj.GenerateResource.cache
@@ -16,3 +15,5 @@ C:\Users\da74\Documents\GitHub\ProHack-Security-Lite\ProHack Security Lite\obj\D
 C:\Users\da74\Documents\GitHub\ProHack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.form_loading.resources
 C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.malware_informer.resources
 C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.UC_Detected.resources
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.ProMSG.resources
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack Security Lite.vbprojAssemblyReference.cache

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>MaterialSkin</id>
+        <version>0.2.1</version>
+        <title>MaterialSkin</title>
+        <authors>Ignace Maes</authors>
+        <owners>Ignace Maes</owners>
+        <licenseUrl>https://github.com/IgnaceMaes/WinForms-MaterialSkin/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/IgnaceMaes/WinForms-MaterialSkin</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Theming WinForms (C# or VB.Net) to Google's Material Design Principles.</description>
+        <summary>Theming WinForms (C# or VB.Net) to Google's Material Design Principles. Please refer to the GitHub page for implementing instructions.</summary>
+        <language>en-US</language>
+        <tags>material design theme winforms materialskin</tags>
+    </metadata>
+</package>
