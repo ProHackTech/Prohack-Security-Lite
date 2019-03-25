@@ -51,15 +51,17 @@ Public Class mainWindow
                 bgpic.Show() : bgpic.Visible = True
                 bgpic.Dock = DockStyle.Fill : bgpic.SendToBack()
             Catch ex As Exception
-                MsgBox(ex.ToString)
+                utils.invoke_msg(2, "Image Error", ex.Message.ToString)
             End Try
-        ElseIf wallpaper IsNot "none" And wallpaper IsNot "gif" Then ' if wallpaper is not named "none" & "gif" then,
+        ElseIf wallpaper = "nope" Then ' if wallpaper is not named "none" & "gif" then,
+            Me.BackgroundImage = Nothing ' background image empty
+        Else
             Try
                 imgpath = Application.StartupPath & "/res/common_controls/wallpapers/" & wallpaper ' generate image path
                 Me.BackgroundImage = Image.FromFile(imgpath) ' apply image
-            Catch ex As Exception : End Try ' end
-        Else
-            Me.BackgroundImage = Nothing ' background image empty
+            Catch ex As Exception
+                utils.invoke_msg(2, "Image Error", ex.Message.ToString)
+            End Try ' end
         End If
     End Sub
 
@@ -89,7 +91,7 @@ Public Class mainWindow
         Try
             sender.BackgroundImage = Image.FromFile(path)
         Catch ex As Exception
-            MsgBox(ex.ToString())
+            utils.invoke_msg(2, "Icon Error", ex.Message.ToString)
         End Try
     End Sub
 
@@ -125,7 +127,7 @@ Public Class mainWindow
                 bgWorker_QuickQuery.CancelAsync()
             End If
         Catch ex As Exception
-            MsgBox(ex.ToString())
+            utils.invoke_msg(3, "Worker Error", ex.Message.ToString)
         End Try
         form_fadeOut()
         Application.Exit()

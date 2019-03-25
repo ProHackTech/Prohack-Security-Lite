@@ -1,6 +1,9 @@
 ﻿Imports System.IO
 
 Public Class ProMSG
+
+    Public _priority_ As Integer 'informational = 1, critical = 2, error = 3
+
     Sub New()
         InitializeComponent()
         Me.DoubleBuffered = True
@@ -79,5 +82,17 @@ Public Class ProMSG
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         Me.Close()
+    End Sub
+
+    Private Sub btnRefreshApp_Click(sender As Object, e As EventArgs) Handles btnRefreshApp.Click
+        If utils._online_status_ = True Then
+            ' start updater, exit application
+        Else
+            MsgBox("Need internet for this!")
+        End If
+    End Sub
+
+    Private Sub btnHelpRefreshInfo_Click(sender As Object, e As EventArgs) Handles btnHelpRefreshInfo.Click
+        MsgBox("Re-Update the app")
     End Sub
 End Class

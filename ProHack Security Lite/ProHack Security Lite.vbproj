@@ -88,7 +88,6 @@
     <Compile Include="form_loading.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Hasher.vb" />
     <Compile Include="mainWindow.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +134,7 @@
     <Compile Include="UC_Detected.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="utils.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="form_loading.resx">
