@@ -345,7 +345,6 @@ Public Class mainWindow
         ' save query results to file
         Dim filepath As String = Application.StartupPath & "/data/win_searchIndex_results.list"
         File.WriteAllLines(filepath, queryResults) ' save filepath list to file
-
     End Sub
 
     Private Sub bgWorker_QuickQuery_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgWorker_QuickQuery.RunWorkerCompleted
