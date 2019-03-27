@@ -28,17 +28,19 @@ Partial Class UC_Detected
         Me.picFile = New System.Windows.Forms.PictureBox()
         Me.txtFile = New System.Windows.Forms.TextBox()
         Me.txtHash = New System.Windows.Forms.TextBox()
-        Me.lblSeperator = New System.Windows.Forms.Label()
+        Me.lblSeperator1 = New System.Windows.Forms.Label()
         Me.lblOptions = New System.Windows.Forms.Label()
+        Me.picInfo = New System.Windows.Forms.PictureBox()
+        Me.lblSeperator2 = New System.Windows.Forms.Label()
+        Me.txtNumber = New System.Windows.Forms.TextBox()
         Me.picIgnore = New System.Windows.Forms.PictureBox()
         Me.picTrash = New System.Windows.Forms.PictureBox()
-        Me.picInfo = New System.Windows.Forms.PictureBox()
         CType(Me.picEvil, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picHash, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picFile, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picInfo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picIgnore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picTrash, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picInfo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'picEvil
@@ -100,31 +102,67 @@ Partial Class UC_Detected
         Me.txtHash.TabStop = False
         Me.txtHash.Text = "000a6d40eee7814b8243a0d8c19f94c3"
         '
-        'lblSeperator
+        'lblSeperator1
         '
-        Me.lblSeperator.AutoSize = True
-        Me.lblSeperator.ForeColor = System.Drawing.Color.Gray
-        Me.lblSeperator.Location = New System.Drawing.Point(450, 6)
-        Me.lblSeperator.Name = "lblSeperator"
-        Me.lblSeperator.Size = New System.Drawing.Size(9, 78)
-        Me.lblSeperator.TabIndex = 5
-        Me.lblSeperator.Text = "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|"
+        Me.lblSeperator1.AutoSize = True
+        Me.lblSeperator1.ForeColor = System.Drawing.Color.Gray
+        Me.lblSeperator1.Location = New System.Drawing.Point(450, 6)
+        Me.lblSeperator1.Name = "lblSeperator1"
+        Me.lblSeperator1.Size = New System.Drawing.Size(9, 78)
+        Me.lblSeperator1.TabIndex = 5
+        Me.lblSeperator1.Text = "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|"
         '
         'lblOptions
         '
         Me.lblOptions.AutoSize = True
         Me.lblOptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblOptions.Location = New System.Drawing.Point(674, 8)
+        Me.lblOptions.Location = New System.Drawing.Point(725, 8)
         Me.lblOptions.Name = "lblOptions"
         Me.lblOptions.Size = New System.Drawing.Size(64, 20)
         Me.lblOptions.TabIndex = 6
         Me.lblOptions.Text = "Options"
         '
+        'picInfo
+        '
+        Me.picInfo.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.picInfo.Image = CType(resources.GetObject("picInfo.Image"), System.Drawing.Image)
+        Me.picInfo.Location = New System.Drawing.Point(740, 42)
+        Me.picInfo.Name = "picInfo"
+        Me.picInfo.Size = New System.Drawing.Size(35, 35)
+        Me.picInfo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picInfo.TabIndex = 9
+        Me.picInfo.TabStop = False
+        '
+        'lblSeperator2
+        '
+        Me.lblSeperator2.AutoSize = True
+        Me.lblSeperator2.ForeColor = System.Drawing.Color.Gray
+        Me.lblSeperator2.Location = New System.Drawing.Point(560, 6)
+        Me.lblSeperator2.Name = "lblSeperator2"
+        Me.lblSeperator2.Size = New System.Drawing.Size(9, 78)
+        Me.lblSeperator2.TabIndex = 10
+        Me.lblSeperator2.Text = "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|"
+        '
+        'txtNumber
+        '
+        Me.txtNumber.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
+        Me.txtNumber.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtNumber.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtNumber.Font = New System.Drawing.Font("Lucida Console", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNumber.ForeColor = System.Drawing.Color.White
+        Me.txtNumber.Location = New System.Drawing.Point(465, 33)
+        Me.txtNumber.Name = "txtNumber"
+        Me.txtNumber.ReadOnly = True
+        Me.txtNumber.Size = New System.Drawing.Size(89, 19)
+        Me.txtNumber.TabIndex = 11
+        Me.txtNumber.TabStop = False
+        Me.txtNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'picIgnore
         '
         Me.picIgnore.Cursor = System.Windows.Forms.Cursors.Hand
         Me.picIgnore.Image = CType(resources.GetObject("picIgnore.Image"), System.Drawing.Image)
-        Me.picIgnore.Location = New System.Drawing.Point(755, 42)
+        Me.picIgnore.Location = New System.Drawing.Point(806, 42)
         Me.picIgnore.Name = "picIgnore"
         Me.picIgnore.Size = New System.Drawing.Size(35, 35)
         Me.picIgnore.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -135,23 +173,12 @@ Partial Class UC_Detected
         '
         Me.picTrash.Cursor = System.Windows.Forms.Cursors.Hand
         Me.picTrash.Image = CType(resources.GetObject("picTrash.Image"), System.Drawing.Image)
-        Me.picTrash.Location = New System.Drawing.Point(624, 42)
+        Me.picTrash.Location = New System.Drawing.Point(675, 42)
         Me.picTrash.Name = "picTrash"
         Me.picTrash.Size = New System.Drawing.Size(35, 35)
         Me.picTrash.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.picTrash.TabIndex = 7
         Me.picTrash.TabStop = False
-        '
-        'picInfo
-        '
-        Me.picInfo.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.picInfo.Image = CType(resources.GetObject("picInfo.Image"), System.Drawing.Image)
-        Me.picInfo.Location = New System.Drawing.Point(689, 42)
-        Me.picInfo.Name = "picInfo"
-        Me.picInfo.Size = New System.Drawing.Size(35, 35)
-        Me.picInfo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.picInfo.TabIndex = 9
-        Me.picInfo.TabStop = False
         '
         'UC_Detected
         '
@@ -160,11 +187,13 @@ Partial Class UC_Detected
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Controls.Add(Me.txtNumber)
+        Me.Controls.Add(Me.lblSeperator2)
         Me.Controls.Add(Me.picInfo)
         Me.Controls.Add(Me.picIgnore)
         Me.Controls.Add(Me.picTrash)
         Me.Controls.Add(Me.lblOptions)
-        Me.Controls.Add(Me.lblSeperator)
+        Me.Controls.Add(Me.lblSeperator1)
         Me.Controls.Add(Me.txtHash)
         Me.Controls.Add(Me.txtFile)
         Me.Controls.Add(Me.picFile)
@@ -176,9 +205,9 @@ Partial Class UC_Detected
         CType(Me.picEvil, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picHash, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picFile, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picInfo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picIgnore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picTrash, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picInfo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -189,9 +218,11 @@ Partial Class UC_Detected
     Friend WithEvents picFile As PictureBox
     Friend WithEvents txtFile As TextBox
     Friend WithEvents txtHash As TextBox
-    Friend WithEvents lblSeperator As Label
+    Friend WithEvents lblSeperator1 As Label
     Friend WithEvents lblOptions As Label
+    Friend WithEvents picInfo As PictureBox
+    Friend WithEvents lblSeperator2 As Label
+    Friend WithEvents txtNumber As TextBox
     Friend WithEvents picIgnore As PictureBox
     Friend WithEvents picTrash As PictureBox
-    Friend WithEvents picInfo As PictureBox
 End Class

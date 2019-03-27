@@ -66,4 +66,41 @@ Public Class utils
         ProMSG.txtMsg.Text = msg
     End Sub
 
+    Public Shared detected_filepath As New List(Of String)()
+    Public Shared detected_filehash As New List(Of String)()
+
+    Public Shared Sub _check_detections_()
+
+        ' read detections file
+        Dim fpath As String = Application.StartupPath & "/data/detected.list"
+        Dim reader As StreamReader = My.Computer.FileSystem.OpenTextFileReader(fpath)
+        Dim line As String
+        Do
+            line = reader.ReadLine
+            If Not String.IsNullOrEmpty(line) Then
+                Dim tempArray() As String = Split(line, " |+| ")
+                detected_filepath.Add(tempArray(0))
+                detected_filehash.Add(tempArray(1))
+            End If
+        Loop Until line Is Nothing
+        reader.Close()
+        reader.Dispose()
+        Dim totalDetections As Integer = detected_filehash.Count
+        For x As Integer = 0 To totalDetections - 1
+            createCards(detected_filepath(x), detected_filehash(x), x + 1)
+        Next
+    End Sub
+
+    Public Shared Sub createCards(file As String, hash As String, num As Integer)
+        Try
+            Dim ucdetected As New UC_Detected
+            ucdetected.txtFile.Text = file
+            ucdetected.txtHash.Text = hash
+            ucdetected.txtNumber.Text = num
+            malware_informer.flowDetections.Controls.Add(ucdetected)
+        Catch ex As Exception
+            utils.invoke_msg(3, "Worker Error", ex.Message.ToString)
+        End Try
+    End Sub
+
 End Class
