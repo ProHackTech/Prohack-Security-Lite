@@ -231,7 +231,7 @@ Partial Class mainWindow
         Me.TabPage_WebUtils.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_WebUtils.Name = "TabPage_WebUtils"
         Me.TabPage_WebUtils.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage_WebUtils.Size = New System.Drawing.Size(1012, 61)
+        Me.TabPage_WebUtils.Size = New System.Drawing.Size(1012, 0)
         Me.TabPage_WebUtils.TabIndex = 1
         Me.TabPage_WebUtils.Text = "WEB UTILS"
         '
