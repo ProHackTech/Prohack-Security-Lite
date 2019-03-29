@@ -70,7 +70,7 @@ Public Class UC_Detected
     End Sub
 
     Private Sub picInfo_Click(sender As Object, e As EventArgs) Handles picInfo.Click
-
+        ' get malware information
     End Sub
 
     Private Sub picIgnore_Click(sender As Object, e As EventArgs) Handles picIgnore.Click
