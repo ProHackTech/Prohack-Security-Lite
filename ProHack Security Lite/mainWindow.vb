@@ -254,14 +254,16 @@ Public Class mainWindow
 
     Private Sub mainWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' loading settings
-        form_loading.Show() : Me.Opacity = 0.1
+        'form_loading.Show() : Me.Opacity = 0.1
         If loadingScreenTopMost = "true" Then
             form_loading.TopMost = True
         Else
             form_loading.TopMost = False
         End If
-        bgWorker_QuickQuery.RunWorkerAsync()
+        'bgWorker_QuickQuery.RunWorkerAsync()
         bgWorker_QuickQuery.WorkerSupportsCancellation = True
+
+        malware_informer.Show()
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
@@ -343,8 +345,7 @@ Public Class mainWindow
         Next
 
         ' save query results to file
-        Dim filepath As String = Application.StartupPath & "/data/win_searchIndex_results.list"
-        File.WriteAllLines(filepath, queryResults) ' save filepath list to file
+        File.WriteAllLines(utils.WSIR_file, queryResults) ' save filepath list to file
     End Sub
 
     Private Sub bgWorker_QuickQuery_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgWorker_QuickQuery.RunWorkerCompleted

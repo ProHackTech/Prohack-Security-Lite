@@ -116,7 +116,7 @@ Partial Class UC_Detected
         '
         Me.lblOptions.AutoSize = True
         Me.lblOptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblOptions.Location = New System.Drawing.Point(725, 8)
+        Me.lblOptions.Location = New System.Drawing.Point(722, 8)
         Me.lblOptions.Name = "lblOptions"
         Me.lblOptions.Size = New System.Drawing.Size(64, 20)
         Me.lblOptions.TabIndex = 6
@@ -126,7 +126,7 @@ Partial Class UC_Detected
         '
         Me.picInfo.Cursor = System.Windows.Forms.Cursors.Hand
         Me.picInfo.Image = CType(resources.GetObject("picInfo.Image"), System.Drawing.Image)
-        Me.picInfo.Location = New System.Drawing.Point(740, 42)
+        Me.picInfo.Location = New System.Drawing.Point(737, 42)
         Me.picInfo.Name = "picInfo"
         Me.picInfo.Size = New System.Drawing.Size(35, 35)
         Me.picInfo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -162,7 +162,7 @@ Partial Class UC_Detected
         '
         Me.picIgnore.Cursor = System.Windows.Forms.Cursors.Hand
         Me.picIgnore.Image = CType(resources.GetObject("picIgnore.Image"), System.Drawing.Image)
-        Me.picIgnore.Location = New System.Drawing.Point(806, 42)
+        Me.picIgnore.Location = New System.Drawing.Point(803, 42)
         Me.picIgnore.Name = "picIgnore"
         Me.picIgnore.Size = New System.Drawing.Size(35, 35)
         Me.picIgnore.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -173,7 +173,7 @@ Partial Class UC_Detected
         '
         Me.picTrash.Cursor = System.Windows.Forms.Cursors.Hand
         Me.picTrash.Image = CType(resources.GetObject("picTrash.Image"), System.Drawing.Image)
-        Me.picTrash.Location = New System.Drawing.Point(675, 42)
+        Me.picTrash.Location = New System.Drawing.Point(672, 42)
         Me.picTrash.Name = "picTrash"
         Me.picTrash.Size = New System.Drawing.Size(35, 35)
         Me.picTrash.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -201,7 +201,7 @@ Partial Class UC_Detected
         Me.Controls.Add(Me.picEvil)
         Me.ForeColor = System.Drawing.Color.White
         Me.Name = "UC_Detected"
-        Me.Size = New System.Drawing.Size(955, 100)
+        Me.Size = New System.Drawing.Size(945, 100)
         CType(Me.picEvil, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picHash, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picFile, System.ComponentModel.ISupportInitialize).EndInit()

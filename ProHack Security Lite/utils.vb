@@ -4,6 +4,11 @@ Imports System.Net
 
 Public Class utils
 
+    Public Shared detected_filepath As New List(Of String)()
+    Public Shared detected_filehash As New List(Of String)()
+    Public Shared dectected_malware_file As String = Application.StartupPath & "/data/detected.list"
+    Public Shared WSIR_file As String = Application.StartupPath & "/data/WSIR.list"
+
     ' check internet connection
     Public Shared Function _online_status_() As Boolean
         Try
@@ -39,6 +44,7 @@ Public Class utils
         Return hex_value.ToLower
     End Function
 
+    ' custom message dialog creation
     Public Shared Sub invoke_msg(level As Integer, title As String, msg As String)
         ProMSG.Show()
         ProMSG._priority_ = level
@@ -66,14 +72,14 @@ Public Class utils
         ProMSG.txtMsg.Text = msg
     End Sub
 
-    Public Shared detected_filepath As New List(Of String)()
-    Public Shared detected_filehash As New List(Of String)()
-
+    ' check and list detections
     Public Shared Sub _check_detections_()
-
+        ' perform clear
+        removeCards()
+        detected_filehash.Clear()
+        detected_filepath.Clear()
         ' read detections file
-        Dim fpath As String = Application.StartupPath & "/data/detected.list"
-        Dim reader As StreamReader = My.Computer.FileSystem.OpenTextFileReader(fpath)
+        Dim reader As StreamReader = My.Computer.FileSystem.OpenTextFileReader(dectected_malware_file)
         Dim line As String
         Do
             line = reader.ReadLine
@@ -91,7 +97,9 @@ Public Class utils
         Next
     End Sub
 
+    ' create UC_Detected controls in flowlayoutpanel for malware informer
     Public Shared Sub createCards(file As String, hash As String, num As Integer)
+        malware_informer.flowDetections.SuspendLayout()
         Try
             Dim ucdetected As New UC_Detected
             ucdetected.txtFile.Text = file
@@ -101,6 +109,20 @@ Public Class utils
         Catch ex As Exception
             utils.invoke_msg(3, "Worker Error", ex.Message.ToString)
         End Try
+        malware_informer.flowDetections.ResumeLayout()
+    End Sub
+
+    ' remove UC_Detected controls from flowlayoutpanel for malware informer
+    Public Shared Sub removeCards()
+        malware_informer.flowDetections.SuspendLayout()
+        If malware_informer.flowDetections.Controls.Count > 0 Then
+            For i As Integer = malware_informer.flowDetections.Controls.Count - 1 To 0
+                Dim c As Control = malware_informer.flowDetections.Controls(i)
+                c.Dispose()
+            Next
+            GC.Collect()
+        End If
+        malware_informer.flowDetections.ResumeLayout()
     End Sub
 
 End Class

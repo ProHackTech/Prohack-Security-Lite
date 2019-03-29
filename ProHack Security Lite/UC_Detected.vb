@@ -36,37 +36,37 @@ Public Class UC_Detected
         toggle_btnHover(picIgnore, False)
     End Sub
 
-    Private Sub picTrash_Click(sender As Object, e As EventArgs) Handles picTrash.Click\
-        ' ---- FIX ERRORS -----'
-
+    Private Sub picTrash_Click(sender As Object, e As EventArgs) Handles picTrash.Click
         Dim tempfile As String = txtFile.Text
-
         ' find index of hash value (filename will be the same index)
         Dim index As Integer = utils.detected_filepath.FindIndex(Function(x As String) x.Contains(tempfile))
-
         ' try deleting the infected file from the system
         Try
             File.Delete(utils.detected_filepath(index))
-
             ' remove filename and hash at stored index
             utils.detected_filepath.RemoveAt(index)
             utils.detected_filehash.RemoveAt(index)
-
-            utils.invoke_msg(1, "Success!", "Infected file was deleted from system successfully!")
+            Try
+                ' refresh detected file
+                File.Create(utils.dectected_malware_file).Dispose()
+                ' save list
+                Dim writer As New IO.StreamWriter(utils.dectected_malware_file)
+                Dim lenDetections As Integer = utils.detected_filehash.Count
+                For x As Integer = 0 To lenDetections - 1
+                    Dim tempString As String = utils.detected_filepath(x) & " |+| " & utils.detected_filehash(x)
+                    writer.WriteLine(tempString)
+                Next
+                writer.Close()
+                writer.Dispose()
+                utils.invoke_msg(1, "Success!", "Infected file was deleted from system successfully!")
+                malware_informer.refresher()
+                Me.Dispose() : GC.Collect()
+            Catch ex As Exception
+                utils.invoke_msg(3, "File Delete Error", ex.Message.ToString)
+            End Try
         Catch ex As Exception
             utils.invoke_msg(2, "Remove Error", ex.Message.ToString)
         End Try
-
-        ' save list - not adding in try because No.
-        Dim writer As New IO.StreamWriter(Application.StartupPath & "/data/detected.list")
-        Dim lenDetections As Integer = utils.detected_filehash.Count
-        For x As Integer = 0 To lenDetections - 1
-            Dim tempString As String = utils.detected_filepath(x) & " |+| " & utils.detected_filehash(x)
-            writer.WriteLine(tempString)
-        Next
-        writer.Close()
-        writer.Dispose()
-        malware_informer.perform_check()
     End Sub
 
     Private Sub picInfo_Click(sender As Object, e As EventArgs) Handles picInfo.Click
