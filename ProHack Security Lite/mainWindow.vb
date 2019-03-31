@@ -1,6 +1,8 @@
 ﻿Imports System.Data.OleDb
 Imports System.IO
+Imports System.Net
 Imports System.Threading
+Imports System.IO.Compression.ZipFile
 
 Public Class mainWindow
 
@@ -344,6 +346,9 @@ Public Class mainWindow
 
         ' save query results to file
         File.WriteAllLines(utils.WSIR_file, queryResults) ' save filepath list to file
+
+        ' auto update check
+        bgWorker_Updater.RunWorkerAsync()
     End Sub
 
     Private Sub bgWorker_QuickQuery_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgWorker_QuickQuery.RunWorkerCompleted
@@ -373,5 +378,98 @@ Public Class mainWindow
         scanType = "Custom"
         Me.Hide()
         malware_scanner.Show()
+    End Sub
+
+    Private Sub bgWorker_Updater_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgWorker_Updater.DoWork
+        Dim line As String = Nothing : Dim run_from As String = Nothing
+        Dim curversion, newversion As Integer
+        Dim tempstring As String
+        Dim reader As StreamReader
+        Dim updater_version, updater_newversion As Integer
+
+        ' check the current updater version
+        reader = New StreamReader(Application.StartupPath & "/updater/versions.txt")
+        tempstring = reader.ReadToEnd
+        tempstring = tempstring.Replace(".", "")
+        updater_version = Int(tempstring)
+
+        ' check the new updater version
+        Dim address As String = "https://prohack.tech/Products/Security-Lite/versions.txt"
+        Dim client As WebClient = New WebClient()
+        reader = New StreamReader(client.OpenRead(address))
+        tempstring = reader.ReadToEnd
+        tempstring = tempstring.Replace(".", "")
+        updater_newversion = Int(tempstring)
+        reader.Close()
+        reader.Dispose()
+
+        ' read the run from value
+        reader = New StreamReader(Application.StartupPath & "run_from.cfg")
+        Do
+            line = reader.ReadLine()
+            If Not String.IsNullOrEmpty(line) Then
+                run_from = line
+            End If
+        Loop Until line Is Nothing
+        reader.Close() : reader.Dispose()
+
+        ' compare updater versions
+        If updater_newversion > updater_version Then
+            ' download new updater
+            Dim latest_saveAs As String = Application.StartupPath & "updater.zip"
+            Try
+                My.Computer.Network.DownloadFile("https://prohack.tech/Products/Security-Lite/updater.zip", latest_saveAs)
+                Try
+                    ' delete old updater folder
+                    Try
+                        System.IO.Directory.Delete(Application.StartupPath & "/updater", True)
+                    Catch ex As Exception : End Try
+                    ' extract
+                    System.IO.Compression.ZipFile.ExtractToDirectory(latest_saveAs, Application.StartupPath)
+                    ' delete zip
+                    Try
+                        File.Delete(latest_saveAs)
+                    Catch ex As Exception : End Try
+                Catch ex As Exception
+                    MsgBox(ex.Message.ToString)
+                End Try
+            Catch ex As Exception
+                MsgBox("Error download update!")
+                Exit Sub
+            End Try
+        End If
+
+        ' read current version
+        reader = New StreamReader(Application.StartupPath & "versions.txt")
+        tempstring = reader.ReadToEnd
+        tempstring = tempstring.Replace(".", "")
+        curversion = Int(tempstring)
+
+        ' read new version
+        Dim address_mainread As String = "https://prohack.tech/Products/Security-Lite/versions.txt"
+        Dim client_mainread As WebClient = New WebClient()
+        reader = New StreamReader(client_mainread.OpenRead(address_mainread))
+        tempstring = reader.ReadToEnd
+        tempstring = tempstring.Replace(".", "")
+        newversion = Int(tempstring)
+        reader.Close()
+        reader.Dispose()
+
+        ' compare versions
+        If newversion > curversion Then
+            Dim updater_path As String = Application.StartupPath
+            ' start updater
+            If run_from = "debug" Then
+                updater_path += "updater/updater/bin/debug/updater.exe"
+                Process.Start(updater_path)
+                Application.Exit()
+            ElseIf run_from = "release" Then
+                updater_path += "updater/updater.exe"
+                Process.Start(updater_path)
+                Application.Exit()
+            Else
+                ' tell user about updater update
+            End If
+        End If
     End Sub
 End Class

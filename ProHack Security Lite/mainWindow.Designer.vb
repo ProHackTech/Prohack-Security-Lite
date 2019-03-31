@@ -54,6 +54,7 @@ Partial Class mainWindow
         Me.pic_opt_scan = New System.Windows.Forms.PictureBox()
         Me.bgWorker_QuickQuery = New System.ComponentModel.BackgroundWorker()
         Me.btnShowSettings = New System.Windows.Forms.Button()
+        Me.bgWorker_Updater = New System.ComponentModel.BackgroundWorker()
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabControl_Options.SuspendLayout()
         Me.TabPage_Scans.SuspendLayout()
@@ -516,6 +517,9 @@ Partial Class mainWindow
         Me.btnShowSettings.TabStop = False
         Me.btnShowSettings.UseVisualStyleBackColor = False
         '
+        'bgWorker_Updater
+        '
+        '
         'mainWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -588,4 +592,5 @@ Partial Class mainWindow
     Private WithEvents btnScan_Quick As Button
     Friend WithEvents bgWorker_QuickQuery As System.ComponentModel.BackgroundWorker
     Private WithEvents btnShowSettings As Button
+    Friend WithEvents bgWorker_Updater As System.ComponentModel.BackgroundWorker
 End Class
