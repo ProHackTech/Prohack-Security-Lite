@@ -392,9 +392,10 @@ Public Class mainWindow
         tempstring = reader.ReadToEnd
         tempstring = tempstring.Replace(".", "")
         updater_version = Int(tempstring)
+        reader.Close() : reader.Dispose()
 
         ' check the new updater version
-        Dim address As String = "https://prohack.tech/Products/Security-Lite/versions.txt"
+        Dim address As String = "https://prohack.tech/Products/Security-Lite/updater_versions.txt"
         Dim client As WebClient = New WebClient()
         reader = New StreamReader(client.OpenRead(address))
         tempstring = reader.ReadToEnd
@@ -404,7 +405,7 @@ Public Class mainWindow
         reader.Dispose()
 
         ' read the run from value
-        reader = New StreamReader(Application.StartupPath & "run_from.cfg")
+        reader = New StreamReader(Application.StartupPath & "/run_from.cfg")
         Do
             line = reader.ReadLine()
             If Not String.IsNullOrEmpty(line) Then
@@ -415,35 +416,41 @@ Public Class mainWindow
 
         ' compare updater versions
         If updater_newversion > updater_version Then
-            ' download new updater
-            Dim latest_saveAs As String = Application.StartupPath & "updater.zip"
-            Try
-                My.Computer.Network.DownloadFile("https://prohack.tech/Products/Security-Lite/updater.zip", latest_saveAs)
+            ' ask if user wants to update
+            Dim askresult = MessageBox.Show("New Updater Version Available! Update?", "Update Updater?", MessageBoxButtons.YesNoCancel)
+            If askresult = DialogResult.Yes Then
+                ' download new updater
+                Dim latest_saveAs As String = Application.StartupPath & "/updater.zip"
                 Try
-                    ' delete old updater folder
+                    My.Computer.Network.DownloadFile("https://prohack.tech/Products/Security-Lite/updater.zip", latest_saveAs)
                     Try
-                        System.IO.Directory.Delete(Application.StartupPath & "/updater", True)
-                    Catch ex As Exception : End Try
-                    ' extract
-                    System.IO.Compression.ZipFile.ExtractToDirectory(latest_saveAs, Application.StartupPath)
-                    ' delete zip
-                    Try
-                        File.Delete(latest_saveAs)
-                    Catch ex As Exception : End Try
+                        ' delete old updater folder
+                        Try
+                            System.IO.Directory.Delete(Application.StartupPath & "/updater/", True)
+                        Catch ex As Exception : End Try
+                        ' extract
+                        System.IO.Compression.ZipFile.ExtractToDirectory(latest_saveAs, Application.StartupPath)
+                        ' delete zip
+                        Try
+                            File.Delete(latest_saveAs)
+                            MsgBox("Updater Updated!")
+                        Catch ex As Exception : End Try
+                    Catch ex As Exception
+                        MsgBox(ex.Message.ToString)
+                    End Try
                 Catch ex As Exception
                     MsgBox(ex.Message.ToString)
+                    Exit Sub
                 End Try
-            Catch ex As Exception
-                MsgBox("Error download update!")
-                Exit Sub
-            End Try
+            ElseIf askresult = DialogResult.No Or askresult = DialogResult.Cancel Then : End If
         End If
 
         ' read current version
-        reader = New StreamReader(Application.StartupPath & "versions.txt")
+        reader = New StreamReader(Application.StartupPath & "/versions.txt")
         tempstring = reader.ReadToEnd
         tempstring = tempstring.Replace(".", "")
         curversion = Int(tempstring)
+        reader.Close() : reader.Dispose()
 
         ' read new version
         Dim address_mainread As String = "https://prohack.tech/Products/Security-Lite/versions.txt"
@@ -457,18 +464,19 @@ Public Class mainWindow
 
         ' compare versions
         If newversion > curversion Then
+            Dim askresult = MessageBox.Show("New App Version Available! Start Updater?", "Update App?", MessageBoxButtons.YesNoCancel)
             Dim updater_path As String = Application.StartupPath
-            ' start updater
-            If run_from = "debug" Then
-                updater_path += "updater/updater/bin/debug/updater.exe"
-                Process.Start(updater_path)
-                Application.Exit()
-            ElseIf run_from = "release" Then
-                updater_path += "updater/updater.exe"
-                Process.Start(updater_path)
-                Application.Exit()
-            Else
-                ' tell user about updater update
+            If askresult = DialogResult.Yes Then
+                ' start updater
+                If run_from = "debug" Then
+                    updater_path += "/updater/updater/bin/debug/updater.exe"
+                    Process.Start(updater_path)
+                    Application.Exit()
+                ElseIf run_from = "release" Then
+                    updater_path += "/updater/updater.exe"
+                    Process.Start(updater_path)
+                    Application.Exit()
+                End If
             End If
         End If
     End Sub
