@@ -9,6 +9,30 @@ Public Class utils
     Public Shared dectected_malware_file As String = Application.StartupPath & "/data/detected.list"
     Public Shared WSIR_file As String = Application.StartupPath & "/data/WSIR.list"
 
+    'Method: To fade out form
+    Public Shared Sub form_fadeOut(form As Form)
+        Dim count As Integer
+        Dim num As Integer = 15
+        For count = 100 To 0 Step -num
+            form.Opacity = count / 100
+            form.Size = New Size(form.Width - num, form.Height - num)
+            form.Location = New Point(form.Location.X - (num + 5), form.Location.Y + (num + 5))
+            form.Refresh()
+        Next
+    End Sub
+
+    'Method: To fade in form
+    Public Shared Sub form_fadeIn(form)
+        Dim count As Integer
+        Dim num As Integer = 15
+        For count = 0 To 100 Step num
+            form.Opacity = count / 100
+            form.Size = New Size(form.Width + num, form.Height + num)
+            form.Location = New Point(form.Location.X + (num + 5), form.Location.Y - (num + 5))
+            form.Refresh()
+        Next
+    End Sub
+
     ' check internet connection
     Public Shared Function _online_status_() As Boolean
         Try

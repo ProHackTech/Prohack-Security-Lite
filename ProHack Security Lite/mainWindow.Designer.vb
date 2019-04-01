@@ -22,6 +22,7 @@ Partial Class mainWindow
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainWindow))
         Me.lblSubTitle = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
@@ -55,6 +56,7 @@ Partial Class mainWindow
         Me.bgWorker_QuickQuery = New System.ComponentModel.BackgroundWorker()
         Me.btnShowSettings = New System.Windows.Forms.Button()
         Me.bgWorker_Updater = New System.ComponentModel.BackgroundWorker()
+        Me.check_focused = New System.Windows.Forms.Timer(Me.components)
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabControl_Options.SuspendLayout()
         Me.TabPage_Scans.SuspendLayout()
@@ -520,6 +522,9 @@ Partial Class mainWindow
         'bgWorker_Updater
         '
         '
+        'check_focused
+        '
+        '
         'mainWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -593,4 +598,5 @@ Partial Class mainWindow
     Friend WithEvents bgWorker_QuickQuery As System.ComponentModel.BackgroundWorker
     Private WithEvents btnShowSettings As Button
     Friend WithEvents bgWorker_Updater As System.ComponentModel.BackgroundWorker
+    Friend WithEvents check_focused As Timer
 End Class

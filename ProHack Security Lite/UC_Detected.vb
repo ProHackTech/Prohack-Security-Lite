@@ -71,9 +71,38 @@ Public Class UC_Detected
 
     Private Sub picInfo_Click(sender As Object, e As EventArgs) Handles picInfo.Click
         ' get malware information
+        ' by default browser
+        Dim searchString = "https://www.virustotal.com/#/search/" & txtHash.Text
+        Try
+            Process.Start(searchString)
+        Catch ex As Exception
+            utils.invoke_msg(2, "Process Error0", ex.Message.ToString)
+        End Try
     End Sub
 
     Private Sub picIgnore_Click(sender As Object, e As EventArgs) Handles picIgnore.Click
-        ' find a way.. 
+        Dim tempfile As String = txtFile.Text
+        ' find index of hash value (filename will be the same index)
+        Dim index As Integer = utils.detected_filepath.FindIndex(Function(x As String) x.Contains(tempfile))
+        Try
+            utils.detected_filepath.RemoveAt(index)
+            utils.detected_filehash.RemoveAt(index)
+            ' refresh detected file
+            File.Create(utils.dectected_malware_file).Dispose()
+            ' save list
+            Dim writer As New IO.StreamWriter(utils.dectected_malware_file)
+            Dim lenDetections As Integer = utils.detected_filehash.Count
+            For x As Integer = 0 To lenDetections - 1
+                Dim tempString As String = utils.detected_filepath(x) & " |+| " & utils.detected_filehash(x)
+                writer.WriteLine(tempString)
+            Next
+            writer.Close()
+            writer.Dispose()
+            utils.invoke_msg(1, "Ignored!", "Selected file has been ignored for now..")
+            malware_informer.refresher()
+            Me.Dispose() : GC.Collect()
+        Catch ex As Exception
+            utils.invoke_msg(3, "File Delete Error", ex.Message.ToString)
+        End Try
     End Sub
 End Class
