@@ -6,10 +6,15 @@ Imports System.IO.Compression.ZipFile
 
 Public Class mainWindow
 
+    ' general declares
     Public Shared scanType As String
     Dim form_settings(5) As String
-    Public theme As String : Dim wallpaper As String : Dim fadeEffect_Status : Dim optionsHoverEffect_Status
+    Public theme As String : Dim wallpaper As String : Public fadeEffect_Status : Dim optionsHoverEffect_Status
     Dim loadingScreenTopMost As String : Dim bgGif As String
+
+    ' form movement
+    Private isFormMovement As Boolean = False
+    Private MouseDownX, MouseDownY As Integer
 
     Sub New()
         InitializeComponent() 'initialize form
@@ -21,7 +26,7 @@ Public Class mainWindow
     'Method: To apply theme settings
     Private Sub form_init_setter()
         'read theme settings
-        Dim fpath = Application.StartupPath & "/data/mainWindow_Settings.conf" 'filepath
+        Dim fpath = Application.StartupPath & "/data/start_config" 'filepath
         Dim reader As StreamReader = My.Computer.FileSystem.OpenTextFileReader(fpath) 'open text file reader
         Dim line As String 'declare variable for stroing string
         For x As Integer = 0 To 6
@@ -55,7 +60,7 @@ Public Class mainWindow
             Catch ex As Exception
                 utils.invoke_msg(2, "Image Error", ex.Message.ToString)
             End Try
-        ElseIf wallpaper = "nope" Then ' if wallpaper is not named "none" & "gif" then,
+        ElseIf wallpaper = "none" Then ' if wallpaper is not named "none" & "gif" then,
             Me.BackgroundImage = Nothing ' background image empty
         Else
             Try
@@ -110,17 +115,6 @@ Public Class mainWindow
         End Select
     End Sub
 
-    'Method: To fade out form
-    Private Sub form_fadeOut()
-        If fadeEffect_Status = "on" Then
-            Dim iCount As Integer
-            For iCount = 90 To 10 Step -120
-                Me.Opacity = iCount / 100
-                Me.Refresh()
-                Thread.Sleep(50)
-            Next
-        Else : End If
-    End Sub
 
     'Method: To exit application
     Private Sub app_exit()
@@ -131,7 +125,9 @@ Public Class mainWindow
         Catch ex As Exception
             utils.invoke_msg(3, "Worker Error", ex.Message.ToString)
         End Try
-        form_fadeOut()
+        If fadeEffect_Status = "on" Then
+            utils.form_fadeOut(Me)
+        End If
         Application.Exit()
     End Sub
 
@@ -271,6 +267,10 @@ Public Class mainWindow
     End Sub
 
     Private Sub btnMinimize_Click(sender As Object, e As EventArgs) Handles btnMinimize.Click
+        If fadeEffect_Status = "on" Then
+            utils.form_fadeOut(Me)
+            check_focused.Start()
+        End If
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
@@ -378,6 +378,33 @@ Public Class mainWindow
         scanType = "Custom"
         Me.Hide()
         malware_scanner.Show()
+    End Sub
+
+    Private Sub mainWindow_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
+        If e.Button = MouseButtons.Left Then
+            isFormMovement = True
+            MouseDownX = e.X : MouseDownY = e.Y
+        End If
+    End Sub
+
+    Private Sub mainWindow_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
+        If isFormMovement = True Then
+            Me.Location = New Point(Me.Location.X + (e.X - MouseDownX), Me.Location.Y + (e.Y - MouseDownY))
+        End If
+    End Sub
+
+    Private Sub mainWindow_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp
+        If e.Button = MouseButtons.Left Then
+            isFormMovement = False
+        End If
+    End Sub
+
+    Private Sub check_focused_Tick(sender As Object, e As EventArgs) Handles check_focused.Tick
+        If Me.WindowState = FormWindowState.Normal Then
+            utils.form_fadeIn(Me)
+            Me.Opacity = 1
+            check_focused.Stop()
+        End If
     End Sub
 
     Private Sub bgWorker_Updater_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgWorker_Updater.DoWork
