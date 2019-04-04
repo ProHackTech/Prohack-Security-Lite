@@ -21,5 +21,19 @@ This is a small anti-malware application made in VB.NET. All the hashes are coll
 - Create error logging & reporting
 - Create settings menu
 
+## License
+**DWTFFYWTDWIADBMFATHWI GENERAL PUBLIC LICENSE**
+<Br>
+**Version 1, April 2018**
+<Br>
+
+'Do Whatever The Frecking Fuck You Want To Do With It And Don't Blame Me For Anything That Happens With It' License allows the users to do exactly what the name expands to.
+
+
+You can take any part of the code to do whatever you want with it. I didn't create any programming language. I didn't learn programming from air. Most of the code I write is the result of other people dumping their work online for free.
+
+
+Take it... And go... And don't blame me if anything happens using any logic under this license. Any unlawful activity is the commiters crime. You can choose to not agree with it.
+
 ## Contribution
 Contributions will be allowed once the planned features are completed.
