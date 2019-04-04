@@ -81,18 +81,27 @@ Public Class ProMSG
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        utils.form_fadeOut(Me)
         Me.Close()
     End Sub
 
     Private Sub btnRefreshApp_Click(sender As Object, e As EventArgs) Handles btnRefreshApp.Click
-        If utils._online_status_ = True Then
-            ' start updater, exit application
-        Else
-            MsgBox("Need internet for this!")
-        End If
+        'start updater
     End Sub
 
     Private Sub btnHelpRefreshInfo_Click(sender As Object, e As EventArgs) Handles btnHelpRefreshInfo.Click
-        MsgBox("Re-Update the app")
+        MsgBox("Re-Updates the app")
+    End Sub
+
+    Private Sub ProMSG_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
+        utils.Form_MouseDown(Me, e)
+    End Sub
+
+    Private Sub ProMSG_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
+        utils.Form_MouseMove(Me, e)
+    End Sub
+
+    Private Sub ProMSG_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp
+        utils.Form_MouseUp(Me, e)
     End Sub
 End Class

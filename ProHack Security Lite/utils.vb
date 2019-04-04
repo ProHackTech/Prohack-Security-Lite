@@ -13,26 +13,58 @@ Public Class utils
 
     'Method: To fade out form
     Public Shared Sub form_fadeOut(form As Form)
-        Dim count As Integer
-        Dim num As Integer = 15
-        For count = 100 To 0 Step -num
-            form.Opacity = count / 100
-            form.Size = New Size(form.Width - num, form.Height - num)
-            form.Location = New Point(form.Location.X - (num + 5), form.Location.Y + (num + 5))
-            form.Refresh()
-        Next
+        Dim count As Integer : Dim speed As Integer = mainWindow.fadeEffect_Speed
+
+        If mainWindow.fadeEffect_Type = "WindowsDefault" Then
+            For count = 100 To 0 Step -speed
+                form.Opacity = count / 100
+                form.Size = New Size(form.Width - (speed + 5), form.Height - (speed + 5))
+                form.Location = New Point(form.Location.X - (speed + 5), form.Location.Y + (speed + 5))
+                form.Refresh()
+            Next
+        ElseIf mainWindow.fadeEffect_Type = "FadeLeft" Then
+            For count = 100 To 0 Step -speed
+                form.Opacity = count / 100
+                form.Size = New Size(form.Width - (speed + 5), form.Height)
+                form.Location = New Point(form.Location.X - (speed + 5), form.Location.Y)
+                form.Refresh()
+            Next
+        ElseIf mainWindow.fadeEffect_Type = "FadeTop" Then
+            For count = 100 To 0 Step -speed
+                form.Opacity = count / 100
+                form.Size = New Size(form.Width - (speed + 5), form.Height)
+                form.Location = New Point(form.Location.X, form.Location.Y - (speed + 5))
+                form.Refresh()
+            Next
+        End If
     End Sub
 
     'Method: To fade in form
     Public Shared Sub form_fadeIn(form)
-        Dim count As Integer
-        Dim num As Integer = 15
-        For count = 0 To 100 Step num
-            form.Opacity = count / 100
-            form.Size = New Size(form.Width + num, form.Height + num)
-            form.Location = New Point(form.Location.X + (num + 5), form.Location.Y - (num + 5))
-            form.Refresh()
-        Next
+        Dim count As Integer : Dim speed As Integer = mainWindow.fadeEffect_Speed
+
+        If mainWindow.fadeEffect_Type = "WindowsDefault" Then
+            For count = 0 To 100 Step speed
+                form.Opacity = count / 100
+                form.Size = New Size(form.Width + (speed + 5), form.Height + (speed + 5))
+                form.Location = New Point(form.Location.X + (speed + 5), form.Location.Y - (speed + 5))
+                form.Refresh()
+            Next
+        ElseIf mainWindow.fadeEffect_Type = "FadeLeft" Then
+            For count = 0 To 100 Step speed
+                form.Opacity = count / 100
+                form.Size = New Size(form.Width + (speed + 5), form.Height)
+                form.Location = New Point(form.Location.X + (speed + 5), form.Location.Y)
+                form.Refresh()
+            Next
+        ElseIf mainWindow.fadeEffect_Type = "FadeTop" Then
+            For count = 100 To 0 Step -speed
+                form.Opacity = count / 100
+                form.Size = New Size(form.Width + (speed + 5), form.Height)
+                form.Location = New Point(form.Location.X, form.Location.Y + (speed + 5))
+                form.Refresh()
+            Next
+        End If
     End Sub
 
     ' Form Movevement: On Mouse Down

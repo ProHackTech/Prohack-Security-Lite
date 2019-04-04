@@ -37,8 +37,9 @@ Partial Class ProMSG
         'picPriority
         '
         Me.picPriority.BackColor = System.Drawing.Color.Black
-        Me.picPriority.Image = CType(resources.GetObject("picPriority.Image"), System.Drawing.Image)
-        Me.picPriority.Location = New System.Drawing.Point(12, 3)
+        Me.picPriority.BackgroundImage = CType(resources.GetObject("picPriority.BackgroundImage"), System.Drawing.Image)
+        Me.picPriority.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.picPriority.Location = New System.Drawing.Point(12, 12)
         Me.picPriority.Name = "picPriority"
         Me.picPriority.Size = New System.Drawing.Size(35, 36)
         Me.picPriority.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -52,7 +53,7 @@ Partial Class ProMSG
         Me.txtTitle.Cursor = System.Windows.Forms.Cursors.Default
         Me.txtTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTitle.ForeColor = System.Drawing.Color.White
-        Me.txtTitle.Location = New System.Drawing.Point(53, 9)
+        Me.txtTitle.Location = New System.Drawing.Point(64, 17)
         Me.txtTitle.Name = "txtTitle"
         Me.txtTitle.ReadOnly = True
         Me.txtTitle.Size = New System.Drawing.Size(138, 22)
@@ -71,7 +72,7 @@ Partial Class ProMSG
         Me.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnExit.Location = New System.Drawing.Point(563, 8)
+        Me.btnExit.Location = New System.Drawing.Point(554, 14)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(25, 25)
         Me.btnExit.TabIndex = 2
@@ -83,11 +84,11 @@ Partial Class ProMSG
         Me.txtMsg.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtMsg.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.txtMsg.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(30, Byte), Integer))
         Me.txtMsg.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtMsg.Cursor = System.Windows.Forms.Cursors.Default
         Me.txtMsg.Font = New System.Drawing.Font("Lucida Sans Unicode", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMsg.ForeColor = System.Drawing.Color.Black
+        Me.txtMsg.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.txtMsg.Location = New System.Drawing.Point(12, 54)
         Me.txtMsg.Name = "txtMsg"
         Me.txtMsg.ReadOnly = True
@@ -139,7 +140,7 @@ Partial Class ProMSG
         'btnHelpRefreshInfo
         '
         Me.btnHelpRefreshInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnHelpRefreshInfo.BackColor = System.Drawing.Color.White
+        Me.btnHelpRefreshInfo.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
         Me.btnHelpRefreshInfo.BackgroundImage = CType(resources.GetObject("btnHelpRefreshInfo.BackgroundImage"), System.Drawing.Image)
         Me.btnHelpRefreshInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnHelpRefreshInfo.Cursor = System.Windows.Forms.Cursors.Hand
@@ -178,7 +179,7 @@ Partial Class ProMSG
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.White
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(600, 450)
@@ -190,6 +191,7 @@ Partial Class ProMSG
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.txtTitle)
         Me.Controls.Add(Me.picPriority)
+        Me.DoubleBuffered = True
         Me.ForeColor = System.Drawing.Color.Black
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -198,6 +200,7 @@ Partial Class ProMSG
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ProHack Message"
         Me.TopMost = True
+        Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         CType(Me.picPriority, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

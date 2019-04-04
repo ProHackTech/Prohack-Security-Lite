@@ -8,9 +8,9 @@ Public Class mainWindow
 
     ' general declares
     Public Shared scanType As String
-    Dim form_settings(5) As String
-    Public theme As String : Dim wallpaper As String : Public fadeEffect_Status : Dim optionsHoverEffect_Status
-    Dim loadingScreenTopMost As String : Dim bgGif As String
+    Dim form_settings(7) As String
+    Public theme As String : Dim wallpaper As String : Public fadeEffect_Status As String : Dim optionsHoverEffect_Status As String
+    Dim loadingScreenTopMost As String : Dim bgGif As String : Public fadeEffect_Type As String : Public fadeEffect_Speed As Integer
 
     Sub New()
         InitializeComponent() 'initialize form
@@ -25,7 +25,7 @@ Public Class mainWindow
         Dim fpath = Application.StartupPath & "/data/start_config" 'filepath
         Dim reader As StreamReader = My.Computer.FileSystem.OpenTextFileReader(fpath) 'open text file reader
         Dim line As String 'declare variable for stroing string
-        For x As Integer = 0 To 6
+        For x As Integer = 0 To 9
             line = reader.ReadLine 'read line into variable
             If Not String.IsNullOrEmpty(line) Then ' if line is not null or empty
                 Dim lineArray As String() = line.Split(New Char() {":"c}) ' split by delimeter
@@ -40,6 +40,8 @@ Public Class mainWindow
         optionsHoverEffect_Status = form_settings(3) ' options button hover setting
         loadingScreenTopMost = form_settings(4) ' option to toggle loading screen topmost
         bgGif = form_settings(5) ' gif image for animated background
+        fadeEffect_Type = form_settings(6) ' fade effect type
+        fadeEffect_Speed = form_settings(7) ' fade effect speed
 
         'apply theme settings
         Dim imgpath As String ' image path variable
@@ -92,7 +94,6 @@ Public Class mainWindow
     Private Sub toggle_tabControlOptions(show As Boolean)
         Select Case show 'if tab control show
             Case True
-                tabControl_Options.Size = New Size(1020, 150)
                 tabControl_Options.Show()
                 tabSelector_Options.Show()
                 btnTabControl_Hide.Show()
@@ -100,6 +101,7 @@ Public Class mainWindow
                 btnTabControl_Hide.Location = New Point(990, 370)
                 btnTabControl_Hide.BringToFront()
                 panelFooter.Hide()
+                tabControl_Options.Size = New Size(1020, 150)
             Case False 'if tab control hide
                 tabControl_Options.Hide()
                 tabSelector_Options.Hide()
@@ -176,7 +178,6 @@ Public Class mainWindow
         End If
     End Sub
 
-#Region "Control Hovers"
     Private Sub btnExit_MouseEnter(sender As Object, e As EventArgs) Handles btnExit.MouseEnter
         change_icon(btnExit, "common_controls/shutdown_hover.png")
     End Sub
@@ -264,7 +265,6 @@ Public Class mainWindow
     Private Sub btnShowSettings_MouseLeave(sender As Object, e As EventArgs) Handles btnShowSettings.MouseLeave
         change_icon(btnShowSettings, "common_controls/settings.png")
     End Sub
-#End Region
 
     Private Sub mainWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' loading settings
