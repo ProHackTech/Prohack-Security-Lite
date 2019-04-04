@@ -12,10 +12,6 @@ Public Class mainWindow
     Public theme As String : Dim wallpaper As String : Public fadeEffect_Status : Dim optionsHoverEffect_Status
     Dim loadingScreenTopMost As String : Dim bgGif As String
 
-    ' form movement
-    Private isFormMovement As Boolean = False
-    Private MouseDownX, MouseDownY As Integer
-
     Sub New()
         InitializeComponent() 'initialize form
         Me.DoubleBuffered = True ' double buffering of form for visual performance
@@ -52,8 +48,13 @@ Public Class mainWindow
                 imgpath = Application.StartupPath & "/res/common_controls/wallpapers/" & bgGif ' generate image path
                 ' create background picture handler
                 Dim bgpic As New PictureBox
-                bgpic.Image = Image.FromFile(imgpath)
-                bgpic.SizeMode = PictureBoxSizeMode.StretchImage
+                With bgpic
+                    .Image = Image.FromFile(imgpath)
+                    .SizeMode = PictureBoxSizeMode.StretchImage
+                    AddHandler .MouseDown, AddressOf gitHandler_MouseDown
+                    AddHandler .MouseMove, AddressOf gitHandler_MouseMove
+                    AddHandler .MouseUp, AddressOf gitHandler_MouseUp
+                End With
                 Me.Controls.Add(bgpic)
                 bgpic.Show() : bgpic.Visible = True
                 bgpic.Dock = DockStyle.Fill : bgpic.SendToBack()
@@ -70,6 +71,21 @@ Public Class mainWindow
                 utils.invoke_msg(2, "Image Error", ex.Message.ToString)
             End Try ' end
         End If
+    End Sub
+
+    ' Gif Background Movement Handler: MouseDown
+    Private Sub gitHandler_MouseDown(ByVal sender As Object, ByVal e As EventArgs)
+        utils.Form_MouseDown(Me, e)
+    End Sub
+
+    ' Gif Background Movement Handler: MouseMove
+    Private Sub gitHandler_MouseMove(ByVal sender As Object, ByVal e As EventArgs)
+        utils.Form_MouseMove(Me, e)
+    End Sub
+
+    ' Gif Background Movement Handler: MouseUp
+    Private Sub gitHandler_MouseUp(ByVal sender As Object, ByVal e As EventArgs)
+        utils.Form_MouseUp(Me, e)
     End Sub
 
     ' Method: To toggle tabControl Options
@@ -381,22 +397,15 @@ Public Class mainWindow
     End Sub
 
     Private Sub mainWindow_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
-        If e.Button = MouseButtons.Left Then
-            isFormMovement = True
-            MouseDownX = e.X : MouseDownY = e.Y
-        End If
+        utils.Form_MouseDown(Me, e)
     End Sub
 
     Private Sub mainWindow_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
-        If isFormMovement = True Then
-            Me.Location = New Point(Me.Location.X + (e.X - MouseDownX), Me.Location.Y + (e.Y - MouseDownY))
-        End If
+        utils.Form_MouseMove(Me, e)
     End Sub
 
     Private Sub mainWindow_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp
-        If e.Button = MouseButtons.Left Then
-            isFormMovement = False
-        End If
+        utils.Form_MouseUp(Me, e)
     End Sub
 
     Private Sub check_focused_Tick(sender As Object, e As EventArgs) Handles check_focused.Tick

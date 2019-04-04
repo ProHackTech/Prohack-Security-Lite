@@ -10,7 +10,7 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("ProHack Security Lite")>
 <Assembly: AssemblyDescription("Anti Malware for Windows")>
-<Assembly: AssemblyCompany("ProHack.Tech")>
+<Assembly: AssemblyCompany("ProHackTech")>
 <Assembly: AssemblyProduct("ProHack Security Lite")>
 <Assembly: AssemblyCopyright("Copyright © Bhavesh Kaul  2019")>
 <Assembly: AssemblyTrademark("")>

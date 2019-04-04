@@ -10,7 +10,7 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("updater")>
 <Assembly: AssemblyDescription("ProHack Security Lite updater")>
-<Assembly: AssemblyCompany("prohack.tech")>
+<Assembly: AssemblyCompany("ProHackTech")>
 <Assembly: AssemblyProduct("updater")>
 <Assembly: AssemblyCopyright("Copyright © Prohack.Tech 2019")>
 <Assembly: AssemblyTrademark("")>

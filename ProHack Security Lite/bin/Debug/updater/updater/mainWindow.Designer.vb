@@ -123,6 +123,7 @@ Partial Class mainWindow
         Me.Name = "mainWindow"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Updater"
+        Me.TopMost = True
         Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.ResumeLayout(False)
         Me.PerformLayout()
