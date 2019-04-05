@@ -36,7 +36,7 @@ Public Class UC_Detected
         toggle_btnHover(picIgnore, False)
     End Sub
 
-    Private Sub picTrash_Click(sender As Object, e As EventArgs) Handles picTrash.Click
+    Private Sub Malware_Trash()
         Dim tempfile As String = txtFile.Text
         ' find index of hash value (filename will be the same index)
         Dim index As Integer = utils.detected_filepath.FindIndex(Function(x As String) x.Contains(tempfile))
@@ -69,7 +69,7 @@ Public Class UC_Detected
         End Try
     End Sub
 
-    Private Sub picInfo_Click(sender As Object, e As EventArgs) Handles picInfo.Click
+    Private Sub Malware_Info()
         ' get malware information
         ' by default browser
         Dim searchString = "https://www.virustotal.com/#/search/" & txtHash.Text
@@ -80,7 +80,7 @@ Public Class UC_Detected
         End Try
     End Sub
 
-    Private Sub picIgnore_Click(sender As Object, e As EventArgs) Handles picIgnore.Click
+    Private Sub Malware_Ignore()
         Dim tempfile As String = txtFile.Text
         ' find index of hash value (filename will be the same index)
         Dim index As Integer = utils.detected_filepath.FindIndex(Function(x As String) x.Contains(tempfile))
@@ -104,5 +104,17 @@ Public Class UC_Detected
         Catch ex As Exception
             utils.invoke_msg(3, "File Delete Error", ex.Message.ToString)
         End Try
+    End Sub
+
+    Private Sub picTrash_Click(sender As Object, e As EventArgs) Handles picTrash.Click
+        Malware_Trash()
+    End Sub
+
+    Private Sub picInfo_Click(sender As Object, e As EventArgs) Handles picInfo.Click
+        Malware_Info()
+    End Sub
+
+    Private Sub picIgnore_Click(sender As Object, e As EventArgs) Handles picIgnore.Click
+        Malware_Ignore()
     End Sub
 End Class

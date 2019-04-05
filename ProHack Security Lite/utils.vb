@@ -72,6 +72,8 @@ Public Class utils
         If e.Button = MouseButtons.Left Then
             isFormMovement = True
             MouseDownX = e.X : MouseDownY = e.Y
+            form.Opacity = 0.8
+            form.Size = New Size(form.Size.Width + 10, form.Size.Height + 10)
         End If
     End Sub
 
@@ -88,6 +90,8 @@ Public Class utils
         If e.Button = MouseButtons.Left Then
             isFormMovement = False
             form.Cursor = Cursors.Default
+            form.Opacity = 1
+            form.Size = New Size(form.Size.Width - 10, form.Size.Height - 10)
         End If
     End Sub
 
