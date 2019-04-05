@@ -9,8 +9,8 @@ Public Class mainWindow
     ' general declares
     Public Shared scanType As String
     Dim form_settings(7) As String
-    Public theme As String : Dim wallpaper As String : Public fadeEffect_Status As String : Dim optionsHoverEffect_Status As String
-    Dim loadingScreenTopMost As String : Dim bgGif As String : Public fadeEffect_Type As String : Public fadeEffect_Speed As Integer
+    Public theme As String : Public wallpaper As String : Public fadeEffect_Status As String : Public optionsHoverEffect_Status As String
+    Public loadingScreenTopMost As String : Public bgGif As String : Public fadeEffect_Type As String : Public fadeEffect_Speed As Integer
 
     Sub New()
         InitializeComponent() 'initialize form
@@ -292,6 +292,7 @@ Public Class mainWindow
 
     Private Sub btnTabControl_Hide_Click(sender As Object, e As EventArgs) Handles btnTabControl_Hide.Click
         toggle_tabControlOptions(False)
+        tabControl_Options.Dock = DockStyle.Bottom
     End Sub
 
     Private Sub pic_opt_scan_Click(sender As Object, e As EventArgs) Handles pic_opt_scan.Click
@@ -374,8 +375,9 @@ Public Class mainWindow
     End Sub
 
     Private Sub btnShowSettings_Click(sender As Object, e As EventArgs) Handles btnShowSettings.Click
-        toggle_tabControlOptions(True)
-        tabControl_Options.SelectedIndex = 3
+        ' application settings
+        SecLite_Settings.Show()
+        Me.Hide()
     End Sub
 
     Private Sub btnScan_Quick_Click(sender As Object, e As EventArgs) Handles btnScan_Quick.Click

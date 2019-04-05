@@ -143,6 +143,15 @@
     <Compile Include="ProMSG.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SecLite_Settings.Designer.vb">
+      <DependentUpon>SecLite_Settings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SecLite_Settings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="smallTabControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UC_Detected.Designer.vb">
       <DependentUpon>UC_Detected.vb</DependentUpon>
     </Compile>
@@ -172,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProMSG.resx">
       <DependentUpon>ProMSG.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SecLite_Settings.resx">
+      <DependentUpon>SecLite_Settings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_Detected.resx">
       <DependentUpon>UC_Detected.vb</DependentUpon>

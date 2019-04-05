@@ -16,4 +16,5 @@ C:\Users\da74\Documents\GitHub\ProHack-Security-Lite\ProHack Security Lite\obj\D
 C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.malware_informer.resources
 C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.UC_Detected.resources
 C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.ProMSG.resources
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.SecLite_Settings.resources
 C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack Security Lite.vbprojAssemblyReference.cache

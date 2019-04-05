@@ -36,7 +36,6 @@ Partial Class mainWindow
         Me.btnScan_Quick = New System.Windows.Forms.Button()
         Me.TabPage_WebUtils = New System.Windows.Forms.TabPage()
         Me.TabPage_Tools = New System.Windows.Forms.TabPage()
-        Me.TabPage_StartSettings = New System.Windows.Forms.TabPage()
         Me.tabSelector_Options = New MaterialSkin.Controls.MaterialTabSelector()
         Me.panelFooter = New System.Windows.Forms.Panel()
         Me.btnWebsite = New System.Windows.Forms.Button()
@@ -148,7 +147,6 @@ Partial Class mainWindow
         Me.tabControl_Options.Controls.Add(Me.TabPage_Scans)
         Me.tabControl_Options.Controls.Add(Me.TabPage_WebUtils)
         Me.tabControl_Options.Controls.Add(Me.TabPage_Tools)
-        Me.tabControl_Options.Controls.Add(Me.TabPage_StartSettings)
         Me.tabControl_Options.Depth = 0
         Me.tabControl_Options.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.tabControl_Options.Location = New System.Drawing.Point(0, 563)
@@ -234,7 +232,7 @@ Partial Class mainWindow
         Me.TabPage_WebUtils.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_WebUtils.Name = "TabPage_WebUtils"
         Me.TabPage_WebUtils.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage_WebUtils.Size = New System.Drawing.Size(1012, 0)
+        Me.TabPage_WebUtils.Size = New System.Drawing.Size(1012, 86)
         Me.TabPage_WebUtils.TabIndex = 1
         Me.TabPage_WebUtils.Text = "WEB UTILS"
         '
@@ -243,18 +241,9 @@ Partial Class mainWindow
         Me.TabPage_Tools.BackColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(71, Byte), Integer), CType(CType(79, Byte), Integer))
         Me.TabPage_Tools.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_Tools.Name = "TabPage_Tools"
-        Me.TabPage_Tools.Size = New System.Drawing.Size(1012, 0)
+        Me.TabPage_Tools.Size = New System.Drawing.Size(1012, 86)
         Me.TabPage_Tools.TabIndex = 2
         Me.TabPage_Tools.Text = "TOOLS"
-        '
-        'TabPage_StartSettings
-        '
-        Me.TabPage_StartSettings.BackColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(71, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.TabPage_StartSettings.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage_StartSettings.Name = "TabPage_StartSettings"
-        Me.TabPage_StartSettings.Size = New System.Drawing.Size(1012, 0)
-        Me.TabPage_StartSettings.TabIndex = 3
-        Me.TabPage_StartSettings.Text = "START SETTINGS"
         '
         'tabSelector_Options
         '
@@ -576,7 +565,6 @@ Partial Class mainWindow
     Friend WithEvents TabPage_WebUtils As TabPage
     Friend WithEvents tabSelector_Options As MaterialSkin.Controls.MaterialTabSelector
     Friend WithEvents TabPage_Tools As TabPage
-    Friend WithEvents TabPage_StartSettings As TabPage
     Private WithEvents panelFooter As Panel
     Private WithEvents btnWebsite As Button
     Private WithEvents btnEmail As Button
