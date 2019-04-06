@@ -211,4 +211,29 @@ Public Class utils
         malware_informer.flowDetections.ResumeLayout()
     End Sub
 
+    ' refresh application
+    Public Shared Sub refresh_app()
+        Process.Start("starter.bat")
+        Application.Exit()
+    End Sub
+
+    ' save application settings
+    Public Shared Sub save_settings()
+        Dim configpath As String = Application.StartupPath & "/data/start_config"
+        If File.Exists(configpath) Then
+            File.Delete(configpath)
+        End If
+        Dim st As StreamWriter = New StreamWriter(configpath)
+        st.WriteLine("Theme:" & mainWindow.theme)
+        st.WriteLine("Wallpaper:" & mainWindow.wallpaper)
+        st.WriteLine("Fading Effect:" & mainWindow.fadeEffect_Status)
+        st.WriteLine("Main Window Options Button Hover Effect:" & mainWindow.optionsHoverEffect_Status)
+        st.WriteLine("Is Loading Screen TopMost?:" & mainWindow.loadingScreenTopMost)
+        st.WriteLine("Background GIF Animation:" & mainWindow.bgGif)
+        st.WriteLine("Fade Effect Type:" & mainWindow.fadeEffect_Type)
+        st.WriteLine("Fade Effect Speed(More means faster):" & mainWindow.fadeEffect_Speed)
+        st.Close()
+        st.Dispose()
+    End Sub
+
 End Class
