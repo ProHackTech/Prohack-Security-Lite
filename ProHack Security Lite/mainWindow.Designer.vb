@@ -56,6 +56,7 @@ Partial Class mainWindow
         Me.btnShowSettings = New System.Windows.Forms.Button()
         Me.bgWorker_Updater = New System.ComponentModel.BackgroundWorker()
         Me.check_focused = New System.Windows.Forms.Timer(Me.components)
+        Me.Schedule_WSIR_Query = New System.Windows.Forms.Timer(Me.components)
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabControl_Options.SuspendLayout()
         Me.TabPage_Scans.SuspendLayout()
@@ -232,7 +233,7 @@ Partial Class mainWindow
         Me.TabPage_WebUtils.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_WebUtils.Name = "TabPage_WebUtils"
         Me.TabPage_WebUtils.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage_WebUtils.Size = New System.Drawing.Size(1012, 86)
+        Me.TabPage_WebUtils.Size = New System.Drawing.Size(1012, 0)
         Me.TabPage_WebUtils.TabIndex = 1
         Me.TabPage_WebUtils.Text = "WEB UTILS"
         '
@@ -241,7 +242,7 @@ Partial Class mainWindow
         Me.TabPage_Tools.BackColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(71, Byte), Integer), CType(CType(79, Byte), Integer))
         Me.TabPage_Tools.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_Tools.Name = "TabPage_Tools"
-        Me.TabPage_Tools.Size = New System.Drawing.Size(1012, 86)
+        Me.TabPage_Tools.Size = New System.Drawing.Size(1012, 0)
         Me.TabPage_Tools.TabIndex = 2
         Me.TabPage_Tools.Text = "TOOLS"
         '
@@ -514,6 +515,10 @@ Partial Class mainWindow
         'check_focused
         '
         '
+        'Schedule_WSIR_Query
+        '
+        Me.Schedule_WSIR_Query.Interval = 60000
+        '
         'mainWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -587,4 +592,5 @@ Partial Class mainWindow
     Private WithEvents btnShowSettings As Button
     Friend WithEvents bgWorker_Updater As System.ComponentModel.BackgroundWorker
     Friend WithEvents check_focused As Timer
+    Friend WithEvents Schedule_WSIR_Query As Timer
 End Class

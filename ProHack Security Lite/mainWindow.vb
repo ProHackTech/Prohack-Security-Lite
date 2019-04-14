@@ -267,15 +267,20 @@ Public Class mainWindow
     End Sub
 
     Private Sub mainWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' loading settings
+        ' show loading screen
         form_loading.Show() : Me.Opacity = 0.1
         If loadingScreenTopMost = "true" Then
             form_loading.TopMost = True
         Else
             form_loading.TopMost = False
         End If
-        bgWorker_QuickQuery.RunWorkerAsync()
         bgWorker_QuickQuery.WorkerSupportsCancellation = True
+        ' start WSI schedule manager
+        Schedule_WSIR_Query.Start()
+        ' start WSI query worker
+        bgWorker_QuickQuery.RunWorkerAsync()
+        ' auto update check
+        bgWorker_Updater.RunWorkerAsync()
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
@@ -363,14 +368,16 @@ Public Class mainWindow
 
         ' save query results to file
         File.WriteAllLines(utils.WSIR_file, queryResults) ' save filepath list to file
-
-        ' auto update check
-        bgWorker_Updater.RunWorkerAsync()
     End Sub
 
     Private Sub bgWorker_QuickQuery_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgWorker_QuickQuery.RunWorkerCompleted
         bgWorker_QuickQuery.CancelAsync()
-        form_loading.Close() : Me.Opacity = 1
+        If form_loading.Visible = True Then
+            form_loading.Close()
+        End If
+        If Not Me.Opacity = 1.0 Then
+            Me.Opacity = 1.0
+        End If
         GC.Collect() 'garbage collection
     End Sub
 
@@ -514,6 +521,24 @@ Public Class mainWindow
                     updater_path += "/updater/updater.exe"
                     Process.Start(updater_path)
                     Application.Exit()
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub Schedule_WSIR_Query_Tick(sender As Object, e As EventArgs) Handles Schedule_WSIR_Query.Tick
+        ' if malware_scanner is not scanning, then
+        ' perform WSIR query as scheduled
+
+        ' if scanning status is false
+        If malware_scanner.isScanning = False Then
+            ' perform another check for reducing problems
+            ' if malware scanner background worker is not working
+            If Not malware_scanner.bgWorker_Scanner.IsBusy Then
+                ' if WSI query worker is not working
+                If Not bgWorker_QuickQuery.IsBusy Then
+                    ' run WSI worker
+                    bgWorker_QuickQuery.RunWorkerAsync()
                 End If
             End If
         End If
