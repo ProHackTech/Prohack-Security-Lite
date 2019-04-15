@@ -12,18 +12,11 @@
         End Try
     End Sub
 
-    Private Sub BtnExit_MouseMove(sender As Object, e As MouseEventArgs) Handles btnExit.MouseMove
-        Try
-            btnExit.BackgroundImage = Image.FromFile(Application.StartupPath & "/res/common_controls/shutdown.png")
-        Catch ex As Exception
-            utils.invoke_msg(2, "Icon Error", ex.Message.ToString)
-        End Try
-    End Sub
-
     Private Sub BtnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         If mainWindow.fadeEffect_Status = "on" Then
             utils.form_fadeOut(Me)
         End If
+        GC.Collect()
         Me.Close()
         mainWindow.Show()
     End Sub
@@ -142,6 +135,7 @@
         form_loading.Show()
         load_config()
         form_loading.Close()
+        Me.BackgroundImage = mainWindow.BackgroundImage
     End Sub
 
     Private Sub Rbtn_Theme_Dark_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_Theme_Dark.CheckedChanged
@@ -266,6 +260,7 @@
                 End If
                 mainWindow.wallpaper = imagename
                 picPreview_Wallpaper.Image = Image.FromFile(wallpaperDir & imagename)
+                Me.BackgroundImage = picPreview_Wallpaper.Image
                 rbtn_Wallpaper_Image.ForeColor = lime
                 rbtn_Wallpaper_None.ForeColor = blue
                 rbtn_Wallpaper_GIF.ForeColor = blue
@@ -276,11 +271,38 @@
     End Sub
 
     Private Sub TxtSetting_FadingEffect_Speed_TextChanged(sender As Object, e As EventArgs) Handles txtSetting_FadingEffect_Speed.TextChanged
-        mainWindow.fadeEffect_Speed = txtSetting_FadingEffect_Speed.Text
+        ' declare temp variable for easiness
+        Dim spd As String = txtSetting_FadingEffect_Speed.Text
+
+        ' check if not null, empty - fixes type error
+        If Not String.IsNullOrEmpty(spd) Then
+            ' convert to integer 32 and apply
+            mainWindow.fadeEffect_Speed = Convert.ToInt32(spd)
+        End If
     End Sub
 
     Private Sub BtnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
         utils.save_settings()
         utils.refresh_app()
+    End Sub
+
+    Private Sub SecLite_Settings_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
+        utils.Form_MouseDown(Me, e)
+    End Sub
+
+    Private Sub SecLite_Settings_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
+        utils.Form_MouseMove(Me, e)
+    End Sub
+
+    Private Sub SecLite_Settings_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp
+        utils.Form_MouseUp(Me, e)
+    End Sub
+
+    Private Sub BtnExit_MouseLeave(sender As Object, e As EventArgs) Handles btnExit.MouseLeave
+        Try
+            btnExit.BackgroundImage = Image.FromFile(Application.StartupPath & "/res/common_controls/shutdown.png")
+        Catch ex As Exception
+            utils.invoke_msg(2, "Icon Error", ex.Message.ToString)
+        End Try
     End Sub
 End Class
