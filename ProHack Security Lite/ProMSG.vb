@@ -82,6 +82,7 @@ Public Class ProMSG
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         utils.form_fadeOut(Me)
+        GC.Collect()
         Me.Close()
     End Sub
 
