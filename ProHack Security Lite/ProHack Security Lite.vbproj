@@ -158,6 +158,12 @@
     <Compile Include="UC_Detected.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UC_Extras.Designer.vb">
+      <DependentUpon>UC_Extras.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Extras.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="utils.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC_Detected.resx">
       <DependentUpon>UC_Detected.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Extras.resx">
+      <DependentUpon>UC_Extras.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -57,9 +57,14 @@ Partial Class mainWindow
         Me.bgWorker_Updater = New System.ComponentModel.BackgroundWorker()
         Me.check_focused = New System.Windows.Forms.Timer(Me.components)
         Me.Schedule_WSIR_Query = New System.Windows.Forms.Timer(Me.components)
+        Me.flow_webutils = New System.Windows.Forms.FlowLayoutPanel()
+        Me.flow_tools = New System.Windows.Forms.FlowLayoutPanel()
+        Me.bgWorker_FlowPopulus = New System.ComponentModel.BackgroundWorker()
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabControl_Options.SuspendLayout()
         Me.TabPage_Scans.SuspendLayout()
+        Me.TabPage_WebUtils.SuspendLayout()
+        Me.TabPage_Tools.SuspendLayout()
         Me.panelFooter.SuspendLayout()
         Me.pnl_opt_tools.SuspendLayout()
         CType(Me.pic_opt_tools, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -150,11 +155,11 @@ Partial Class mainWindow
         Me.tabControl_Options.Controls.Add(Me.TabPage_Tools)
         Me.tabControl_Options.Depth = 0
         Me.tabControl_Options.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.tabControl_Options.Location = New System.Drawing.Point(0, 563)
+        Me.tabControl_Options.Location = New System.Drawing.Point(0, 392)
         Me.tabControl_Options.MouseState = MaterialSkin.MouseState.HOVER
         Me.tabControl_Options.Name = "tabControl_Options"
         Me.tabControl_Options.SelectedIndex = 0
-        Me.tabControl_Options.Size = New System.Drawing.Size(1020, 10)
+        Me.tabControl_Options.Size = New System.Drawing.Size(1020, 181)
         Me.tabControl_Options.TabIndex = 8
         '
         'TabPage_Scans
@@ -166,7 +171,7 @@ Partial Class mainWindow
         Me.TabPage_Scans.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_Scans.Name = "TabPage_Scans"
         Me.TabPage_Scans.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage_Scans.Size = New System.Drawing.Size(1012, 0)
+        Me.TabPage_Scans.Size = New System.Drawing.Size(1012, 86)
         Me.TabPage_Scans.TabIndex = 0
         Me.TabPage_Scans.Text = "SCANS"
         '
@@ -182,7 +187,7 @@ Partial Class mainWindow
         Me.btnScan_Custom.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow
         Me.btnScan_Custom.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnScan_Custom.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnScan_Custom.Location = New System.Drawing.Point(682, -22)
+        Me.btnScan_Custom.Location = New System.Drawing.Point(682, 21)
         Me.btnScan_Custom.Name = "btnScan_Custom"
         Me.btnScan_Custom.Size = New System.Drawing.Size(200, 46)
         Me.btnScan_Custom.TabIndex = 12
@@ -201,7 +206,7 @@ Partial Class mainWindow
         Me.btnScan_Deep.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow
         Me.btnScan_Deep.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnScan_Deep.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnScan_Deep.Location = New System.Drawing.Point(405, -22)
+        Me.btnScan_Deep.Location = New System.Drawing.Point(405, 21)
         Me.btnScan_Deep.Name = "btnScan_Deep"
         Me.btnScan_Deep.Size = New System.Drawing.Size(200, 46)
         Me.btnScan_Deep.TabIndex = 11
@@ -220,7 +225,7 @@ Partial Class mainWindow
         Me.btnScan_Quick.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow
         Me.btnScan_Quick.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnScan_Quick.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnScan_Quick.Location = New System.Drawing.Point(131, -22)
+        Me.btnScan_Quick.Location = New System.Drawing.Point(131, 21)
         Me.btnScan_Quick.Name = "btnScan_Quick"
         Me.btnScan_Quick.Size = New System.Drawing.Size(200, 46)
         Me.btnScan_Quick.TabIndex = 10
@@ -230,19 +235,21 @@ Partial Class mainWindow
         'TabPage_WebUtils
         '
         Me.TabPage_WebUtils.BackColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(71, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.TabPage_WebUtils.Controls.Add(Me.flow_webutils)
         Me.TabPage_WebUtils.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_WebUtils.Name = "TabPage_WebUtils"
         Me.TabPage_WebUtils.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage_WebUtils.Size = New System.Drawing.Size(1012, 0)
+        Me.TabPage_WebUtils.Size = New System.Drawing.Size(1012, 155)
         Me.TabPage_WebUtils.TabIndex = 1
         Me.TabPage_WebUtils.Text = "WEB UTILS"
         '
         'TabPage_Tools
         '
         Me.TabPage_Tools.BackColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(71, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.TabPage_Tools.Controls.Add(Me.flow_tools)
         Me.TabPage_Tools.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_Tools.Name = "TabPage_Tools"
-        Me.TabPage_Tools.Size = New System.Drawing.Size(1012, 0)
+        Me.TabPage_Tools.Size = New System.Drawing.Size(1012, 155)
         Me.TabPage_Tools.TabIndex = 2
         Me.TabPage_Tools.Text = "TOOLS"
         '
@@ -251,7 +258,7 @@ Partial Class mainWindow
         Me.tabSelector_Options.BaseTabControl = Me.tabControl_Options
         Me.tabSelector_Options.Depth = 0
         Me.tabSelector_Options.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.tabSelector_Options.Location = New System.Drawing.Point(0, 452)
+        Me.tabSelector_Options.Location = New System.Drawing.Point(0, 281)
         Me.tabSelector_Options.MouseState = MaterialSkin.MouseState.HOVER
         Me.tabSelector_Options.Name = "tabSelector_Options"
         Me.tabSelector_Options.Size = New System.Drawing.Size(1020, 34)
@@ -266,7 +273,7 @@ Partial Class mainWindow
         Me.panelFooter.Controls.Add(Me.btnTwitter)
         Me.panelFooter.Controls.Add(Me.btnGithub)
         Me.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.panelFooter.Location = New System.Drawing.Point(0, 486)
+        Me.panelFooter.Location = New System.Drawing.Point(0, 315)
         Me.panelFooter.Name = "panelFooter"
         Me.panelFooter.Size = New System.Drawing.Size(1020, 77)
         Me.panelFooter.TabIndex = 13
@@ -519,6 +526,27 @@ Partial Class mainWindow
         '
         Me.Schedule_WSIR_Query.Interval = 60000
         '
+        'flow_webutils
+        '
+        Me.flow_webutils.AutoScroll = True
+        Me.flow_webutils.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
+        Me.flow_webutils.Location = New System.Drawing.Point(129, 47)
+        Me.flow_webutils.Name = "flow_webutils"
+        Me.flow_webutils.Size = New System.Drawing.Size(753, 100)
+        Me.flow_webutils.TabIndex = 0
+        '
+        'flow_tools
+        '
+        Me.flow_tools.AutoScroll = True
+        Me.flow_tools.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
+        Me.flow_tools.Location = New System.Drawing.Point(129, 47)
+        Me.flow_tools.Name = "flow_tools"
+        Me.flow_tools.Size = New System.Drawing.Size(753, 100)
+        Me.flow_tools.TabIndex = 1
+        '
+        'bgWorker_FlowPopulus
+        '
+        '
         'mainWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -548,6 +576,8 @@ Partial Class mainWindow
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabControl_Options.ResumeLayout(False)
         Me.TabPage_Scans.ResumeLayout(False)
+        Me.TabPage_WebUtils.ResumeLayout(False)
+        Me.TabPage_Tools.ResumeLayout(False)
         Me.panelFooter.ResumeLayout(False)
         Me.pnl_opt_tools.ResumeLayout(False)
         CType(Me.pic_opt_tools, System.ComponentModel.ISupportInitialize).EndInit()
@@ -593,4 +623,7 @@ Partial Class mainWindow
     Friend WithEvents bgWorker_Updater As System.ComponentModel.BackgroundWorker
     Friend WithEvents check_focused As Timer
     Friend WithEvents Schedule_WSIR_Query As Timer
+    Friend WithEvents flow_webutils As FlowLayoutPanel
+    Friend WithEvents flow_tools As FlowLayoutPanel
+    Friend WithEvents bgWorker_FlowPopulus As System.ComponentModel.BackgroundWorker
 End Class

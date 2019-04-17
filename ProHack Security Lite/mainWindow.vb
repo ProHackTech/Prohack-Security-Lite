@@ -1,16 +1,17 @@
 ﻿Imports System.Data.OleDb
 Imports System.IO
 Imports System.Net
-Imports System.Threading
-Imports System.IO.Compression.ZipFile
 
 Public Class mainWindow
 
     ' general declares
     Public Shared scanType As String
-    Dim form_settings(7) As String
-    Public theme As String : Public wallpaper As String : Public fadeEffect_Status As String : Public optionsHoverEffect_Status As String
-    Public loadingScreenTopMost As String : Public bgGif As String : Public fadeEffect_Type As String : Public fadeEffect_Speed As Integer
+    ' store form settings
+    Public form_settings(7) As String
+    ' settings variables: string types
+    Public theme, wallpaper, fadeEffect_Status, optionsHoverEffect_Status, fadeEffect_Type, bgGif, loadingScreenTopMost As String
+    ' settings variables: integer types
+    Public fadeEffect_Speed As Integer
 
     Sub New()
         InitializeComponent() 'initialize form
@@ -19,7 +20,7 @@ Public Class mainWindow
         form_init_setter() ' run the setting initialization before form loads
     End Sub
 
-    'Method: To apply theme settings
+    'Method: To apply form settings
     Private Sub form_init_setter()
         'read theme settings
         Dim fpath = Application.StartupPath & "/data/start_config" 'filepath
@@ -281,6 +282,8 @@ Public Class mainWindow
         bgWorker_QuickQuery.RunWorkerAsync()
         ' auto update check
         bgWorker_Updater.RunWorkerAsync()
+        ' populus flows : webutils, tools
+        bgWorker_FlowPopulus.RunWorkerAsync()
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
@@ -403,6 +406,77 @@ Public Class mainWindow
         scanType = "Custom"
         Me.Hide()
         malware_scanner.Show()
+    End Sub
+
+    Private Sub BgWorker_FlowPopulus_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgWorker_FlowPopulus.DoWork
+        ' common declares for file reading
+        Dim reader As StreamReader
+        Dim tempStr As String = Nothing
+        Dim file_webutils As String = Application.StartupPath & "/data/webutils.list"
+        Dim file_tools As String = Application.StartupPath & "/data/tools.list"
+
+        ' storing names and paths
+        Dim utils_names As New List(Of String)()
+        Dim utils_paths As New List(Of String)()
+        Dim tools_names As New List(Of String)()
+        Dim tools_paths As New List(Of String)()
+
+        ' read items: web utils
+        reader = New StreamReader(file_webutils)
+        Do
+            tempStr = reader.ReadLine
+            If Not String.IsNullOrEmpty(tempStr) Then
+                Dim tempArray As String() = tempStr.Split(">")
+                utils_names.Add(tempArray(0))
+                utils_paths.Add(tempArray(1))
+            End If
+        Loop Until tempStr Is Nothing
+        reader.Close()
+
+        ' populus webutils
+        BeginInvoke(CType(Sub()
+                              _populus_items("webutils", utils_names, utils_paths)
+                          End Sub, MethodInvoker))
+
+        ' read items: tools
+        reader = New StreamReader(file_tools)
+        Do
+            tempStr = reader.ReadLine
+            If Not String.IsNullOrEmpty(tempStr) Then
+                Dim tempArray As String() = tempStr.Split(">")
+                tools_names.Add(tempArray(0))
+                tools_paths.Add(tempArray(1))
+            End If
+        Loop Until tempStr Is Nothing
+        reader.Close()
+
+        ' populus tools
+        BeginInvoke(CType(Sub()
+                              _populus_items("tools", tools_names, tools_paths)
+                          End Sub, MethodInvoker))
+
+    End Sub
+
+    Private Sub _populus_items(ByVal itemType As String, ByVal names As List(Of String), ByVal paths As List(Of String))
+        If itemType = "tools" Then
+            For i As Integer = 0 To names.Count - 1
+                Dim uctools As New UC_Extras
+                uctools.Tag = "uctools" & i
+                uctools.txtName.Text = names(i)
+                flow_tools.Controls.Add(uctools)
+                uctools.Visible = True
+                uctools.Show()
+            Next
+        Else
+            For i As Integer = 0 To names.Count - 1
+                Dim ucutils As New UC_Extras
+                ucutils.Tag = "ucutils" & i
+                ucutils.txtName.Text = names(i)
+                flow_webutils.Controls.Add(ucutils)
+                ucutils.Visible = True
+                ucutils.Show()
+            Next
+        End If
     End Sub
 
     Private Sub mainWindow_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
