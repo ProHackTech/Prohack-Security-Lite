@@ -72,13 +72,13 @@ Public Class utils
         If e.Button = MouseButtons.Left Then
             isFormMovement = True
             MouseDownX = e.X : MouseDownY = e.Y
-            form.Opacity = 0.8
         End If
     End Sub
 
     ' Form Movevement: On Mouse Move
     Public Shared Sub Form_MouseMove(form As Form, e As MouseEventArgs)
         If isFormMovement = True Then
+            form.Opacity = 0.8
             form.Cursor = Cursors.SizeAll
             form.Location = New Point(form.Location.X + (e.X - MouseDownX), form.Location.Y + (e.Y - MouseDownY))
         End If

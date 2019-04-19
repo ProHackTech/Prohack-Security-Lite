@@ -7,15 +7,17 @@ Public Class mainWindow
     ' general declares
     Public Shared scanType As String
     ' store form settings
-    Public form_settings(7) As String
+    Public form_settings(8) As String
     ' settings variables: string types
-    Public theme, wallpaper, fadeEffect_Status, optionsHoverEffect_Status, fadeEffect_Type, bgGif, loadingScreenTopMost As String
+    Public theme, wallpaper, fadeEffect_Status, optionsHoverEffect_Status, fadeEffect_Type, bgGif, loadingScreenTopMost, run_from As String
     ' settings variables: integer types
     Public fadeEffect_Speed As Integer
 
     Sub New()
         InitializeComponent() 'initialize form
-        Me.DoubleBuffered = True ' double buffering of form for visual performance
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True) ' double buffering of form for visual performance
+        SetStyle(ControlStyles.UserPaint, True)
+        SetStyle(ControlStyles.AllPaintingInWmPaint, True)
         toggle_tabControlOptions(False) ' toggle tab control and hide it
         form_init_setter() ' run the setting initialization before form loads
     End Sub
@@ -43,6 +45,7 @@ Public Class mainWindow
         bgGif = form_settings(5) ' gif image for animated background
         fadeEffect_Type = form_settings(6) ' fade effect type
         fadeEffect_Speed = form_settings(7) ' fade effect speed
+        run_from = form_settings(8) ' run from config
 
         'apply theme settings
         Dim imgpath As String ' image path variable
@@ -296,6 +299,7 @@ Public Class mainWindow
             check_focused.Start()
         End If
         Me.WindowState = FormWindowState.Minimized
+        toggle_tabControlOptions(False)
     End Sub
 
     Private Sub btnTabControl_Hide_Click(sender As Object, e As EventArgs) Handles btnTabControl_Hide.Click
@@ -388,24 +392,28 @@ Public Class mainWindow
         ' application settings
         SecLite_Settings.Show()
         Me.Hide()
+        toggle_tabControlOptions(False)
     End Sub
 
     Private Sub btnScan_Quick_Click(sender As Object, e As EventArgs) Handles btnScan_Quick.Click
         scanType = "Quick"
         Me.Hide()
         malware_scanner.Show()
+        toggle_tabControlOptions(False)
     End Sub
 
     Private Sub btnScan_Deep_Click(sender As Object, e As EventArgs) Handles btnScan_Deep.Click
         scanType = "Deep"
         Me.Hide()
         malware_scanner.Show()
+        toggle_tabControlOptions(False)
     End Sub
 
     Private Sub btnScan_Custom_Click(sender As Object, e As EventArgs) Handles btnScan_Custom.Click
         scanType = "Custom"
         Me.Hide()
         malware_scanner.Show()
+        toggle_tabControlOptions(False)
     End Sub
 
     Private Sub BgWorker_FlowPopulus_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgWorker_FlowPopulus.DoWork
@@ -479,8 +487,33 @@ Public Class mainWindow
         End If
     End Sub
 
+    Private Sub BtnToTray_MouseEnter(sender As Object, e As EventArgs) Handles btnToTray.MouseEnter
+        change_icon(btnToTray, "common_controls/totray_hover.png")
+    End Sub
+
+    Private Sub BtnToTray_MouseLeave(sender As Object, e As EventArgs) Handles btnToTray.MouseLeave
+        change_icon(btnToTray, "common_controls/totray.png")
+    End Sub
+
+    Private Sub BtnToTray_Click(sender As Object, e As EventArgs) Handles btnToTray.Click
+        Me.ShowInTaskbar = False
+        Me.Hide()
+        PSLNotify.Visible = True
+    End Sub
+
+    Private Sub PSLNotify_Click(sender As Object, e As EventArgs) Handles PSLNotify.Click
+        Me.ShowInTaskbar = True
+        Me.Show()
+        PSLNotify.Visible = False
+    End Sub
+
+    Private Sub MainWindow_Click(sender As Object, e As EventArgs) Handles MyBase.Click
+        toggle_tabControlOptions(False)
+    End Sub
+
     Private Sub mainWindow_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
         utils.Form_MouseDown(Me, e)
+        toggle_tabControlOptions(False)
     End Sub
 
     Private Sub mainWindow_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
@@ -500,7 +533,7 @@ Public Class mainWindow
     End Sub
 
     Private Sub bgWorker_Updater_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgWorker_Updater.DoWork
-        Dim line As String = Nothing : Dim run_from As String = Nothing
+        Dim line As String = Nothing
         Dim curversion, newversion As Integer
         Dim tempstring As String
         Dim reader As StreamReader
@@ -522,16 +555,6 @@ Public Class mainWindow
         updater_newversion = Int(tempstring)
         reader.Close()
         reader.Dispose()
-
-        ' read the run from value
-        reader = New StreamReader(Application.StartupPath & "/run_from.cfg")
-        Do
-            line = reader.ReadLine()
-            If Not String.IsNullOrEmpty(line) Then
-                run_from = line
-            End If
-        Loop Until line Is Nothing
-        reader.Close() : reader.Dispose()
 
         ' compare updater versions
         If updater_newversion > updater_version Then

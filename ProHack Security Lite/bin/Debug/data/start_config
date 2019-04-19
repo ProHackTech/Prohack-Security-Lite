@@ -6,3 +6,4 @@ Is Loading Screen TopMost?:true
 Background GIF Animation:bg_pipes.gif
 Fade Effect Type:FadeLeft
 Fade Effect Speed(More means faster):100
+Run From:debug

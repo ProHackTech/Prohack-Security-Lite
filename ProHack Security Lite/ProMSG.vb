@@ -87,11 +87,20 @@ Public Class ProMSG
     End Sub
 
     Private Sub btnRefreshApp_Click(sender As Object, e As EventArgs) Handles btnRefreshApp.Click
-        'start updater
+        Dim updater_path As String = Application.StartupPath
+        If mainWindow.run_from = "debug" Then
+            updater_path += "/updater/updater/bin/debug/updater.exe"
+            Process.Start(updater_path)
+            Application.Exit()
+        ElseIf mainWindow.run_from = "release" Then
+            updater_path += "/updater/updater.exe"
+            Process.Start(updater_path)
+            Application.Exit()
+        End If
     End Sub
 
     Private Sub btnHelpRefreshInfo_Click(sender As Object, e As EventArgs) Handles btnHelpRefreshInfo.Click
-        MsgBox("Re-Updates the app")
+        MsgBox("Re-Update the app")
     End Sub
 
     Private Sub ProMSG_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
