@@ -41,7 +41,7 @@ The following features have been completed. They may need further improvements.
 #### Error Reporting & Message
 Default messagebox was lacking needed features, so a quick custom form was made for displaying message and errors.
 
-- [+] Generate small report for emailing: To minimize data collection scope, automatic reporting will be developed
+- [+] Generate small report for emailing: To minimize data collection scope, automatic reporting may not planned..
 - [+] Refresh application: Starts the updater to download the application again (to be used incase critical application error or files missing/deleted by mistake).
 
 ### To-Do
