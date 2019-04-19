@@ -35,7 +35,9 @@ Partial Class mainWindow
         Me.btnScan_Deep = New System.Windows.Forms.Button()
         Me.btnScan_Quick = New System.Windows.Forms.Button()
         Me.TabPage_WebUtils = New System.Windows.Forms.TabPage()
+        Me.flow_webutils = New System.Windows.Forms.FlowLayoutPanel()
         Me.TabPage_Tools = New System.Windows.Forms.TabPage()
+        Me.flow_tools = New System.Windows.Forms.FlowLayoutPanel()
         Me.tabSelector_Options = New MaterialSkin.Controls.MaterialTabSelector()
         Me.panelFooter = New System.Windows.Forms.Panel()
         Me.btnWebsite = New System.Windows.Forms.Button()
@@ -57,9 +59,9 @@ Partial Class mainWindow
         Me.bgWorker_Updater = New System.ComponentModel.BackgroundWorker()
         Me.check_focused = New System.Windows.Forms.Timer(Me.components)
         Me.Schedule_WSIR_Query = New System.Windows.Forms.Timer(Me.components)
-        Me.flow_webutils = New System.Windows.Forms.FlowLayoutPanel()
-        Me.flow_tools = New System.Windows.Forms.FlowLayoutPanel()
         Me.bgWorker_FlowPopulus = New System.ComponentModel.BackgroundWorker()
+        Me.btnToTray = New System.Windows.Forms.Button()
+        Me.PSLNotify = New System.Windows.Forms.NotifyIcon(Me.components)
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabControl_Options.SuspendLayout()
         Me.TabPage_Scans.SuspendLayout()
@@ -155,11 +157,11 @@ Partial Class mainWindow
         Me.tabControl_Options.Controls.Add(Me.TabPage_Tools)
         Me.tabControl_Options.Depth = 0
         Me.tabControl_Options.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.tabControl_Options.Location = New System.Drawing.Point(0, 392)
+        Me.tabControl_Options.Location = New System.Drawing.Point(0, 563)
         Me.tabControl_Options.MouseState = MaterialSkin.MouseState.HOVER
         Me.tabControl_Options.Name = "tabControl_Options"
         Me.tabControl_Options.SelectedIndex = 0
-        Me.tabControl_Options.Size = New System.Drawing.Size(1020, 181)
+        Me.tabControl_Options.Size = New System.Drawing.Size(1020, 10)
         Me.tabControl_Options.TabIndex = 8
         '
         'TabPage_Scans
@@ -171,7 +173,7 @@ Partial Class mainWindow
         Me.TabPage_Scans.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_Scans.Name = "TabPage_Scans"
         Me.TabPage_Scans.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage_Scans.Size = New System.Drawing.Size(1012, 86)
+        Me.TabPage_Scans.Size = New System.Drawing.Size(1012, 0)
         Me.TabPage_Scans.TabIndex = 0
         Me.TabPage_Scans.Text = "SCANS"
         '
@@ -187,7 +189,7 @@ Partial Class mainWindow
         Me.btnScan_Custom.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow
         Me.btnScan_Custom.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnScan_Custom.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnScan_Custom.Location = New System.Drawing.Point(682, 21)
+        Me.btnScan_Custom.Location = New System.Drawing.Point(681, -25)
         Me.btnScan_Custom.Name = "btnScan_Custom"
         Me.btnScan_Custom.Size = New System.Drawing.Size(200, 46)
         Me.btnScan_Custom.TabIndex = 12
@@ -206,7 +208,7 @@ Partial Class mainWindow
         Me.btnScan_Deep.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow
         Me.btnScan_Deep.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnScan_Deep.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnScan_Deep.Location = New System.Drawing.Point(405, 21)
+        Me.btnScan_Deep.Location = New System.Drawing.Point(404, -25)
         Me.btnScan_Deep.Name = "btnScan_Deep"
         Me.btnScan_Deep.Size = New System.Drawing.Size(200, 46)
         Me.btnScan_Deep.TabIndex = 11
@@ -225,7 +227,7 @@ Partial Class mainWindow
         Me.btnScan_Quick.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow
         Me.btnScan_Quick.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnScan_Quick.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnScan_Quick.Location = New System.Drawing.Point(131, 21)
+        Me.btnScan_Quick.Location = New System.Drawing.Point(130, -25)
         Me.btnScan_Quick.Name = "btnScan_Quick"
         Me.btnScan_Quick.Size = New System.Drawing.Size(200, 46)
         Me.btnScan_Quick.TabIndex = 10
@@ -239,9 +241,19 @@ Partial Class mainWindow
         Me.TabPage_WebUtils.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_WebUtils.Name = "TabPage_WebUtils"
         Me.TabPage_WebUtils.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage_WebUtils.Size = New System.Drawing.Size(1012, 155)
+        Me.TabPage_WebUtils.Size = New System.Drawing.Size(1012, 0)
         Me.TabPage_WebUtils.TabIndex = 1
         Me.TabPage_WebUtils.Text = "WEB UTILS"
+        '
+        'flow_webutils
+        '
+        Me.flow_webutils.AutoScroll = True
+        Me.flow_webutils.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flow_webutils.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
+        Me.flow_webutils.Location = New System.Drawing.Point(3, 3)
+        Me.flow_webutils.Name = "flow_webutils"
+        Me.flow_webutils.Size = New System.Drawing.Size(1006, 0)
+        Me.flow_webutils.TabIndex = 0
         '
         'TabPage_Tools
         '
@@ -249,16 +261,26 @@ Partial Class mainWindow
         Me.TabPage_Tools.Controls.Add(Me.flow_tools)
         Me.TabPage_Tools.Location = New System.Drawing.Point(4, 22)
         Me.TabPage_Tools.Name = "TabPage_Tools"
-        Me.TabPage_Tools.Size = New System.Drawing.Size(1012, 155)
+        Me.TabPage_Tools.Size = New System.Drawing.Size(1012, 0)
         Me.TabPage_Tools.TabIndex = 2
         Me.TabPage_Tools.Text = "TOOLS"
+        '
+        'flow_tools
+        '
+        Me.flow_tools.AutoScroll = True
+        Me.flow_tools.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flow_tools.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
+        Me.flow_tools.Location = New System.Drawing.Point(0, 0)
+        Me.flow_tools.Name = "flow_tools"
+        Me.flow_tools.Size = New System.Drawing.Size(1012, 0)
+        Me.flow_tools.TabIndex = 1
         '
         'tabSelector_Options
         '
         Me.tabSelector_Options.BaseTabControl = Me.tabControl_Options
         Me.tabSelector_Options.Depth = 0
         Me.tabSelector_Options.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.tabSelector_Options.Location = New System.Drawing.Point(0, 281)
+        Me.tabSelector_Options.Location = New System.Drawing.Point(0, 452)
         Me.tabSelector_Options.MouseState = MaterialSkin.MouseState.HOVER
         Me.tabSelector_Options.Name = "tabSelector_Options"
         Me.tabSelector_Options.Size = New System.Drawing.Size(1020, 34)
@@ -273,7 +295,7 @@ Partial Class mainWindow
         Me.panelFooter.Controls.Add(Me.btnTwitter)
         Me.panelFooter.Controls.Add(Me.btnGithub)
         Me.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.panelFooter.Location = New System.Drawing.Point(0, 315)
+        Me.panelFooter.Location = New System.Drawing.Point(0, 486)
         Me.panelFooter.Name = "panelFooter"
         Me.panelFooter.Size = New System.Drawing.Size(1020, 77)
         Me.panelFooter.TabIndex = 13
@@ -371,10 +393,10 @@ Partial Class mainWindow
         'pnl_opt_tools
         '
         Me.pnl_opt_tools.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.pnl_opt_tools.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.pnl_opt_tools.BackColor = System.Drawing.Color.Transparent
         Me.pnl_opt_tools.Controls.Add(Me.btn_opt_tools)
         Me.pnl_opt_tools.Controls.Add(Me.pic_opt_tools)
-        Me.pnl_opt_tools.Location = New System.Drawing.Point(686, 186)
+        Me.pnl_opt_tools.Location = New System.Drawing.Point(685, 184)
         Me.pnl_opt_tools.Name = "pnl_opt_tools"
         Me.pnl_opt_tools.Size = New System.Drawing.Size(200, 200)
         Me.pnl_opt_tools.TabIndex = 17
@@ -413,10 +435,10 @@ Partial Class mainWindow
         'pnl_opt_webutils
         '
         Me.pnl_opt_webutils.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.pnl_opt_webutils.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.pnl_opt_webutils.BackColor = System.Drawing.Color.Transparent
         Me.pnl_opt_webutils.Controls.Add(Me.btn_opt_webutils)
         Me.pnl_opt_webutils.Controls.Add(Me.pic_opt_webutils)
-        Me.pnl_opt_webutils.Location = New System.Drawing.Point(409, 186)
+        Me.pnl_opt_webutils.Location = New System.Drawing.Point(408, 184)
         Me.pnl_opt_webutils.Name = "pnl_opt_webutils"
         Me.pnl_opt_webutils.Size = New System.Drawing.Size(200, 200)
         Me.pnl_opt_webutils.TabIndex = 16
@@ -455,10 +477,10 @@ Partial Class mainWindow
         'pnl_opt_scan
         '
         Me.pnl_opt_scan.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.pnl_opt_scan.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.pnl_opt_scan.BackColor = System.Drawing.Color.Transparent
         Me.pnl_opt_scan.Controls.Add(Me.btn_opt_scan)
         Me.pnl_opt_scan.Controls.Add(Me.pic_opt_scan)
-        Me.pnl_opt_scan.Location = New System.Drawing.Point(135, 186)
+        Me.pnl_opt_scan.Location = New System.Drawing.Point(134, 184)
         Me.pnl_opt_scan.Name = "pnl_opt_scan"
         Me.pnl_opt_scan.Size = New System.Drawing.Size(200, 200)
         Me.pnl_opt_scan.TabIndex = 15
@@ -509,7 +531,7 @@ Partial Class mainWindow
         Me.btnShowSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnShowSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnShowSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnShowSettings.Location = New System.Drawing.Point(909, 12)
+        Me.btnShowSettings.Location = New System.Drawing.Point(860, 12)
         Me.btnShowSettings.Name = "btnShowSettings"
         Me.btnShowSettings.Size = New System.Drawing.Size(25, 25)
         Me.btnShowSettings.TabIndex = 18
@@ -526,26 +548,33 @@ Partial Class mainWindow
         '
         Me.Schedule_WSIR_Query.Interval = 60000
         '
-        'flow_webutils
-        '
-        Me.flow_webutils.AutoScroll = True
-        Me.flow_webutils.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
-        Me.flow_webutils.Location = New System.Drawing.Point(129, 47)
-        Me.flow_webutils.Name = "flow_webutils"
-        Me.flow_webutils.Size = New System.Drawing.Size(753, 100)
-        Me.flow_webutils.TabIndex = 0
-        '
-        'flow_tools
-        '
-        Me.flow_tools.AutoScroll = True
-        Me.flow_tools.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
-        Me.flow_tools.Location = New System.Drawing.Point(129, 47)
-        Me.flow_tools.Name = "flow_tools"
-        Me.flow_tools.Size = New System.Drawing.Size(753, 100)
-        Me.flow_tools.TabIndex = 1
-        '
         'bgWorker_FlowPopulus
         '
+        '
+        'btnToTray
+        '
+        Me.btnToTray.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnToTray.BackColor = System.Drawing.Color.Transparent
+        Me.btnToTray.BackgroundImage = CType(resources.GetObject("btnToTray.BackgroundImage"), System.Drawing.Image)
+        Me.btnToTray.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnToTray.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnToTray.FlatAppearance.BorderSize = 0
+        Me.btnToTray.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnToTray.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnToTray.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnToTray.Location = New System.Drawing.Point(921, 12)
+        Me.btnToTray.Name = "btnToTray"
+        Me.btnToTray.Size = New System.Drawing.Size(25, 25)
+        Me.btnToTray.TabIndex = 19
+        Me.btnToTray.TabStop = False
+        Me.btnToTray.UseVisualStyleBackColor = False
+        '
+        'PSLNotify
+        '
+        Me.PSLNotify.BalloonTipText = "ProHack Security Notify"
+        Me.PSLNotify.BalloonTipTitle = "ProHack Security Notify"
+        Me.PSLNotify.Icon = CType(resources.GetObject("PSLNotify.Icon"), System.Drawing.Icon)
+        Me.PSLNotify.Text = "ProHack Security Notify"
         '
         'mainWindow
         '
@@ -554,10 +583,11 @@ Partial Class mainWindow
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1020, 573)
-        Me.Controls.Add(Me.btnShowSettings)
-        Me.Controls.Add(Me.pnl_opt_tools)
+        Me.Controls.Add(Me.btnToTray)
         Me.Controls.Add(Me.pnl_opt_webutils)
         Me.Controls.Add(Me.pnl_opt_scan)
+        Me.Controls.Add(Me.pnl_opt_tools)
+        Me.Controls.Add(Me.btnShowSettings)
         Me.Controls.Add(Me.btnTabControl_Hide)
         Me.Controls.Add(Me.tabSelector_Options)
         Me.Controls.Add(Me.panelFooter)
@@ -626,4 +656,6 @@ Partial Class mainWindow
     Friend WithEvents flow_webutils As FlowLayoutPanel
     Friend WithEvents flow_tools As FlowLayoutPanel
     Friend WithEvents bgWorker_FlowPopulus As System.ComponentModel.BackgroundWorker
+    Private WithEvents btnToTray As Button
+    Friend WithEvents PSLNotify As NotifyIcon
 End Class
