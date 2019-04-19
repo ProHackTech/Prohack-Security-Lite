@@ -9,17 +9,49 @@
 
 This is a small anti-malware application made in VB.NET. All the hashes are collected from <a href="https://virusshare.com/">Virus Share Website</a>. Currently under development.
 
-## Planned Features
+## Features
+
+### Planned (high level general features)
 - Basic signature based scanning
-- Hash gatherer: gathering hashes with drag-drop implementation
-- Scanning by filetypes in quick scan
-- Using powershell or vb.net for generating quick-scan file hashes (default powershell, because faster)
-- Plan web-tools
-- Plan general tools
-- Reduce application to notification bar (for real-time scanning option)
-- Create logger
-- Create error logging & reporting
-- Create settings menu
+- Simple web protection: using host file modifying. Blocking IP's
+- Task blocker and active task blocker: add tasks to block list and allow force blocking
+- Create Quick, Deep & Custom scan options
+- Plan WebUtils, Tools
+- Create logging
+- Add python scripts support
+- Add CLI version for non-gui scanning (python)
+- Create scalable settings menu, replace current
+- Create small GUI python package manager (package list from pypi)
+
+Or abandon the project
+
+### Completed Features
+The following features have been completed. They may need further improvements.
+
+#### Quick Scan
+- [+] Gather files based on 100+ common file extensions
+- [+] Queriy *Windows Search Indexer* for file list
+- [+] Gather MD5 file signature for each file in query results
+- [+] Compare with malware signatures
+
+#### Scheduled Indexer Query
+- [+] Automatic background *Windows Search Indexer* querying every minute
+- [+] Added error management incase a scan is currently taking place
+
+#### Error Reporting & Message
+Default messagebox was lacking needed features, so a quick custom form was made for displaying message and errors.
+
+- [+] Generate small report for emailing: To minimize data collection scope, automatic reporting will be developed
+- [+] Refresh application: Starts the updater to download the application again (to be used incase critical application error or files missing/deleted by mistake).
+
+### To-Do
+- Deep scan, Custom scan
+- WebUtils, Tools
+- Malware Signatures updater
+- Replace 'Easy Install' with better app installer
+
+
+Once the current to-do items are completed, the project will begin release cycles with version controls starting from v1.0.0.0 for both application and updater. Different branches will be created for each sub-project development.
 
 ## License
 **DWTFFYWTDWIADBMFATHWI GENERAL PUBLIC LICENSE**
