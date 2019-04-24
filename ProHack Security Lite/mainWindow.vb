@@ -549,7 +549,11 @@ Public Class mainWindow
         ' check the new updater version
         Dim address As String = "https://prohack.tech/Products/Security-Lite/updater_versions.txt"
         Dim client As WebClient = New WebClient()
-        reader = New StreamReader(client.OpenRead(address))
+        Try
+            reader = New StreamReader(client.OpenRead(address))
+        Catch ex As Exception
+            Exit Sub
+        End Try
         tempstring = reader.ReadToEnd
         tempstring = tempstring.Replace(".", "")
         updater_newversion = Int(tempstring)

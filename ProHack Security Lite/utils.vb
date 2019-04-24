@@ -4,10 +4,16 @@ Imports System.Net
 
 Public Class utils
 
+    ' Declares: Malware detections
     Public Shared detected_filepath As New List(Of String)()
     Public Shared detected_filehash As New List(Of String)()
-    Public Shared dectected_malware_file As String = Application.StartupPath & "/data/detected.list"
-    Public Shared WSIR_file As String = Application.StartupPath & "/data/WSIR.list"
+
+    ' Declares: File locations
+    Public Shared dectected_malware_file As String = Application.StartupPath & "\data\detected.list"
+    Public Shared WSIR_file As String = Application.StartupPath & "\data\WSIR.list"
+    Public Shared pyModDir As String = Application.StartupPath & "\python_modules\"
+
+    ' Declares: Form movement
     Public Shared isFormMovement As Boolean = False
     Public Shared MouseDownX, MouseDownY As Integer
 
