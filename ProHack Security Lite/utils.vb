@@ -4,16 +4,19 @@ Imports System.Net
 
 Public Class utils
 
-    ' Declares: Malware detections
+    ' Declares: Malware Detections
     Public Shared detected_filepath As New List(Of String)()
     Public Shared detected_filehash As New List(Of String)()
 
-    ' Declares: File locations
+    ' Declares: Python Configuration
+    Public Shared python_path As String
+
+    ' Declares: Locations
     Public Shared dectected_malware_file As String = Application.StartupPath & "\data\detected.list"
     Public Shared WSIR_file As String = Application.StartupPath & "\data\WSIR.list"
     Public Shared pyModDir As String = Application.StartupPath & "\python_modules\"
 
-    ' Declares: Form movement
+    ' Declares: Form Movement
     Public Shared isFormMovement As Boolean = False
     Public Shared MouseDownX, MouseDownY As Integer
 
@@ -238,6 +241,23 @@ Public Class utils
         st.WriteLine("Fade Effect Speed(More means faster):" & mainWindow.fadeEffect_Speed)
         st.Close()
         st.Dispose()
+    End Sub
+
+    ' Method: For python config read
+    Public Shared Sub pyconfig()
+        Dim filepath As String = Application.StartupPath & "/data/py_config"
+        Dim configs As New List(Of String)()
+        Dim reader As StreamReader = New StreamReader(filepath)
+        Dim line As String = Nothing
+        Do
+            line = reader.ReadLine
+            If Not String.IsNullOrEmpty(line) Then
+                configs.Add(line)
+            End If
+        Loop Until line Is Nothing
+        reader.Close()
+
+        python_path = configs(0) ' set python path
     End Sub
 
 End Class
