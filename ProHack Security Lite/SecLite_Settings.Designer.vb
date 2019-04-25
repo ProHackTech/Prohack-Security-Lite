@@ -28,8 +28,8 @@ Partial Class SecLite_Settings
         Me.picLogo = New System.Windows.Forms.PictureBox()
         Me.btnExit = New System.Windows.Forms.Button()
         Me.SmallTabControl1 = New ProHack_Security_Lite.smallTabControl()
-        Me.tabpage_config = New System.Windows.Forms.TabPage()
-        Me.btnSaveSettings = New System.Windows.Forms.Button()
+        Me.tabpage_startconfig = New System.Windows.Forms.TabPage()
+        Me.btnSaveSettings1 = New System.Windows.Forms.Button()
         Me.groupSettings_MainWindow_Wallpaper = New System.Windows.Forms.GroupBox()
         Me.rbtn_Wallpaper_None = New System.Windows.Forms.RadioButton()
         Me.picPreview_Wallpaper = New System.Windows.Forms.PictureBox()
@@ -62,10 +62,14 @@ Partial Class SecLite_Settings
         Me.lblSetting_Theme = New System.Windows.Forms.Label()
         Me.rbtn_Theme_Light = New System.Windows.Forms.RadioButton()
         Me.rbtn_Theme_Dark = New System.Windows.Forms.RadioButton()
-        Me.tabpage_packages = New System.Windows.Forms.TabPage()
+        Me.tabpage_pythonconfig = New System.Windows.Forms.TabPage()
+        Me.btnSaveSettings2 = New System.Windows.Forms.Button()
+        Me.btn_browse_python_path = New System.Windows.Forms.Button()
+        Me.lbl_python_path = New System.Windows.Forms.Label()
+        Me.txt_python_path = New System.Windows.Forms.TextBox()
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SmallTabControl1.SuspendLayout()
-        Me.tabpage_config.SuspendLayout()
+        Me.tabpage_startconfig.SuspendLayout()
         Me.groupSettings_MainWindow_Wallpaper.SuspendLayout()
         CType(Me.picPreview_Wallpaper, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.groupSettings_LoadingScreen.SuspendLayout()
@@ -73,6 +77,7 @@ Partial Class SecLite_Settings
         Me.groupSettings_FadingEffect.SuspendLayout()
         Me.groupSettings_FadingEffect_EffectType.SuspendLayout()
         Me.groupSettings_Theme.SuspendLayout()
+        Me.tabpage_pythonconfig.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblSubTitle
@@ -124,7 +129,7 @@ Partial Class SecLite_Settings
         Me.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnExit.Location = New System.Drawing.Point(907, 12)
+        Me.btnExit.Location = New System.Drawing.Point(673, 12)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(25, 25)
         Me.btnExit.TabIndex = 9
@@ -133,53 +138,52 @@ Partial Class SecLite_Settings
         '
         'SmallTabControl1
         '
-        Me.SmallTabControl1.Controls.Add(Me.tabpage_config)
-        Me.SmallTabControl1.Controls.Add(Me.tabpage_packages)
+        Me.SmallTabControl1.Controls.Add(Me.tabpage_startconfig)
+        Me.SmallTabControl1.Controls.Add(Me.tabpage_pythonconfig)
         Me.SmallTabControl1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.SmallTabControl1.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SmallTabControl1.ItemSize = New System.Drawing.Size(250, 30)
         Me.SmallTabControl1.Location = New System.Drawing.Point(0, 128)
         Me.SmallTabControl1.Name = "SmallTabControl1"
         Me.SmallTabControl1.SelectedIndex = 0
-        Me.SmallTabControl1.Size = New System.Drawing.Size(944, 395)
+        Me.SmallTabControl1.Size = New System.Drawing.Size(710, 395)
         Me.SmallTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.SmallTabControl1.TabIndex = 10
         '
-        'tabpage_config
+        'tabpage_startconfig
         '
-        Me.tabpage_config.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
-        Me.tabpage_config.Controls.Add(Me.btnSaveSettings)
-        Me.tabpage_config.Controls.Add(Me.groupSettings_MainWindow_Wallpaper)
-        Me.tabpage_config.Controls.Add(Me.groupSettings_LoadingScreen)
-        Me.tabpage_config.Controls.Add(Me.groupSettings_MainWindow_ContainerEffect)
-        Me.tabpage_config.Controls.Add(Me.groupSettings_FadingEffect)
-        Me.tabpage_config.Controls.Add(Me.groupSettings_Theme)
-        Me.tabpage_config.Location = New System.Drawing.Point(4, 34)
-        Me.tabpage_config.Name = "tabpage_config"
-        Me.tabpage_config.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabpage_config.Size = New System.Drawing.Size(936, 357)
-        Me.tabpage_config.TabIndex = 0
-        Me.tabpage_config.Text = "Start Configuration"
+        Me.tabpage_startconfig.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
+        Me.tabpage_startconfig.Controls.Add(Me.btnSaveSettings1)
+        Me.tabpage_startconfig.Controls.Add(Me.groupSettings_MainWindow_Wallpaper)
+        Me.tabpage_startconfig.Controls.Add(Me.groupSettings_LoadingScreen)
+        Me.tabpage_startconfig.Controls.Add(Me.groupSettings_MainWindow_ContainerEffect)
+        Me.tabpage_startconfig.Controls.Add(Me.groupSettings_FadingEffect)
+        Me.tabpage_startconfig.Controls.Add(Me.groupSettings_Theme)
+        Me.tabpage_startconfig.Location = New System.Drawing.Point(4, 34)
+        Me.tabpage_startconfig.Name = "tabpage_startconfig"
+        Me.tabpage_startconfig.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabpage_startconfig.Size = New System.Drawing.Size(702, 357)
+        Me.tabpage_startconfig.TabIndex = 0
+        Me.tabpage_startconfig.Text = "Start Configuration"
         '
-        'btnSaveSettings
+        'btnSaveSettings1
         '
-        Me.btnSaveSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSaveSettings.BackColor = System.Drawing.Color.RoyalBlue
-        Me.btnSaveSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnSaveSettings.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnSaveSettings.FlatAppearance.BorderSize = 0
-        Me.btnSaveSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.btnSaveSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black
-        Me.btnSaveSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSaveSettings.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveSettings.ForeColor = System.Drawing.Color.White
-        Me.btnSaveSettings.Location = New System.Drawing.Point(583, 297)
-        Me.btnSaveSettings.Name = "btnSaveSettings"
-        Me.btnSaveSettings.Size = New System.Drawing.Size(333, 35)
-        Me.btnSaveSettings.TabIndex = 8
-        Me.btnSaveSettings.TabStop = False
-        Me.btnSaveSettings.Text = "Save and Refresh"
-        Me.btnSaveSettings.UseVisualStyleBackColor = False
+        Me.btnSaveSettings1.BackColor = System.Drawing.Color.RoyalBlue
+        Me.btnSaveSettings1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnSaveSettings1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSaveSettings1.FlatAppearance.BorderSize = 0
+        Me.btnSaveSettings1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.btnSaveSettings1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black
+        Me.btnSaveSettings1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveSettings1.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveSettings1.ForeColor = System.Drawing.Color.White
+        Me.btnSaveSettings1.Location = New System.Drawing.Point(526, 275)
+        Me.btnSaveSettings1.Name = "btnSaveSettings1"
+        Me.btnSaveSettings1.Size = New System.Drawing.Size(153, 57)
+        Me.btnSaveSettings1.TabIndex = 8
+        Me.btnSaveSettings1.TabStop = False
+        Me.btnSaveSettings1.Text = "Save and Refresh"
+        Me.btnSaveSettings1.UseVisualStyleBackColor = False
         '
         'groupSettings_MainWindow_Wallpaper
         '
@@ -191,9 +195,9 @@ Partial Class SecLite_Settings
         Me.groupSettings_MainWindow_Wallpaper.Controls.Add(Me.rbtn_Wallpaper_GIF)
         Me.groupSettings_MainWindow_Wallpaper.Controls.Add(Me.rbtn_Wallpaper_Image)
         Me.groupSettings_MainWindow_Wallpaper.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.groupSettings_MainWindow_Wallpaper.Location = New System.Drawing.Point(583, 21)
+        Me.groupSettings_MainWindow_Wallpaper.Location = New System.Drawing.Point(526, 21)
         Me.groupSettings_MainWindow_Wallpaper.Name = "groupSettings_MainWindow_Wallpaper"
-        Me.groupSettings_MainWindow_Wallpaper.Size = New System.Drawing.Size(333, 255)
+        Me.groupSettings_MainWindow_Wallpaper.Size = New System.Drawing.Size(153, 236)
         Me.groupSettings_MainWindow_Wallpaper.TabIndex = 5
         Me.groupSettings_MainWindow_Wallpaper.TabStop = False
         Me.groupSettings_MainWindow_Wallpaper.Text = "Theme"
@@ -203,18 +207,19 @@ Partial Class SecLite_Settings
         Me.rbtn_Wallpaper_None.AutoSize = True
         Me.rbtn_Wallpaper_None.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rbtn_Wallpaper_None.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.rbtn_Wallpaper_None.Location = New System.Drawing.Point(106, 55)
+        Me.rbtn_Wallpaper_None.Location = New System.Drawing.Point(25, 81)
         Me.rbtn_Wallpaper_None.Name = "rbtn_Wallpaper_None"
         Me.rbtn_Wallpaper_None.Size = New System.Drawing.Size(65, 20)
         Me.rbtn_Wallpaper_None.TabIndex = 5
         Me.rbtn_Wallpaper_None.Text = "None"
+        Me.rbtn_Wallpaper_None.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rbtn_Wallpaper_None.UseVisualStyleBackColor = True
         '
         'picPreview_Wallpaper
         '
-        Me.picPreview_Wallpaper.Location = New System.Drawing.Point(93, 133)
+        Me.picPreview_Wallpaper.Location = New System.Drawing.Point(25, 141)
         Me.picPreview_Wallpaper.Name = "picPreview_Wallpaper"
-        Me.picPreview_Wallpaper.Size = New System.Drawing.Size(143, 103)
+        Me.picPreview_Wallpaper.Size = New System.Drawing.Size(102, 72)
         Me.picPreview_Wallpaper.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.picPreview_Wallpaper.TabIndex = 4
         Me.picPreview_Wallpaper.TabStop = False
@@ -244,11 +249,12 @@ Partial Class SecLite_Settings
         Me.rbtn_Wallpaper_GIF.AutoSize = True
         Me.rbtn_Wallpaper_GIF.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rbtn_Wallpaper_GIF.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.rbtn_Wallpaper_GIF.Location = New System.Drawing.Point(25, 87)
+        Me.rbtn_Wallpaper_GIF.Location = New System.Drawing.Point(25, 107)
         Me.rbtn_Wallpaper_GIF.Name = "rbtn_Wallpaper_GIF"
-        Me.rbtn_Wallpaper_GIF.Size = New System.Drawing.Size(155, 20)
+        Me.rbtn_Wallpaper_GIF.Size = New System.Drawing.Size(55, 20)
         Me.rbtn_Wallpaper_GIF.TabIndex = 1
-        Me.rbtn_Wallpaper_GIF.Text = "GIF Animation"
+        Me.rbtn_Wallpaper_GIF.Text = "GIF"
+        Me.rbtn_Wallpaper_GIF.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rbtn_Wallpaper_GIF.UseVisualStyleBackColor = True
         '
         'rbtn_Wallpaper_Image
@@ -261,6 +267,7 @@ Partial Class SecLite_Settings
         Me.rbtn_Wallpaper_Image.Size = New System.Drawing.Size(75, 20)
         Me.rbtn_Wallpaper_Image.TabIndex = 0
         Me.rbtn_Wallpaper_Image.Text = "Image"
+        Me.rbtn_Wallpaper_Image.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rbtn_Wallpaper_Image.UseVisualStyleBackColor = True
         '
         'groupSettings_LoadingScreen
@@ -393,7 +400,7 @@ Partial Class SecLite_Settings
         Me.groupSettings_FadingEffect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.groupSettings_FadingEffect.Location = New System.Drawing.Point(238, 21)
         Me.groupSettings_FadingEffect.Name = "groupSettings_FadingEffect"
-        Me.groupSettings_FadingEffect.Size = New System.Drawing.Size(325, 311)
+        Me.groupSettings_FadingEffect.Size = New System.Drawing.Size(272, 311)
         Me.groupSettings_FadingEffect.TabIndex = 4
         Me.groupSettings_FadingEffect.TabStop = False
         Me.groupSettings_FadingEffect.Text = "Theme"
@@ -408,7 +415,7 @@ Partial Class SecLite_Settings
         Me.groupSettings_FadingEffect_EffectType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.groupSettings_FadingEffect_EffectType.Location = New System.Drawing.Point(19, 152)
         Me.groupSettings_FadingEffect_EffectType.Name = "groupSettings_FadingEffect_EffectType"
-        Me.groupSettings_FadingEffect_EffectType.Size = New System.Drawing.Size(286, 135)
+        Me.groupSettings_FadingEffect_EffectType.Size = New System.Drawing.Size(234, 135)
         Me.groupSettings_FadingEffect_EffectType.TabIndex = 4
         Me.groupSettings_FadingEffect_EffectType.TabStop = False
         Me.groupSettings_FadingEffect_EffectType.Text = "Theme"
@@ -463,7 +470,7 @@ Partial Class SecLite_Settings
         '
         Me.lblSetting_FadingEffect_Speed.AutoSize = True
         Me.lblSetting_FadingEffect_Speed.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.lblSetting_FadingEffect_Speed.Location = New System.Drawing.Point(126, 81)
+        Me.lblSetting_FadingEffect_Speed.Location = New System.Drawing.Point(103, 87)
         Me.lblSetting_FadingEffect_Speed.Name = "lblSetting_FadingEffect_Speed"
         Me.lblSetting_FadingEffect_Speed.Size = New System.Drawing.Size(68, 16)
         Me.lblSetting_FadingEffect_Speed.TabIndex = 4
@@ -476,9 +483,9 @@ Partial Class SecLite_Settings
         Me.txtSetting_FadingEffect_Speed.BackColor = System.Drawing.Color.Gray
         Me.txtSetting_FadingEffect_Speed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtSetting_FadingEffect_Speed.ForeColor = System.Drawing.Color.Black
-        Me.txtSetting_FadingEffect_Speed.Location = New System.Drawing.Point(72, 100)
+        Me.txtSetting_FadingEffect_Speed.Location = New System.Drawing.Point(19, 106)
         Me.txtSetting_FadingEffect_Speed.Name = "txtSetting_FadingEffect_Speed"
-        Me.txtSetting_FadingEffect_Speed.Size = New System.Drawing.Size(181, 23)
+        Me.txtSetting_FadingEffect_Speed.Size = New System.Drawing.Size(234, 23)
         Me.txtSetting_FadingEffect_Speed.TabIndex = 3
         Me.txtSetting_FadingEffect_Speed.TabStop = False
         Me.txtSetting_FadingEffect_Speed.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -498,7 +505,7 @@ Partial Class SecLite_Settings
         Me.rbtn_FadingEffect_Off.AutoSize = True
         Me.rbtn_FadingEffect_Off.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rbtn_FadingEffect_Off.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.rbtn_FadingEffect_Off.Location = New System.Drawing.Point(176, 31)
+        Me.rbtn_FadingEffect_Off.Location = New System.Drawing.Point(153, 31)
         Me.rbtn_FadingEffect_Off.Name = "rbtn_FadingEffect_Off"
         Me.rbtn_FadingEffect_Off.Size = New System.Drawing.Size(55, 20)
         Me.rbtn_FadingEffect_Off.TabIndex = 1
@@ -510,7 +517,7 @@ Partial Class SecLite_Settings
         Me.rbtn_FadingEffect_On.AutoSize = True
         Me.rbtn_FadingEffect_On.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rbtn_FadingEffect_On.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.rbtn_FadingEffect_On.Location = New System.Drawing.Point(98, 31)
+        Me.rbtn_FadingEffect_On.Location = New System.Drawing.Point(75, 31)
         Me.rbtn_FadingEffect_On.Name = "rbtn_FadingEffect_On"
         Me.rbtn_FadingEffect_On.Size = New System.Drawing.Size(45, 20)
         Me.rbtn_FadingEffect_On.TabIndex = 0
@@ -565,22 +572,89 @@ Partial Class SecLite_Settings
         Me.rbtn_Theme_Dark.Text = "Dark"
         Me.rbtn_Theme_Dark.UseVisualStyleBackColor = True
         '
-        'tabpage_packages
+        'tabpage_pythonconfig
         '
-        Me.tabpage_packages.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
-        Me.tabpage_packages.Location = New System.Drawing.Point(4, 34)
-        Me.tabpage_packages.Name = "tabpage_packages"
-        Me.tabpage_packages.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabpage_packages.Size = New System.Drawing.Size(936, 357)
-        Me.tabpage_packages.TabIndex = 1
-        Me.tabpage_packages.Text = "Package Manager"
+        Me.tabpage_pythonconfig.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
+        Me.tabpage_pythonconfig.Controls.Add(Me.btnSaveSettings2)
+        Me.tabpage_pythonconfig.Controls.Add(Me.btn_browse_python_path)
+        Me.tabpage_pythonconfig.Controls.Add(Me.lbl_python_path)
+        Me.tabpage_pythonconfig.Controls.Add(Me.txt_python_path)
+        Me.tabpage_pythonconfig.Location = New System.Drawing.Point(4, 34)
+        Me.tabpage_pythonconfig.Name = "tabpage_pythonconfig"
+        Me.tabpage_pythonconfig.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabpage_pythonconfig.Size = New System.Drawing.Size(702, 357)
+        Me.tabpage_pythonconfig.TabIndex = 1
+        Me.tabpage_pythonconfig.Text = "Python Configuration"
+        '
+        'btnSaveSettings2
+        '
+        Me.btnSaveSettings2.BackColor = System.Drawing.Color.RoyalBlue
+        Me.btnSaveSettings2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnSaveSettings2.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSaveSettings2.FlatAppearance.BorderSize = 0
+        Me.btnSaveSettings2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.btnSaveSettings2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black
+        Me.btnSaveSettings2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveSettings2.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveSettings2.ForeColor = System.Drawing.Color.White
+        Me.btnSaveSettings2.Location = New System.Drawing.Point(183, 229)
+        Me.btnSaveSettings2.Name = "btnSaveSettings2"
+        Me.btnSaveSettings2.Size = New System.Drawing.Size(333, 35)
+        Me.btnSaveSettings2.TabIndex = 10
+        Me.btnSaveSettings2.TabStop = False
+        Me.btnSaveSettings2.Text = "Save and Refresh"
+        Me.btnSaveSettings2.UseVisualStyleBackColor = False
+        '
+        'btn_browse_python_path
+        '
+        Me.btn_browse_python_path.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btn_browse_python_path.BackColor = System.Drawing.Color.RoyalBlue
+        Me.btn_browse_python_path.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btn_browse_python_path.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btn_browse_python_path.FlatAppearance.BorderSize = 0
+        Me.btn_browse_python_path.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.btn_browse_python_path.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black
+        Me.btn_browse_python_path.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_browse_python_path.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_browse_python_path.ForeColor = System.Drawing.Color.White
+        Me.btn_browse_python_path.Location = New System.Drawing.Point(576, 111)
+        Me.btn_browse_python_path.Name = "btn_browse_python_path"
+        Me.btn_browse_python_path.Size = New System.Drawing.Size(107, 33)
+        Me.btn_browse_python_path.TabIndex = 9
+        Me.btn_browse_python_path.TabStop = False
+        Me.btn_browse_python_path.Text = "Browse"
+        Me.btn_browse_python_path.UseVisualStyleBackColor = False
+        '
+        'lbl_python_path
+        '
+        Me.lbl_python_path.AutoSize = True
+        Me.lbl_python_path.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.lbl_python_path.Location = New System.Drawing.Point(18, 98)
+        Me.lbl_python_path.Name = "lbl_python_path"
+        Me.lbl_python_path.Size = New System.Drawing.Size(168, 16)
+        Me.lbl_python_path.TabIndex = 6
+        Me.lbl_python_path.Text = "Python EXE Path:"
+        '
+        'txt_python_path
+        '
+        Me.txt_python_path.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txt_python_path.BackColor = System.Drawing.Color.Gray
+        Me.txt_python_path.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txt_python_path.ForeColor = System.Drawing.Color.Black
+        Me.txt_python_path.Location = New System.Drawing.Point(21, 117)
+        Me.txt_python_path.Name = "txt_python_path"
+        Me.txt_python_path.Size = New System.Drawing.Size(549, 23)
+        Me.txt_python_path.TabIndex = 5
+        Me.txt_python_path.TabStop = False
+        Me.txt_python_path.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'SecLite_Settings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(944, 523)
+        Me.ClientSize = New System.Drawing.Size(710, 523)
         Me.Controls.Add(Me.SmallTabControl1)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.lblSubTitle)
@@ -594,7 +668,7 @@ Partial Class SecLite_Settings
         Me.Text = "SecLite_Settings"
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SmallTabControl1.ResumeLayout(False)
-        Me.tabpage_config.ResumeLayout(False)
+        Me.tabpage_startconfig.ResumeLayout(False)
         Me.groupSettings_MainWindow_Wallpaper.ResumeLayout(False)
         Me.groupSettings_MainWindow_Wallpaper.PerformLayout()
         CType(Me.picPreview_Wallpaper, System.ComponentModel.ISupportInitialize).EndInit()
@@ -608,6 +682,8 @@ Partial Class SecLite_Settings
         Me.groupSettings_FadingEffect_EffectType.PerformLayout()
         Me.groupSettings_Theme.ResumeLayout(False)
         Me.groupSettings_Theme.PerformLayout()
+        Me.tabpage_pythonconfig.ResumeLayout(False)
+        Me.tabpage_pythonconfig.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -618,8 +694,8 @@ Partial Class SecLite_Settings
     Private WithEvents picLogo As PictureBox
     Private WithEvents btnExit As Button
     Friend WithEvents SmallTabControl1 As smallTabControl
-    Friend WithEvents tabpage_config As TabPage
-    Friend WithEvents tabpage_packages As TabPage
+    Friend WithEvents tabpage_startconfig As TabPage
+    Friend WithEvents tabpage_pythonconfig As TabPage
     Friend WithEvents rbtn_Theme_Dark As RadioButton
     Friend WithEvents rbtn_Theme_Light As RadioButton
     Friend WithEvents lblSetting_Theme As Label
@@ -650,7 +726,11 @@ Partial Class SecLite_Settings
     Friend WithEvents rbtn_Wallpaper_GIF As RadioButton
     Friend WithEvents rbtn_Wallpaper_Image As RadioButton
     Friend WithEvents picPreview_Wallpaper As PictureBox
-    Friend WithEvents btnSaveSettings As Button
+    Friend WithEvents btnSaveSettings1 As Button
     Friend WithEvents rbtn_Wallpaper_None As RadioButton
     Friend WithEvents lblSetting_FadingEffect_Speed As Label
+    Friend WithEvents lbl_python_path As Label
+    Friend WithEvents txt_python_path As TextBox
+    Friend WithEvents btn_browse_python_path As Button
+    Friend WithEvents btnSaveSettings2 As Button
 End Class

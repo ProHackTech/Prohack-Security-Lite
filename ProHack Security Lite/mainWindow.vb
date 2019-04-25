@@ -6,11 +6,11 @@ Public Class mainWindow
 
     ' general declares
     Public Shared scanType As String
-    ' store form settings
+    ' store start_config
     Public form_settings(8) As String
-    ' settings variables: string types
+    ' settings variables: string types for start_config
     Public theme, wallpaper, fadeEffect_Status, optionsHoverEffect_Status, fadeEffect_Type, bgGif, loadingScreenTopMost, run_from As String
-    ' settings variables: integer types
+    ' settings variables: integer types for start_config
     Public fadeEffect_Speed As Integer
 
     Sub New()
@@ -20,6 +20,7 @@ Public Class mainWindow
         SetStyle(ControlStyles.AllPaintingInWmPaint, True)
         toggle_tabControlOptions(False) ' toggle tab control and hide it
         form_init_setter() ' run the setting initialization before form loads
+        utils.pyconfig() ' read python config file
     End Sub
 
     'Method: To apply form settings
@@ -31,12 +32,12 @@ Public Class mainWindow
         For x As Integer = 0 To 9
             line = reader.ReadLine 'read line into variable
             If Not String.IsNullOrEmpty(line) Then ' if line is not null or empty
-                Dim lineArray As String() = line.Split(New Char() {":"c}) ' split by delimeter
-                form_settings(x) = lineArray(1) ' take the second part after ':'
+                Dim lineArray As String() = line.Split(New Char() {"="c}) ' split by delimeter
+                form_settings(x) = lineArray(1) ' take the second part after '='
             End If
         Next : reader.Close() ' close reader
 
-        ' set global variables - for easiness
+        'set global variables - for easiness
         theme = form_settings(0) ' theme setting
         wallpaper = form_settings(1) ' wallpaper setting
         fadeEffect_Status = form_settings(2) ' fade effect setting

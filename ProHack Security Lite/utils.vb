@@ -4,16 +4,19 @@ Imports System.Net
 
 Public Class utils
 
-    ' Declares: Malware detections
+    ' Declares: Malware Detections
     Public Shared detected_filepath As New List(Of String)()
     Public Shared detected_filehash As New List(Of String)()
 
-    ' Declares: File locations
+    ' Declares: Python Configuration
+    Public Shared python_path As String
+
+    ' Declares: Locations
     Public Shared dectected_malware_file As String = Application.StartupPath & "\data\detected.list"
     Public Shared WSIR_file As String = Application.StartupPath & "\data\WSIR.list"
     Public Shared pyModDir As String = Application.StartupPath & "\python_modules\"
 
-    ' Declares: Form movement
+    ' Declares: Form Movement
     Public Shared isFormMovement As Boolean = False
     Public Shared MouseDownX, MouseDownY As Integer
 
@@ -223,21 +226,54 @@ Public Class utils
 
     ' save application settings
     Public Shared Sub save_settings()
-        Dim configpath As String = Application.StartupPath & "/data/start_config"
+        Dim st As StreamWriter
+        Dim configpath As String
+
+        ' write start_config file
+        configpath = Application.StartupPath & "/data/start_config"
         If File.Exists(configpath) Then
             File.Delete(configpath)
         End If
-        Dim st As StreamWriter = New StreamWriter(configpath)
-        st.WriteLine("Theme:" & mainWindow.theme)
-        st.WriteLine("Wallpaper:" & mainWindow.wallpaper)
-        st.WriteLine("Fading Effect:" & mainWindow.fadeEffect_Status)
-        st.WriteLine("Main Window Options Button Hover Effect:" & mainWindow.optionsHoverEffect_Status)
-        st.WriteLine("Is Loading Screen TopMost?:" & mainWindow.loadingScreenTopMost)
-        st.WriteLine("Background GIF Animation:" & mainWindow.bgGif)
-        st.WriteLine("Fade Effect Type:" & mainWindow.fadeEffect_Type)
-        st.WriteLine("Fade Effect Speed(More means faster):" & mainWindow.fadeEffect_Speed)
+        st = New StreamWriter(configpath)
+        st.WriteLine("Theme=" & mainWindow.theme)
+        st.WriteLine("Wallpaper=" & mainWindow.wallpaper)
+        st.WriteLine("Fading Effect=" & mainWindow.fadeEffect_Status)
+        st.WriteLine("Main Window Options Button Hover Effect=" & mainWindow.optionsHoverEffect_Status)
+        st.WriteLine("Is Loading Screen TopMost?=" & mainWindow.loadingScreenTopMost)
+        st.WriteLine("Background GIF Animation=" & mainWindow.bgGif)
+        st.WriteLine("Fade Effect Type=" & mainWindow.fadeEffect_Type)
+        st.WriteLine("Fade Effect Speed(More means faster)=" & mainWindow.fadeEffect_Speed)
+        st.WriteLine("Run From=" & mainWindow.run_from)
         st.Close()
+
+        ' write py_config file
+        configpath = Application.StartupPath & "/data/py_config"
+        If File.Exists(configpath) Then
+            File.Delete(configpath)
+        End If
+        st = New StreamWriter(configpath)
+        st.WriteLine(utils.python_path)
+        st.Close()
+
         st.Dispose()
+        GC.Collect()
+    End Sub
+
+    ' Method: For python config read
+    Public Shared Sub pyconfig()
+        Dim filepath As String = Application.StartupPath & "/data/py_config"
+        Dim configs As New List(Of String)()
+        Dim reader As StreamReader = New StreamReader(filepath)
+        Dim line As String = Nothing
+        Do
+            line = reader.ReadLine
+            If Not String.IsNullOrEmpty(line) Then
+                configs.Add(line)
+            End If
+        Loop Until line Is Nothing
+        reader.Close()
+
+        python_path = configs(0) ' set python path
     End Sub
 
 End Class
