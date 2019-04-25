@@ -22,6 +22,9 @@
     End Sub
 
     Private Sub load_config()
+
+        ' -- load start configuration --'
+
         ' Theme
         Select Case mainWindow.theme
             Case "dark"
@@ -128,6 +131,9 @@
         '        End If
         '    End If
         'Next
+
+        ' -- load python configuration --'
+        txt_python_path.Text = utils.python_path
 
     End Sub
 
@@ -281,9 +287,13 @@
         End If
     End Sub
 
-    Private Sub BtnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
+    Private Sub save_settings_invoke()
         utils.save_settings()
         utils.refresh_app()
+    End Sub
+
+    Private Sub BtnSaveSettings1_Click(sender As Object, e As EventArgs) Handles btnSaveSettings1.Click
+        save_settings_invoke()
     End Sub
 
     Private Sub SecLite_Settings_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
@@ -304,5 +314,27 @@
         Catch ex As Exception
             utils.invoke_msg(2, "Icon Error", ex.Message.ToString)
         End Try
+    End Sub
+
+    Private Sub BtnSaveSettings2_Click(sender As Object, e As EventArgs) Handles btnSaveSettings2.Click
+        save_settings_invoke()
+    End Sub
+
+    Private Sub Btn_browse_python_path_Click(sender As Object, e As EventArgs) Handles btn_browse_python_path.Click
+        Dim ofd As New OpenFileDialog
+        ofd.Title = "Python EXE Path"
+        ofd.Filter = "EXE File (*.exe)|*.exe"
+        ofd.FileName = String.Empty
+        If ofd.ShowDialog = DialogResult.OK Then
+            txt_python_path.Text = ofd.FileName
+        Else
+            MsgBox("FileBrowse Cancelled")
+        End If
+    End Sub
+
+    Private Sub Txt_python_path_TextChanged(sender As Object, e As EventArgs) Handles txt_python_path.TextChanged
+        If Not String.IsNullOrEmpty(txt_python_path.Text) Then
+            utils.python_path = txt_python_path.Text
+        End If
     End Sub
 End Class
