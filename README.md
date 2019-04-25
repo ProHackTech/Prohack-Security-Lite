@@ -34,6 +34,10 @@ The following features have been completed. They may need further improvements.
 - [+] Gather MD5 file signature for each file in query results
 - [+] Compare with malware signatures
 
+#### Deep Scan
+- [+] Gather system file list using Python
+- [+] Scan against malware signatures
+
 #### Scheduled Indexer Query
 - [+] Automatic background *Windows Search Indexer* querying every minute
 - [+] Added error management incase a scan is currently taking place
@@ -45,11 +49,18 @@ Default messagebox was lacking needed features, so a quick custom form was made 
 - [+] Refresh application: Starts the updater to download the application again (to be used incase critical application error or files missing/deleted by mistake).
 
 ### To-Do
-- Deep scan, Custom scan
-- WebUtils, Tools
+- Custom Scan
+- Webutils, Tools
 - Malware Signatures updater
 - Replace 'Easy Install' with better app installer
+- Create powershell support scripts (later)
+- Create gui python package installer
 
+### FIFO Order
+Items in this section are to be made/fixed before doing anything else, hence *<b>F</b>irst<b>I</b>n<b>F</b>irst<b>O</b>ut* order of development:
+
+- Custom Scan (time: 2 days)
+- Add force delete malware file (time: 1 day)
 
 Once the current to-do items are completed, the project will begin release cycles with version controls starting from v1.0.0.0 for both application and updater. Different branches will be created for each sub-project development.
 
