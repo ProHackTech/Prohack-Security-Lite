@@ -15,3 +15,5 @@ __pycache__/
 *.binlog
 *.nvuser
 *.cache
+*.git
+*.vs
