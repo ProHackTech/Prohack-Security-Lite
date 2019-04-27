@@ -97,6 +97,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="custom_scanner.Designer.vb">
+      <DependentUpon>custom_scanner.vb</DependentUpon>
+    </Compile>
+    <Compile Include="custom_scanner.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="form_loading.Designer.vb">
       <DependentUpon>form_loading.vb</DependentUpon>
     </Compile>
@@ -167,6 +173,9 @@
     <Compile Include="utils.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="custom_scanner.resx">
+      <DependentUpon>custom_scanner.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form_loading.resx">
       <DependentUpon>form_loading.vb</DependentUpon>
     </EmbeddedResource>

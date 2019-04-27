@@ -63,6 +63,7 @@ Partial Class SecLite_Settings
         Me.rbtn_Theme_Light = New System.Windows.Forms.RadioButton()
         Me.rbtn_Theme_Dark = New System.Windows.Forms.RadioButton()
         Me.tabpage_pythonconfig = New System.Windows.Forms.TabPage()
+        Me.btnPythonPackageManager = New System.Windows.Forms.Button()
         Me.btnSaveSettings2 = New System.Windows.Forms.Button()
         Me.btn_browse_python_path = New System.Windows.Forms.Button()
         Me.lbl_python_path = New System.Windows.Forms.Label()
@@ -87,7 +88,7 @@ Partial Class SecLite_Settings
         Me.lblSubTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.lblSubTitle.Font = New System.Drawing.Font("Arial Nova", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSubTitle.ForeColor = System.Drawing.Color.Goldenrod
-        Me.lblSubTitle.Location = New System.Drawing.Point(128, 68)
+        Me.lblSubTitle.Location = New System.Drawing.Point(78, 45)
         Me.lblSubTitle.Name = "lblSubTitle"
         Me.lblSubTitle.Size = New System.Drawing.Size(147, 26)
         Me.lblSubTitle.TabIndex = 8
@@ -100,7 +101,7 @@ Partial Class SecLite_Settings
         Me.lblTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.lblTitle.Font = New System.Drawing.Font("Arial Nova", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitle.ForeColor = System.Drawing.Color.Olive
-        Me.lblTitle.Location = New System.Drawing.Point(127, 35)
+        Me.lblTitle.Location = New System.Drawing.Point(77, 12)
         Me.lblTitle.Name = "lblTitle"
         Me.lblTitle.Size = New System.Drawing.Size(235, 33)
         Me.lblTitle.TabIndex = 7
@@ -113,7 +114,7 @@ Partial Class SecLite_Settings
         Me.picLogo.Image = CType(resources.GetObject("picLogo.Image"), System.Drawing.Image)
         Me.picLogo.Location = New System.Drawing.Point(12, 12)
         Me.picLogo.Name = "picLogo"
-        Me.picLogo.Size = New System.Drawing.Size(100, 100)
+        Me.picLogo.Size = New System.Drawing.Size(59, 59)
         Me.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.picLogo.TabIndex = 6
         Me.picLogo.TabStop = False
@@ -143,7 +144,7 @@ Partial Class SecLite_Settings
         Me.SmallTabControl1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.SmallTabControl1.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SmallTabControl1.ItemSize = New System.Drawing.Size(250, 30)
-        Me.SmallTabControl1.Location = New System.Drawing.Point(0, 128)
+        Me.SmallTabControl1.Location = New System.Drawing.Point(0, 81)
         Me.SmallTabControl1.Name = "SmallTabControl1"
         Me.SmallTabControl1.SelectedIndex = 0
         Me.SmallTabControl1.Size = New System.Drawing.Size(710, 395)
@@ -575,6 +576,7 @@ Partial Class SecLite_Settings
         'tabpage_pythonconfig
         '
         Me.tabpage_pythonconfig.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
+        Me.tabpage_pythonconfig.Controls.Add(Me.btnPythonPackageManager)
         Me.tabpage_pythonconfig.Controls.Add(Me.btnSaveSettings2)
         Me.tabpage_pythonconfig.Controls.Add(Me.btn_browse_python_path)
         Me.tabpage_pythonconfig.Controls.Add(Me.lbl_python_path)
@@ -585,6 +587,26 @@ Partial Class SecLite_Settings
         Me.tabpage_pythonconfig.Size = New System.Drawing.Size(702, 357)
         Me.tabpage_pythonconfig.TabIndex = 1
         Me.tabpage_pythonconfig.Text = "Python Configuration"
+        '
+        'btnPythonPackageManager
+        '
+        Me.btnPythonPackageManager.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnPythonPackageManager.BackColor = System.Drawing.Color.RoyalBlue
+        Me.btnPythonPackageManager.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnPythonPackageManager.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnPythonPackageManager.FlatAppearance.BorderSize = 0
+        Me.btnPythonPackageManager.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.btnPythonPackageManager.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black
+        Me.btnPythonPackageManager.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPythonPackageManager.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPythonPackageManager.ForeColor = System.Drawing.Color.White
+        Me.btnPythonPackageManager.Location = New System.Drawing.Point(20, 300)
+        Me.btnPythonPackageManager.Name = "btnPythonPackageManager"
+        Me.btnPythonPackageManager.Size = New System.Drawing.Size(251, 35)
+        Me.btnPythonPackageManager.TabIndex = 11
+        Me.btnPythonPackageManager.TabStop = False
+        Me.btnPythonPackageManager.Text = "Manage Packages"
+        Me.btnPythonPackageManager.UseVisualStyleBackColor = False
         '
         'btnSaveSettings2
         '
@@ -597,7 +619,7 @@ Partial Class SecLite_Settings
         Me.btnSaveSettings2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveSettings2.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSaveSettings2.ForeColor = System.Drawing.Color.White
-        Me.btnSaveSettings2.Location = New System.Drawing.Point(183, 229)
+        Me.btnSaveSettings2.Location = New System.Drawing.Point(349, 300)
         Me.btnSaveSettings2.Name = "btnSaveSettings2"
         Me.btnSaveSettings2.Size = New System.Drawing.Size(333, 35)
         Me.btnSaveSettings2.TabIndex = 10
@@ -617,9 +639,9 @@ Partial Class SecLite_Settings
         Me.btn_browse_python_path.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_browse_python_path.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_browse_python_path.ForeColor = System.Drawing.Color.White
-        Me.btn_browse_python_path.Location = New System.Drawing.Point(576, 111)
+        Me.btn_browse_python_path.Location = New System.Drawing.Point(575, 127)
         Me.btn_browse_python_path.Name = "btn_browse_python_path"
-        Me.btn_browse_python_path.Size = New System.Drawing.Size(107, 33)
+        Me.btn_browse_python_path.Size = New System.Drawing.Size(107, 35)
         Me.btn_browse_python_path.TabIndex = 9
         Me.btn_browse_python_path.TabStop = False
         Me.btn_browse_python_path.Text = "Browse"
@@ -629,7 +651,7 @@ Partial Class SecLite_Settings
         '
         Me.lbl_python_path.AutoSize = True
         Me.lbl_python_path.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.lbl_python_path.Location = New System.Drawing.Point(18, 98)
+        Me.lbl_python_path.Location = New System.Drawing.Point(17, 115)
         Me.lbl_python_path.Name = "lbl_python_path"
         Me.lbl_python_path.Size = New System.Drawing.Size(168, 16)
         Me.lbl_python_path.TabIndex = 6
@@ -642,7 +664,7 @@ Partial Class SecLite_Settings
         Me.txt_python_path.BackColor = System.Drawing.Color.Gray
         Me.txt_python_path.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txt_python_path.ForeColor = System.Drawing.Color.Black
-        Me.txt_python_path.Location = New System.Drawing.Point(21, 117)
+        Me.txt_python_path.Location = New System.Drawing.Point(20, 134)
         Me.txt_python_path.Name = "txt_python_path"
         Me.txt_python_path.Size = New System.Drawing.Size(549, 23)
         Me.txt_python_path.TabIndex = 5
@@ -654,7 +676,7 @@ Partial Class SecLite_Settings
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(710, 523)
+        Me.ClientSize = New System.Drawing.Size(710, 476)
         Me.Controls.Add(Me.SmallTabControl1)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.lblSubTitle)
@@ -733,4 +755,5 @@ Partial Class SecLite_Settings
     Friend WithEvents txt_python_path As TextBox
     Friend WithEvents btn_browse_python_path As Button
     Friend WithEvents btnSaveSettings2 As Button
+    Friend WithEvents btnPythonPackageManager As Button
 End Class

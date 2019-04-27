@@ -1,8 +1,8 @@
 ﻿Public Class SecLite_Settings
 
+    Public settings_isChanged As Boolean
     Dim blue As Color = Color.FromArgb(0, 192, 192)
     Dim lime As Color = Color.Lime
-    Dim isSaved As Boolean = False
 
     Private Sub BtnExit_MouseEnter(sender As Object, e As EventArgs) Handles btnExit.MouseEnter
         Try
@@ -12,13 +12,28 @@
         End Try
     End Sub
 
-    Private Sub BtnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+    Private Sub window_exit()
         If mainWindow.fadeEffect_Status = "on" Then
             utils.form_fadeOut(Me)
         End If
         GC.Collect()
         Me.Close()
         mainWindow.Show()
+    End Sub
+
+    Private Sub BtnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        If settings_isChanged = False Then
+            window_exit()
+        Else
+            Dim result As Integer = MessageBox.Show("Settings have been changed! Save them?", "Unsaved Settings", MessageBoxButtons.YesNoCancel)
+            If result = DialogResult.Cancel Then
+                MsgBox("Cancelled. Not Closing.")
+            ElseIf result = DialogResult.No Then
+                window_exit()
+            ElseIf result = DialogResult.Yes Then
+                save_settings_invoke()
+            End If
+        End If
     End Sub
 
     Private Sub load_config()
@@ -142,54 +157,63 @@
         load_config()
         form_loading.Close()
         Me.BackgroundImage = mainWindow.BackgroundImage
+        settings_isChanged = False
     End Sub
 
     Private Sub Rbtn_Theme_Dark_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_Theme_Dark.CheckedChanged
         mainWindow.theme = "dark"
         rbtn_Theme_Dark.ForeColor = lime
         rbtn_Theme_Light.ForeColor = blue
+        settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_Theme_Light_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_Theme_Light.CheckedChanged
         mainWindow.theme = "light"
         rbtn_Theme_Dark.ForeColor = blue
         rbtn_Theme_Light.ForeColor = lime
+        settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_ContainerEffect_On_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_ContainerEffect_On.CheckedChanged
         mainWindow.optionsHoverEffect_Status = "on"
         rbtn_ContainerEffect_On.ForeColor = lime
         rbtn_ContainerEffect_Off.ForeColor = blue
+        settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_ContainerEffect_Off_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_ContainerEffect_Off.CheckedChanged
         mainWindow.optionsHoverEffect_Status = "off"
         rbtn_ContainerEffect_On.ForeColor = blue
         rbtn_ContainerEffect_Off.ForeColor = lime
+        settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_LoadingScreen_TopMost_Yes_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_LoadingScreen_TopMost_Yes.CheckedChanged
         mainWindow.loadingScreenTopMost = "true"
         rbtn_LoadingScreen_TopMost_Yes.ForeColor = lime
         rbtn_LoadingScreen_TopMost_No.ForeColor = blue
+        settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_LoadingScreen_TopMost_No_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_LoadingScreen_TopMost_No.CheckedChanged
         mainWindow.loadingScreenTopMost = "false"
         rbtn_LoadingScreen_TopMost_Yes.ForeColor = blue
         rbtn_LoadingScreen_TopMost_No.ForeColor = lime
+        settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_FadingEffect_On_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_FadingEffect_On.CheckedChanged
         mainWindow.fadeEffect_Status = "on"
         rbtn_FadingEffect_On.ForeColor = lime
         rbtn_FadingEffect_Off.ForeColor = blue
+        settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_FadingEffect_Off_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_FadingEffect_Off.CheckedChanged
         mainWindow.fadeEffect_Status = "off"
         rbtn_FadingEffect_On.ForeColor = blue
         rbtn_FadingEffect_Off.ForeColor = lime
+        settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_FadingType_WinDefault_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_FadingType_WinDefault.CheckedChanged
@@ -197,6 +221,7 @@
         rbtn_FadingType_WinDefault.ForeColor = lime
         rbtn_FadingType_FadeLeft.ForeColor = blue
         rbtn_FadingType_FadeTop.ForeColor = blue
+        settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_FadingType_FadeLeft_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_FadingType_FadeLeft.CheckedChanged
@@ -204,6 +229,7 @@
         rbtn_FadingType_WinDefault.ForeColor = blue
         rbtn_FadingType_FadeLeft.ForeColor = lime
         rbtn_FadingType_FadeTop.ForeColor = blue
+        settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_FadingType_FadeTop_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_FadingType_FadeTop.CheckedChanged
@@ -211,6 +237,7 @@
         rbtn_FadingType_WinDefault.ForeColor = blue
         rbtn_FadingType_FadeLeft.ForeColor = blue
         rbtn_FadingType_FadeTop.ForeColor = lime
+        settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_Wallpaper_None_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_Wallpaper_None.CheckedChanged
@@ -219,6 +246,7 @@
         rbtn_Wallpaper_Image.ForeColor = blue
         rbtn_Wallpaper_None.ForeColor = lime
         rbtn_Wallpaper_GIF.ForeColor = blue
+        settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_Wallpaper_GIF_Click(sender As Object, e As EventArgs) Handles rbtn_Wallpaper_GIF.Click
@@ -245,6 +273,7 @@
                 utils.invoke_msg(2, "File Error", "Wallpaper file not found")
             End If
         End If
+        settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_Wallpaper_Image_Click(sender As Object, e As EventArgs) Handles rbtn_Wallpaper_Image.Click
@@ -271,9 +300,10 @@
                 rbtn_Wallpaper_None.ForeColor = blue
                 rbtn_Wallpaper_GIF.ForeColor = blue
             Else
-                    utils.invoke_msg(2, "File Error", "Wallpaper file not found")
+                utils.invoke_msg(2, "File Error", "Wallpaper file not found")
             End If
         End If
+        settings_isChanged = True
     End Sub
 
     Private Sub TxtSetting_FadingEffect_Speed_TextChanged(sender As Object, e As EventArgs) Handles txtSetting_FadingEffect_Speed.TextChanged
@@ -285,6 +315,7 @@
             ' convert to integer 32 and apply
             mainWindow.fadeEffect_Speed = Convert.ToInt32(spd)
         End If
+        settings_isChanged = True
     End Sub
 
     Private Sub save_settings_invoke()
@@ -327,6 +358,7 @@
         ofd.FileName = String.Empty
         If ofd.ShowDialog = DialogResult.OK Then
             txt_python_path.Text = ofd.FileName
+            settings_isChanged = True
         Else
             MsgBox("FileBrowse Cancelled")
         End If
@@ -336,5 +368,6 @@
         If Not String.IsNullOrEmpty(txt_python_path.Text) Then
             utils.python_path = txt_python_path.Text
         End If
+        settings_isChanged = True
     End Sub
 End Class

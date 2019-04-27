@@ -411,9 +411,8 @@ Public Class mainWindow
     End Sub
 
     Private Sub btnScan_Custom_Click(sender As Object, e As EventArgs) Handles btnScan_Custom.Click
-        scanType = "Custom"
         Me.Hide()
-        malware_scanner.Show()
+        custom_scanner.Show()
         toggle_tabControlOptions(False)
     End Sub
 
