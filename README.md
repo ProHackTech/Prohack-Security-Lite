@@ -41,6 +41,12 @@ The following features have been completed. They may need further improvements.
 - [+] Gather system file list using Python
 - [+] Scan against malware signatures
 
+#### Custom Scan
+Choose file(s) and scan. Very simple and no extra features (becuase this is LITE version)
+
+- [+] Choose file(s)
+- [+] Scan againt malware signatures
+
 #### Scheduled Indexer Query
 
 - [+] Automatic background *Windows Search Indexer* querying every minute
@@ -55,7 +61,6 @@ Default messagebox was lacking needed features, so a quick custom form was made 
 
 ### To-Do
 
-- Custom Scan
 - Webutils, Tools
 - Malware Signatures updater
 - Replace 'Easy Install' with better app installer
@@ -66,8 +71,9 @@ Default messagebox was lacking needed features, so a quick custom form was made 
 
 Items in this section are to be made/fixed before doing anything else, hence *<b>F</b>irst<b>I</b>n<b>F</b>irst<b>O</b>ut* order of development:
 
-- Custom Scan (time: 2 days)
-- Add force delete malware file (time: 1 day)
+- Add force delete malware file (1) [core]
+- Add fade settings to custom_scanner on close (2) [ui]
+- Merge scanner code into seperate class for malware_scanner, custom_scanner (3) [optimization]
 
 Once the current to-do items are completed, the project will begin release cycles with version controls starting from v1.0.0.0 for both application and updater. Different branches will be created for each sub-project development.
 
