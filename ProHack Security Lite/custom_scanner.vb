@@ -159,6 +159,9 @@ Public Class custom_scanner
     End Sub
 
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        If mainWindow.fadeEffect_Status = "on" Then
+            utils.form_fadeOut(Me)
+        End If
         mainWindow.Show()
         Me.Close()
     End Sub

@@ -64,8 +64,15 @@ Public Class UC_Detected
             Catch ex As Exception
                 utils.invoke_msg(3, "File Delete Error", ex.Message.ToString)
             End Try
-        Catch ex As Exception
-            utils.invoke_msg(2, "Remove Error", ex.Message.ToString)
+        Catch ex1 As Exception
+            ' try to force delete using cmd -> 'DEL [args]'
+            Dim del_command = "/c DEL /F /Q /A " & utils.detected_filepath(index)
+            Try
+                ' run the cmd process with arguments
+                Process.Start("cmd", del_command)
+            Catch ex2 As Exception
+                utils.invoke_msg(2, "Remove Error", ex2.Message.ToString)
+            End Try
         End Try
     End Sub
 
@@ -116,5 +123,15 @@ Public Class UC_Detected
 
     Private Sub picIgnore_Click(sender As Object, e As EventArgs) Handles picIgnore.Click
         Malware_Ignore()
+    End Sub
+
+    Private Sub TxtHash_DoubleClick(sender As Object, e As EventArgs) Handles txtHash.DoubleClick
+        ' copy the hash to clipboard
+        Clipboard.SetText(txtHash.Text)
+    End Sub
+
+    Private Sub TxtFile_DoubleClick(sender As Object, e As EventArgs) Handles txtFile.DoubleClick
+        ' copy the filepath to clipboard
+        Clipboard.SetText(txtFile.Text)
     End Sub
 End Class
