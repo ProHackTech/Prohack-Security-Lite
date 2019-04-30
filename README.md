@@ -71,8 +71,8 @@ Default messagebox was lacking needed features, so a quick custom form was made 
 
 Items in this section are to be made/fixed before doing anything else, hence *<b>F</b>irst<b>I</b>n<b>F</b>irst<b>O</b>ut* order of development:
 
-- Add force delete malware file (1) [core]
-- Add fade settings to custom_scanner on close (2) [ui]
+- WebUtil:Website Blocker (add items to hosts file) (1)
+- Tool:File encypter/decrypter (UI = VB | Core = Python) (2)
 - Merge scanner code into seperate class for malware_scanner, custom_scanner (3) [optimization]
 
 Once the current to-do items are completed, the project will begin release cycles with version controls starting from v1.0.0.0 for both application and updater. Different branches will be created for each sub-project development.
