@@ -72,7 +72,6 @@ Default messagebox was lacking needed features, so a quick custom form was made 
 Items in this section are to be made/fixed before doing anything else, hence *<b>F</b>irst<b>I</b>n<b>F</b>irst<b>O</b>ut* order of development:
 
 - WebUtil:Website Blocker (add items to hosts file) (1)
-- Tool:File encypter/decrypter (UI = VB | Core = Python) (2)
 - Merge scanner code into seperate class for malware_scanner, custom_scanner (3-a) [optimization]
 - Common settings utilities class for everything related to settings (3-b-0) [optimization]
 - New settings categories and maintainable logic (3-b-1) [optimization]

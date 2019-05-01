@@ -13,7 +13,7 @@
     End Sub
 
     Private Sub window_exit()
-        If mainWindow.fadeEffect_Status = "on" Then
+        If utils.core_FadeEffect = "True" Then
             utils.form_fadeOut(Me)
         End If
         GC.Collect()
@@ -41,7 +41,7 @@
         ' -- load start configuration --'
 
         ' Theme
-        Select Case mainWindow.theme
+        Select Case utils.core_Theme
             Case "dark"
                 rbtn_Theme_Dark.Checked = True
                 rbtn_Theme_Dark.ForeColor = lime
@@ -53,46 +53,46 @@
         End Select
 
         ' MainWindow Containner Effect
-        Select Case mainWindow.optionsHoverEffect_Status
-            Case "on"
+        Select Case utils.core_MainWindowOptionHoverEffect
+            Case "True"
                 rbtn_ContainerEffect_On.Checked = True
                 rbtn_ContainerEffect_On.ForeColor = lime
                 rbtn_ContainerEffect_Off.ForeColor = blue
-            Case "off"
+            Case "False"
                 rbtn_ContainerEffect_Off.Checked = True
                 rbtn_ContainerEffect_On.ForeColor = blue
                 rbtn_ContainerEffect_Off.ForeColor = lime
         End Select
 
         ' Loading Screen TopMost
-        Select Case mainWindow.loadingScreenTopMost
-            Case "true"
+        Select Case utils.core_LoadingScreenTopmost
+            Case "True"
                 rbtn_LoadingScreen_TopMost_Yes.Checked = True
                 rbtn_LoadingScreen_TopMost_Yes.ForeColor = lime
                 rbtn_LoadingScreen_TopMost_No.ForeColor = blue
-            Case "false"
+            Case "False"
                 rbtn_LoadingScreen_TopMost_No.Checked = True
                 rbtn_LoadingScreen_TopMost_Yes.ForeColor = blue
                 rbtn_LoadingScreen_TopMost_No.ForeColor = lime
         End Select
 
         ' Fading Effect
-        Select Case mainWindow.fadeEffect_Status
-            Case "on"
+        Select Case utils.core_FadeEffect
+            Case "True"
                 rbtn_FadingEffect_On.Checked = True
                 rbtn_FadingEffect_On.ForeColor = lime
                 rbtn_FadingEffect_Off.ForeColor = blue
-            Case "off"
+            Case "False"
                 rbtn_FadingEffect_Off.Checked = True
                 rbtn_FadingEffect_On.ForeColor = blue
                 rbtn_FadingEffect_Off.ForeColor = lime
         End Select
 
         ' Fading Effect Speed
-        txtSetting_FadingEffect_Speed.Text = mainWindow.fadeEffect_Speed
+        txtSetting_FadingEffect_Speed.Text = utils.core_FadeEffectSpeed
 
         ' Fade Effect Type
-        Select Case mainWindow.fadeEffect_Type
+        Select Case utils.core_FadeEffectType
             Case "WindowsDefault"
                 rbtn_FadingType_WinDefault.Checked = True
                 rbtn_FadingType_WinDefault.ForeColor = lime
@@ -111,7 +111,7 @@
         End Select
 
         ' Wallpaper Settings + Pic Preview
-        If mainWindow.wallpaper = "gif" Then
+        If utils.core_Wallpaper = "gif" Then
             rbtn_Wallpaper_GIF.Checked = True
             rbtn_Wallpaper_GIF.ForeColor = lime
             rbtn_Wallpaper_None.ForeColor = blue
@@ -119,7 +119,7 @@
             Try
                 picPreview_Wallpaper.Image = Image.FromFile(Application.StartupPath & "/res/common_controls/wallpapers/" & mainWindow.bgGif)
             Catch ex As Exception : End Try
-        ElseIf mainWindow.wallpaper = "none" Then
+        ElseIf utils.core_Wallpaper = "none" Then
             rbtn_Wallpaper_None.Checked = True
             rbtn_Wallpaper_GIF.ForeColor = blue
             rbtn_Wallpaper_None.ForeColor = lime
@@ -132,7 +132,7 @@
             rbtn_Wallpaper_None.ForeColor = blue
             rbtn_Wallpaper_Image.ForeColor = lime
             Try
-                picPreview_Wallpaper.Image = Image.FromFile(Application.StartupPath & "/res/common_controls/wallpapers/" & mainWindow.wallpaper)
+                picPreview_Wallpaper.Image = Image.FromFile(Application.StartupPath & "/res/common_controls/wallpapers/" & utils.core_Wallpaper)
             Catch ex As Exception : End Try
         End If
 
@@ -148,7 +148,7 @@
         'Next
 
         ' -- load python configuration --'
-        txt_python_path.Text = utils.python_path
+        txt_python_path.Text = utils.python_Path
 
     End Sub
 
@@ -161,63 +161,63 @@
     End Sub
 
     Private Sub Rbtn_Theme_Dark_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_Theme_Dark.CheckedChanged
-        mainWindow.theme = "dark"
+        utils.core_Theme = "dark"
         rbtn_Theme_Dark.ForeColor = lime
         rbtn_Theme_Light.ForeColor = blue
         settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_Theme_Light_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_Theme_Light.CheckedChanged
-        mainWindow.theme = "light"
+        utils.core_Theme = "light"
         rbtn_Theme_Dark.ForeColor = blue
         rbtn_Theme_Light.ForeColor = lime
         settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_ContainerEffect_On_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_ContainerEffect_On.CheckedChanged
-        mainWindow.optionsHoverEffect_Status = "on"
+        utils.core_MainWindowOptionHoverEffect = "True"
         rbtn_ContainerEffect_On.ForeColor = lime
         rbtn_ContainerEffect_Off.ForeColor = blue
         settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_ContainerEffect_Off_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_ContainerEffect_Off.CheckedChanged
-        mainWindow.optionsHoverEffect_Status = "off"
+        utils.core_MainWindowOptionHoverEffect = "False"
         rbtn_ContainerEffect_On.ForeColor = blue
         rbtn_ContainerEffect_Off.ForeColor = lime
         settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_LoadingScreen_TopMost_Yes_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_LoadingScreen_TopMost_Yes.CheckedChanged
-        mainWindow.loadingScreenTopMost = "true"
+        utils.core_LoadingScreenTopmost = "True"
         rbtn_LoadingScreen_TopMost_Yes.ForeColor = lime
         rbtn_LoadingScreen_TopMost_No.ForeColor = blue
         settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_LoadingScreen_TopMost_No_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_LoadingScreen_TopMost_No.CheckedChanged
-        mainWindow.loadingScreenTopMost = "false"
+        utils.core_LoadingScreenTopmost = "False"
         rbtn_LoadingScreen_TopMost_Yes.ForeColor = blue
         rbtn_LoadingScreen_TopMost_No.ForeColor = lime
         settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_FadingEffect_On_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_FadingEffect_On.CheckedChanged
-        mainWindow.fadeEffect_Status = "on"
+        utils.core_FadeEffect = "True"
         rbtn_FadingEffect_On.ForeColor = lime
         rbtn_FadingEffect_Off.ForeColor = blue
         settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_FadingEffect_Off_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_FadingEffect_Off.CheckedChanged
-        mainWindow.fadeEffect_Status = "off"
+        utils.core_FadeEffect = "False"
         rbtn_FadingEffect_On.ForeColor = blue
         rbtn_FadingEffect_Off.ForeColor = lime
         settings_isChanged = True
     End Sub
 
     Private Sub Rbtn_FadingType_WinDefault_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_FadingType_WinDefault.CheckedChanged
-        mainWindow.fadeEffect_Type = "WindowsDefault"
+        utils.core_FadeEffectType = "WindowsDefault"
         rbtn_FadingType_WinDefault.ForeColor = lime
         rbtn_FadingType_FadeLeft.ForeColor = blue
         rbtn_FadingType_FadeTop.ForeColor = blue
@@ -225,7 +225,7 @@
     End Sub
 
     Private Sub Rbtn_FadingType_FadeLeft_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_FadingType_FadeLeft.CheckedChanged
-        mainWindow.fadeEffect_Type = "FadeLeft"
+        utils.core_FadeEffectType = "FadeLeft"
         rbtn_FadingType_WinDefault.ForeColor = blue
         rbtn_FadingType_FadeLeft.ForeColor = lime
         rbtn_FadingType_FadeTop.ForeColor = blue
@@ -233,7 +233,7 @@
     End Sub
 
     Private Sub Rbtn_FadingType_FadeTop_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_FadingType_FadeTop.CheckedChanged
-        mainWindow.fadeEffect_Type = "FadeTop"
+        utils.core_FadeEffectType = "FadeTop"
         rbtn_FadingType_WinDefault.ForeColor = blue
         rbtn_FadingType_FadeLeft.ForeColor = blue
         rbtn_FadingType_FadeTop.ForeColor = lime
@@ -241,7 +241,7 @@
     End Sub
 
     Private Sub Rbtn_Wallpaper_None_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_Wallpaper_None.CheckedChanged
-        mainWindow.wallpaper = "none"
+        utils.core_Wallpaper = "none"
         picPreview_Wallpaper.Image = Nothing
         rbtn_Wallpaper_Image.ForeColor = blue
         rbtn_Wallpaper_None.ForeColor = lime
@@ -264,7 +264,7 @@
                 Dim imgpathArrLen As Integer = imgpathArray.Length()
                 Dim imagename As String = imgpathArray(imgpathArrLen - 1)
                 System.IO.File.Copy(imgpath, wallpaperDir & imagename)
-                mainWindow.wallpaper = imagename
+                utils.core_Wallpaper = imagename
                 picPreview_Wallpaper.Image = Image.FromFile(wallpaperDir & imagename)
                 rbtn_Wallpaper_Image.ForeColor = blue
                 rbtn_Wallpaper_None.ForeColor = blue
@@ -293,7 +293,7 @@
                 If Not System.IO.File.Exists(wallpaperDir & imagename) Then
                     System.IO.File.Copy(imgpath, wallpaperDir & imagename)
                 End If
-                mainWindow.wallpaper = imagename
+                utils.core_Wallpaper = imagename
                 picPreview_Wallpaper.Image = Image.FromFile(wallpaperDir & imagename)
                 Me.BackgroundImage = picPreview_Wallpaper.Image
                 rbtn_Wallpaper_Image.ForeColor = lime
@@ -313,14 +313,15 @@
         ' check if not null, empty - fixes type error
         If Not String.IsNullOrEmpty(spd) Then
             ' convert to integer 32 and apply
-            mainWindow.fadeEffect_Speed = Convert.ToInt32(spd)
+            utils.core_FadeEffectSpeed = Convert.ToInt32(spd)
         End If
         settings_isChanged = True
     End Sub
 
     Private Sub save_settings_invoke()
-        utils.save_settings()
-        utils.refresh_app()
+        'utils.save_config(core,python,scanner)
+        'utils.refresh_app()
+        MsgBox("UNDER PROGRESS - testing cycle")
     End Sub
 
     Private Sub BtnSaveSettings1_Click(sender As Object, e As EventArgs) Handles btnSaveSettings1.Click

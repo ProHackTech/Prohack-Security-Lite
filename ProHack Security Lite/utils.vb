@@ -8,37 +8,120 @@ Public Class utils
     Public Shared detected_filepath As New List(Of String)()
     Public Shared detected_filehash As New List(Of String)()
 
-    ' Declares: Python Configuration
-    Public Shared python_path As String
-
     ' Declares: Locations
     Public Shared dectected_malware_file As String = Application.StartupPath & "\data\detected.list"
     Public Shared WSIR_file As String = Application.StartupPath & "\data\WSIR.list"
     Public Shared pyModDir As String = Application.StartupPath & "\python_modules\"
+    Public Shared confDir As String = Application.StartupPath & "\data\config\"
 
     ' Declares: Form Movement
     Public Shared isFormMovement As Boolean = False
     Public Shared MouseDownX, MouseDownY As Integer
 
+    ' Declares: Reusable
+    Public Shared reader As StreamReader
+    Public Shared writer As StreamWriter
+    Public Shared tempStr As String
+    Public Shared tempCounter As Integer
+
+    ' Declares: Store Configurations
+    Public Shared core_conf As New List(Of String)()
+    Public Shared python_conf As New List(Of String)()
+    Public Shared scanner_conf As New List(Of String)()
+
+    ' Declares: Configuration Variables
+    ' Order 1: Core
+    ' Order 2: Python
+    ' Order 3: Scanner
+    '
+    ' -- core --
+    Public Shared core_Theme As String
+    Public Shared core_Wallpaper As String
+    Public Shared core_FadeEffect As Boolean
+    Public Shared core_FadeEffectType As String
+    Public Shared core_FadeEffectSpeed As Integer
+    Public Shared core_MainWindowOptionHoverEffect As Boolean
+    Public Shared core_LoadingScreenTopmost As Boolean
+    Public Shared core_BackgroundGIF As String
+    Public Shared core_RunFrom As String
+    ' -- python --
+    Public Shared python_Path As String
+    ' -- scanner --
+    Public Shared scanner_ShowDetectionsOnLoad As Boolean
+
+    ' Method: To read application configurations
+    Public Shared Sub read_config(ByVal file_name As String)
+        ' form the file path
+        Dim file_path = confDir & file_name & ".conf"
+
+        tempStr = Nothing
+        reader = New StreamReader(file_path)
+        Do
+            tempStr = reader.ReadLine
+            If Not String.IsNullOrWhiteSpace(tempStr) Then
+                ' store 2 parts seperated by delimeter "=" into temporary array
+                Dim tempArray As String() = tempStr.Split("=")
+                ' replace the double quotes with nothing
+                tempArray(1) = tempArray(1).Replace("""", "")
+                ' decide which list to store the value in
+                ' depending on the file_name / config file
+                Select Case file_name
+                    Case "core"
+                        core_conf.Add(tempArray(0)) ' add name item
+                        core_conf.Add(tempArray(1)) ' add value item
+                    Case "python"
+                        python_conf.Add(tempArray(0)) ' add name item
+                        python_conf.Add(tempArray(1)) ' add value item
+                    Case "scanner"
+                        scanner_conf.Add(tempArray(0)) ' add name item
+                        scanner_conf.Add(tempArray(1)) ' add value item
+                End Select
+            End If
+        Loop Until tempStr Is Nothing
+        reader.Close()
+        reader.Dispose()
+
+        ' apply configurations based on file
+        ' even index = configuration name
+        ' odd index = configuration value
+        Select Case file_name
+            Case "core"
+                core_Theme = core_conf(1)
+                core_Wallpaper = core_conf(3)
+                core_FadeEffect = core_conf(5)
+                core_FadeEffectType = core_conf(7)
+                core_FadeEffectSpeed = core_conf(9)
+                core_MainWindowOptionHoverEffect = core_conf(11)
+                core_LoadingScreenTopmost = core_conf(13)
+                core_BackgroundGIF = core_conf(15)
+                core_RunFrom = core_conf(17)
+            Case "python"
+                python_Path = python_conf(1)
+            Case "scanner"
+                scanner_ShowDetectionsOnLoad = scanner_conf(1)
+        End Select
+    End Sub
+
     'Method: To fade out form
     Public Shared Sub form_fadeOut(form As Form)
-        Dim count As Integer : Dim speed As Integer = mainWindow.fadeEffect_Speed
+        Dim count As Integer
+        Dim speed As Integer = core_FadeEffectSpeed
 
-        If mainWindow.fadeEffect_Type = "WindowsDefault" Then
+        If core_FadeEffectType = "WindowsDefault" Then
             For count = 100 To 0 Step -speed
                 form.Opacity = count / 100
                 form.Size = New Size(form.Width - (speed + 5), form.Height - (speed + 5))
                 form.Location = New Point(form.Location.X - (speed + 5), form.Location.Y + (speed + 5))
                 form.Refresh()
             Next
-        ElseIf mainWindow.fadeEffect_Type = "FadeLeft" Then
+        ElseIf core_FadeEffectType = "FadeLeft" Then
             For count = 100 To 0 Step -speed
                 form.Opacity = count / 100
                 form.Size = New Size(form.Width - (speed + 5), form.Height)
                 form.Location = New Point(form.Location.X - (speed + 5), form.Location.Y)
                 form.Refresh()
             Next
-        ElseIf mainWindow.fadeEffect_Type = "FadeTop" Then
+        ElseIf core_FadeEffectType = "FadeTop" Then
             For count = 100 To 0 Step -speed
                 form.Opacity = count / 100
                 form.Size = New Size(form.Width - (speed + 5), form.Height)
@@ -46,27 +129,29 @@ Public Class utils
                 form.Refresh()
             Next
         End If
+        GC.Collect()
     End Sub
 
     'Method: To fade in form
     Public Shared Sub form_fadeIn(form)
-        Dim count As Integer : Dim speed As Integer = mainWindow.fadeEffect_Speed
+        Dim count As Integer
+        Dim speed As Integer = core_FadeEffectSpeed
 
-        If mainWindow.fadeEffect_Type = "WindowsDefault" Then
+        If core_FadeEffectType = "WindowsDefault" Then
             For count = 0 To 100 Step speed
                 form.Opacity = count / 100
                 form.Size = New Size(form.Width + (speed + 5), form.Height + (speed + 5))
                 form.Location = New Point(form.Location.X + (speed + 5), form.Location.Y - (speed + 5))
                 form.Refresh()
             Next
-        ElseIf mainWindow.fadeEffect_Type = "FadeLeft" Then
+        ElseIf core_FadeEffectType = "FadeLeft" Then
             For count = 0 To 100 Step speed
                 form.Opacity = count / 100
                 form.Size = New Size(form.Width + (speed + 5), form.Height)
                 form.Location = New Point(form.Location.X + (speed + 5), form.Location.Y)
                 form.Refresh()
             Next
-        ElseIf mainWindow.fadeEffect_Type = "FadeTop" Then
+        ElseIf core_FadeEffectType = "FadeTop" Then
             For count = 100 To 0 Step -speed
                 form.Opacity = count / 100
                 form.Size = New Size(form.Width + (speed + 5), form.Height)
@@ -74,6 +159,7 @@ Public Class utils
                 form.Refresh()
             Next
         End If
+        GC.Collect()
     End Sub
 
     ' Form Movevement: On Mouse Down
@@ -172,22 +258,23 @@ Public Class utils
         detected_filehash.Clear()
         detected_filepath.Clear()
         ' read detections file
-        Dim reader As StreamReader = My.Computer.FileSystem.OpenTextFileReader(dectected_malware_file)
-        Dim line As String
+        reader = New StreamReader(dectected_malware_file)
+        tempStr = Nothing
         Do
-            line = reader.ReadLine
-            If Not String.IsNullOrEmpty(line) Then
-                Dim tempArray() As String = Split(line, " |+| ")
+            tempStr = reader.ReadLine
+            If Not String.IsNullOrEmpty(tempStr) Then
+                Dim tempArray() As String = Split(tempStr, " |+| ")
                 detected_filepath.Add(tempArray(0))
                 detected_filehash.Add(tempArray(1))
             End If
-        Loop Until line Is Nothing
+        Loop Until tempStr Is Nothing
         reader.Close()
         reader.Dispose()
         Dim totalDetections As Integer = detected_filehash.Count
         For x As Integer = 0 To totalDetections - 1
             createCards(detected_filepath(x), detected_filehash(x), x + 1)
         Next
+        GC.Collect()
     End Sub
 
     ' create UC_Detected controls in flowlayoutpanel for malware informer
@@ -203,6 +290,7 @@ Public Class utils
             utils.invoke_msg(3, "Worker Error", ex.Message.ToString)
         End Try
         malware_informer.flowDetections.ResumeLayout()
+        GC.Collect()
     End Sub
 
     ' remove UC_Detected controls from flowlayoutpanel for malware informer
@@ -222,58 +310,6 @@ Public Class utils
     Public Shared Sub refresh_app()
         Process.Start("starter.bat")
         Application.Exit()
-    End Sub
-
-    ' save application settings
-    Public Shared Sub save_settings()
-        Dim st As StreamWriter
-        Dim configpath As String
-
-        ' write start_config file
-        configpath = Application.StartupPath & "/data/start_config"
-        If File.Exists(configpath) Then
-            File.Delete(configpath)
-        End If
-        st = New StreamWriter(configpath)
-        st.WriteLine("Theme=" & mainWindow.theme)
-        st.WriteLine("Wallpaper=" & mainWindow.wallpaper)
-        st.WriteLine("Fading Effect=" & mainWindow.fadeEffect_Status)
-        st.WriteLine("Main Window Options Button Hover Effect=" & mainWindow.optionsHoverEffect_Status)
-        st.WriteLine("Is Loading Screen TopMost?=" & mainWindow.loadingScreenTopMost)
-        st.WriteLine("Background GIF Animation=" & mainWindow.bgGif)
-        st.WriteLine("Fade Effect Type=" & mainWindow.fadeEffect_Type)
-        st.WriteLine("Fade Effect Speed(More means faster)=" & mainWindow.fadeEffect_Speed)
-        st.WriteLine("Run From=" & mainWindow.run_from)
-        st.Close()
-
-        ' write py_config file
-        configpath = Application.StartupPath & "/data/py_config"
-        If File.Exists(configpath) Then
-            File.Delete(configpath)
-        End If
-        st = New StreamWriter(configpath)
-        st.WriteLine(utils.python_path)
-        st.Close()
-
-        st.Dispose()
-        GC.Collect()
-    End Sub
-
-    ' Method: For python config read
-    Public Shared Sub pyconfig()
-        Dim filepath As String = Application.StartupPath & "/data/py_config"
-        Dim configs As New List(Of String)()
-        Dim reader As StreamReader = New StreamReader(filepath)
-        Dim line As String = Nothing
-        Do
-            line = reader.ReadLine
-            If Not String.IsNullOrEmpty(line) Then
-                configs.Add(line)
-            End If
-        Loop Until line Is Nothing
-        reader.Close()
-
-        python_path = configs(0) ' set python path
     End Sub
 
 End Class

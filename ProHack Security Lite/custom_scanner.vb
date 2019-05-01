@@ -7,10 +7,6 @@ Public Class custom_scanner
 
     Private Sub BgWorker_Scanner_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgWorker_Scanner.DoWork
         ' reusable declares
-        Dim reader As StreamReader                  ' common file reader
-        Dim writer As StreamWriter                  ' common file writer
-        Dim tempString As String = Nothing          ' temporary string storage
-        Dim counter As Integer = 0                  ' loop counter
         Dim FilesAndHashes As New List(Of String)() ' save filepaths and hashes
 
         ' common declares : comparer
@@ -26,12 +22,12 @@ Public Class custom_scanner
 
         For Each filepath In selectedPaths
             Try
-                tempString = utils._MD5_(filepath)
-                tempString = filepath & " |+| " & tempString
-                FilesAndHashes.Add(tempString)
+                utils.tempStr = utils._MD5_(filepath)
+                utils.tempStr = filepath & " |+| " & utils.tempStr
+                FilesAndHashes.Add(utils.tempStr)
             Catch ex As Exception : End Try
-            counter += 1
-            bgWorker_Scanner.ReportProgress(counter * 100 / filenumbers)
+            utils.tempCounter += 1
+            bgWorker_Scanner.ReportProgress(utils.tempCounter * 100 / filenumbers)
         Next
         bgWorker_Scanner.ReportProgress(100)
 
@@ -46,18 +42,18 @@ Public Class custom_scanner
         ' and compare each hash in the malware db file with each hash from file hash list
         For Each malware_hash_file In malware_hash_files
             ' read the malware hash db file
-            reader = New StreamReader(malware_hash_file)
+            utils.reader = New StreamReader(malware_hash_file)
             ' loop over each line
             ' one line comsists of two signatures - packed & unpacked file signatures
             Do
                 ' read the line into the temp variable
-                tempString = reader.ReadLine
+                utils.tempStr = utils.reader.ReadLine
                 ' perform check for value not being null or empty
                 ' because in some cases, the variable stores null values and invokes many problems
-                If Not String.IsNullOrEmpty(tempString) Then
+                If Not String.IsNullOrEmpty(utils.tempStr) Then
                     ' seperate the packaed and unpacked hash
                     ' and add both to hashfile_lineArray
-                    hashfile_lineArray = Split(tempString, ",")
+                    hashfile_lineArray = Split(utils.tempStr, ",")
                     ' add both parts in lineArray to malware hash list
                     For Each hashPart In hashfile_lineArray
                         malware_hash_store.Add(hashPart)
@@ -65,10 +61,10 @@ Public Class custom_scanner
                 End If
                 ' update malware_scanrner progressbar
                 bgWorker_Scanner.ReportProgress(malware_hash_counter * 100 / len_hash_files)
-            Loop Until tempString Is Nothing ' loop until the variable is nothing (till the end)
+            Loop Until utils.tempStr Is Nothing ' loop until the variable is nothing (till the end)
             ' cleaning operations
-            reader.Close()   ' close file reader
-            tempString = Nothing ' clean the temporary string variable
+            utils.reader.Close()   ' close file reader
+            utils.tempStr = Nothing ' clean the temporary string variable
 
             ' declares for storing matched hashes and files
             Dim matched_hashes As New List(Of String)()
@@ -77,7 +73,7 @@ Public Class custom_scanner
             ' get length of FilesAndHashes
             len_hash_files = FilesAndHashes.Count
             ' set counter to 0
-            counter = 0
+            utils.tempCounter = 0
             ' for each file hash in list of file hashes
             For Each FileAndHash In FilesAndHashes
                 hashfile_lineArray = Split(FileAndHash, " |+| ")
@@ -95,24 +91,24 @@ Public Class custom_scanner
                     End If
                 Next
                 ' increment the counter for progress status
-                counter += 1
+                utils.tempCounter += 1
                 ' show progress in malware_scanner
-                bgWorker_Scanner.ReportProgress(counter * 100 / len_hash_files)
+                bgWorker_Scanner.ReportProgress(utils.tempCounter * 100 / len_hash_files)
             Next
 
             ' save matches to file ( not adding if statement for malwareDetected because I don't want to \[-_-]/ )
-            writer = New StreamWriter(utils.dectected_malware_file)
+            utils.writer = New StreamWriter(utils.dectected_malware_file)
             ' get length of matched hashes list
             Dim len_detections As Integer = matched_hashes.Count
             ' increment over matched hashes using the length
             For x As Integer = 0 To (len_detections - 1)
                 ' concatenate filepath and hash to save into one line
-                tempString = matched_files(x) & " |+| " & matched_hashes(x)
+                utils.tempStr = matched_files(x) & " |+| " & matched_hashes(x)
                 ' write line in the file with tempString
-                writer.WriteLine(tempString)
+                utils.writer.WriteLine(utils.tempStr)
             Next
             ' close writer
-            writer.Close()
+            utils.writer.Close()
             malware_hash_counter += 1
         Next
 
@@ -159,7 +155,7 @@ Public Class custom_scanner
     End Sub
 
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        If mainWindow.fadeEffect_Status = "on" Then
+        If utils.core_FadeEffect = "True" Then
             utils.form_fadeOut(Me)
         End If
         mainWindow.Show()

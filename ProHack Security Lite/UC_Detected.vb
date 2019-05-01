@@ -37,9 +37,9 @@ Public Class UC_Detected
     End Sub
 
     Private Sub Malware_Trash()
-        Dim tempfile As String = txtFile.Text
+        utils.tempStr = txtFile.Text
         ' find index of hash value (filename will be the same index)
-        Dim index As Integer = utils.detected_filepath.FindIndex(Function(x As String) x.Contains(tempfile))
+        Dim index As Integer = utils.detected_filepath.FindIndex(Function(x As String) x.Contains(utils.tempStr))
         ' try deleting the infected file from the system
         Try
             File.Delete(utils.detected_filepath(index))
@@ -50,14 +50,14 @@ Public Class UC_Detected
                 ' refresh detected file
                 File.Create(utils.dectected_malware_file).Dispose()
                 ' save list
-                Dim writer As New IO.StreamWriter(utils.dectected_malware_file)
+                utils.writer = New StreamWriter(utils.dectected_malware_file)
                 Dim lenDetections As Integer = utils.detected_filehash.Count
                 For x As Integer = 0 To lenDetections - 1
                     Dim tempString As String = utils.detected_filepath(x) & " |+| " & utils.detected_filehash(x)
-                    writer.WriteLine(tempString)
+                    utils.writer.WriteLine(tempString)
                 Next
-                writer.Close()
-                writer.Dispose()
+                utils.writer.Close()
+                utils.writer.Dispose()
                 utils.invoke_msg(1, "Success!", "Infected file was deleted from system successfully!")
                 malware_informer.refresher()
                 Me.Dispose() : GC.Collect()
@@ -97,14 +97,14 @@ Public Class UC_Detected
             ' refresh detected file
             File.Create(utils.dectected_malware_file).Dispose()
             ' save list
-            Dim writer As New IO.StreamWriter(utils.dectected_malware_file)
+            utils.writer = New StreamWriter(utils.dectected_malware_file)
             Dim lenDetections As Integer = utils.detected_filehash.Count
             For x As Integer = 0 To lenDetections - 1
                 Dim tempString As String = utils.detected_filepath(x) & " |+| " & utils.detected_filehash(x)
-                writer.WriteLine(tempString)
+                utils.writer.WriteLine(tempString)
             Next
-            writer.Close()
-            writer.Dispose()
+            utils.writer.Close()
+            utils.writer.Dispose()
             utils.invoke_msg(1, "Ignored!", "Selected file has been ignored for now..")
             malware_informer.refresher()
             Me.Dispose() : GC.Collect()

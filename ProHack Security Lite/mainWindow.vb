@@ -6,12 +6,6 @@ Public Class mainWindow
 
     ' general declares
     Public Shared scanType As String
-    ' store start_config
-    Public form_settings(8) As String
-    ' settings variables: string types for start_config
-    Public theme, wallpaper, fadeEffect_Status, optionsHoverEffect_Status, fadeEffect_Type, bgGif, loadingScreenTopMost, run_from As String
-    ' settings variables: integer types for start_config
-    Public fadeEffect_Speed As Integer
 
     Sub New()
         InitializeComponent() 'initialize form
@@ -19,40 +13,16 @@ Public Class mainWindow
         SetStyle(ControlStyles.UserPaint, True)
         SetStyle(ControlStyles.AllPaintingInWmPaint, True)
         toggle_tabControlOptions(False) ' toggle tab control and hide it
-        form_init_setter() ' run the setting initialization before form loads
-        utils.pyconfig() ' read python config file
+        init_setter() ' run the setting initialization before form loads
     End Sub
 
     'Method: To apply form settings
-    Private Sub form_init_setter()
-        'read theme settings
-        Dim fpath = Application.StartupPath & "/data/start_config" 'filepath
-        Dim reader As StreamReader = My.Computer.FileSystem.OpenTextFileReader(fpath) 'open text file reader
-        Dim line As String 'declare variable for stroing string
-        For x As Integer = 0 To 9
-            line = reader.ReadLine 'read line into variable
-            If Not String.IsNullOrEmpty(line) Then ' if line is not null or empty
-                Dim lineArray As String() = line.Split(New Char() {"="c}) ' split by delimeter
-                form_settings(x) = lineArray(1) ' take the second part after '='
-            End If
-        Next : reader.Close() ' close reader
-
-        'set global variables - for easiness
-        theme = form_settings(0) ' theme setting
-        wallpaper = form_settings(1) ' wallpaper setting
-        fadeEffect_Status = form_settings(2) ' fade effect setting
-        optionsHoverEffect_Status = form_settings(3) ' options button hover setting
-        loadingScreenTopMost = form_settings(4) ' option to toggle loading screen topmost
-        bgGif = form_settings(5) ' gif image for animated background
-        fadeEffect_Type = form_settings(6) ' fade effect type
-        fadeEffect_Speed = form_settings(7) ' fade effect speed
-        run_from = form_settings(8) ' run from config
-
-        'apply theme settings
+    Private Sub init_setter()
+        'apply configurations
         Dim imgpath As String ' image path variable
-        If wallpaper = "gif" Then
+        If utils.core_Wallpaper = "gif" Then
             Try
-                imgpath = Application.StartupPath & "/res/common_controls/wallpapers/" & bgGif ' generate image path
+                imgpath = Application.StartupPath & "/res/common_controls/wallpapers/" & utils.core_BackgroundGIF ' generate image path
                 ' create background picture handler
                 Dim bgpic As New PictureBox
                 With bgpic
@@ -68,11 +38,11 @@ Public Class mainWindow
             Catch ex As Exception
                 utils.invoke_msg(2, "Image Error", ex.Message.ToString)
             End Try
-        ElseIf wallpaper = "none" Then ' if wallpaper is not named "none" & "gif" then,
+        ElseIf utils.core_Wallpaper = "none" Then ' if wallpaper is not named "none" & "gif" then,
             Me.BackgroundImage = Nothing ' background image empty
         Else
             Try
-                imgpath = Application.StartupPath & "/res/common_controls/wallpapers/" & wallpaper ' generate image path
+                imgpath = Application.StartupPath & "/res/common_controls/wallpapers/" & utils.core_Wallpaper ' generate image path
                 Me.BackgroundImage = Image.FromFile(imgpath) ' apply image
             Catch ex As Exception
                 utils.invoke_msg(2, "Image Error", ex.Message.ToString)
@@ -148,7 +118,7 @@ Public Class mainWindow
         Catch ex As Exception
             utils.invoke_msg(3, "Worker Error", ex.Message.ToString)
         End Try
-        If fadeEffect_Status = "on" Then
+        If utils.core_FadeEffect = "True" Then
             utils.form_fadeOut(Me)
         End If
         Application.Exit()
@@ -158,7 +128,7 @@ Public Class mainWindow
     Private Sub toggle_opt_hover(sender As Control, toHover As Boolean)
         Dim curWidth As Integer = sender.Width : Dim curHeight As Integer = sender.Height
         Dim speed As Integer = 5
-        If optionsHoverEffect_Status = "on" Then
+        If utils.core_MainWindowOptionHoverEffect = "True" Then
             Select Case toHover
                 Case True
                     sender.BackColor = Color.RoyalBlue
@@ -274,7 +244,7 @@ Public Class mainWindow
     Private Sub mainWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' show loading screen
         form_loading.Show() : Me.Opacity = 0.1
-        If loadingScreenTopMost = "true" Then
+        If utils.core_LoadingScreenTopmost = "True" Then
             form_loading.TopMost = True
         Else
             form_loading.TopMost = False
@@ -295,7 +265,7 @@ Public Class mainWindow
     End Sub
 
     Private Sub btnMinimize_Click(sender As Object, e As EventArgs) Handles btnMinimize.Click
-        If fadeEffect_Status = "on" Then
+        If utils.core_FadeEffect = "True" Then
             utils.form_fadeOut(Me)
             check_focused.Start()
         End If
@@ -418,8 +388,6 @@ Public Class mainWindow
 
     Private Sub BgWorker_FlowPopulus_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgWorker_FlowPopulus.DoWork
         ' common declares for file reading
-        Dim reader As StreamReader
-        Dim tempStr As String = Nothing
         Dim file_webutils As String = Application.StartupPath & "/data/webutils.list"
         Dim file_tools As String = Application.StartupPath & "/data/tools.list"
 
@@ -430,16 +398,17 @@ Public Class mainWindow
         Dim tools_paths As New List(Of String)()
 
         ' read items: web utils
-        reader = New StreamReader(file_webutils)
+        utils.reader = New StreamReader(file_webutils)
+        utils.tempStr = Nothing
         Do
-            tempStr = reader.ReadLine
-            If Not String.IsNullOrEmpty(tempStr) Then
-                Dim tempArray As String() = tempStr.Split(">")
+            utils.tempStr = utils.reader.ReadLine
+            If Not String.IsNullOrEmpty(utils.tempStr) Then
+                Dim tempArray As String() = utils.tempStr.Split(">")
                 utils_names.Add(tempArray(0))
                 utils_paths.Add(tempArray(1))
             End If
-        Loop Until tempStr Is Nothing
-        reader.Close()
+        Loop Until utils.tempStr Is Nothing
+        utils.reader.Close()
 
         ' populus webutils
         BeginInvoke(CType(Sub()
@@ -447,16 +416,17 @@ Public Class mainWindow
                           End Sub, MethodInvoker))
 
         ' read items: tools
-        reader = New StreamReader(file_tools)
+        utils.reader = New StreamReader(file_tools)
         Do
-            tempStr = reader.ReadLine
-            If Not String.IsNullOrEmpty(tempStr) Then
-                Dim tempArray As String() = tempStr.Split(">")
+            utils.tempStr = utils.reader.ReadLine
+            If Not String.IsNullOrEmpty(utils.tempStr) Then
+                Dim tempArray As String() = utils.tempStr.Split(">")
                 tools_names.Add(tempArray(0))
                 tools_paths.Add(tempArray(1))
             End If
-        Loop Until tempStr Is Nothing
-        reader.Close()
+        Loop Until utils.tempStr Is Nothing
+        utils.reader.Close()
+        utils.reader.Dispose()
 
         ' populus tools
         BeginInvoke(CType(Sub()
@@ -535,30 +505,28 @@ Public Class mainWindow
     Private Sub bgWorker_Updater_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgWorker_Updater.DoWork
         Dim line As String = Nothing
         Dim curversion, newversion As Integer
-        Dim tempstring As String
-        Dim reader As StreamReader
         Dim updater_version, updater_newversion As Integer
 
         ' check the current updater version
-        reader = New StreamReader(Application.StartupPath & "/updater/versions.txt")
-        tempstring = reader.ReadToEnd
-        tempstring = tempstring.Replace(".", "")
-        updater_version = Int(tempstring)
-        reader.Close() : reader.Dispose()
+        utils.reader = New StreamReader(Application.StartupPath & "/updater/versions.txt")
+        utils.tempStr = utils.reader.ReadToEnd
+        utils.tempStr = utils.tempStr.Replace(".", "")
+        updater_version = Int(utils.tempStr)
+        utils.reader.Close() : utils.reader.Dispose()
 
         ' check the new updater version
         Dim address As String = "https://prohack.tech/Products/Security-Lite/updater_versions.txt"
         Dim client As WebClient = New WebClient()
         Try
-            reader = New StreamReader(client.OpenRead(address))
+            utils.reader = New StreamReader(client.OpenRead(address))
         Catch ex As Exception
             Exit Sub
         End Try
-        tempstring = reader.ReadToEnd
-        tempstring = tempstring.Replace(".", "")
-        updater_newversion = Int(tempstring)
-        reader.Close()
-        reader.Dispose()
+        utils.tempStr = utils.reader.ReadToEnd
+        utils.tempStr = utils.tempStr.Replace(".", "")
+        updater_newversion = Int(utils.tempStr)
+        utils.reader.Close()
+        utils.reader.Dispose()
 
         ' compare updater versions
         If updater_newversion > updater_version Then
@@ -592,21 +560,21 @@ Public Class mainWindow
         End If
 
         ' read current version
-        reader = New StreamReader(Application.StartupPath & "/versions.txt")
-        tempstring = reader.ReadToEnd
-        tempstring = tempstring.Replace(".", "")
-        curversion = Int(tempstring)
-        reader.Close() : reader.Dispose()
+        utils.reader = New StreamReader(Application.StartupPath & "/versions.txt")
+        utils.tempStr = utils.reader.ReadToEnd
+        utils.tempStr = utils.tempStr.Replace(".", "")
+        curversion = Int(utils.tempStr)
+        utils.reader.Close() : utils.reader.Dispose()
 
         ' read new version
         Dim address_mainread As String = "https://prohack.tech/Products/Security-Lite/versions.txt"
         Dim client_mainread As WebClient = New WebClient()
-        reader = New StreamReader(client_mainread.OpenRead(address_mainread))
-        tempstring = reader.ReadToEnd
-        tempstring = tempstring.Replace(".", "")
-        newversion = Int(tempstring)
-        reader.Close()
-        reader.Dispose()
+        utils.reader = New StreamReader(client_mainread.OpenRead(address_mainread))
+        utils.tempStr = utils.reader.ReadToEnd
+        utils.tempStr = utils.tempStr.Replace(".", "")
+        newversion = Int(utils.tempStr)
+        utils.reader.Close()
+        utils.reader.Dispose()
 
         ' compare versions
         If newversion > curversion Then
@@ -614,11 +582,11 @@ Public Class mainWindow
             Dim updater_path As String = Application.StartupPath
             If askresult = DialogResult.Yes Then
                 ' start updater
-                If run_from = "debug" Then
+                If utils.core_RunFrom = "debug" Then
                     updater_path += "/updater/updater/bin/debug/updater.exe"
                     Process.Start(updater_path)
                     Application.Exit()
-                ElseIf run_from = "release" Then
+                ElseIf utils.core_RunFrom = "release" Then
                     updater_path += "/updater/updater.exe"
                     Process.Start(updater_path)
                     Application.Exit()
