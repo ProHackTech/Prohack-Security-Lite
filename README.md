@@ -9,6 +9,27 @@
 
 This is a small anti-malware application made in VB.NET. All the hashes are collected from <a href="https://virusshare.com/">Virus Share Website</a>. Currently under development.
 
+## Test It Out
+
+### Requirements
+
+- .NET Framework 4.7.2
+- Visual Studio (for source view/testing)
+- Python 3x
+
+### For Newbs
+
+> 1. Clone or Download
+
+> 2. Goto: *Prohack-Security-Lite\ProHack Security Lite\bin\Debug* (bin\Debug folder)
+
+> 3. Crete empty file named: "FIRST_TIME" (without quotes and extension) - This is to auto start the easy installer for dependencies
+
+> 4. Run: ProHack Security Lite.exe
+
+### For Non-Noobs
+Non-Newbs will have Visual Studio, .NET Framework 4.7.2 installed and Python 3x installed. Follow the steps for newbs leaving out the 3rd part.
+
 ## Features
 
 ### Planning (Unordered)
