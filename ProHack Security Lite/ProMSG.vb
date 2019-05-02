@@ -88,11 +88,11 @@ Public Class ProMSG
 
     Private Sub btnRefreshApp_Click(sender As Object, e As EventArgs) Handles btnRefreshApp.Click
         Dim updater_path As String = Application.StartupPath
-        If mainWindow.run_from = "debug" Then
+        If utils.core_RunFrom = "debug" Then
             updater_path += "/updater/updater/bin/debug/updater.exe"
             Process.Start(updater_path)
             Application.Exit()
-        ElseIf mainWindow.run_from = "release" Then
+        ElseIf utils.core_RunFrom = "release" Then
             updater_path += "/updater/updater.exe"
             Process.Start(updater_path)
             Application.Exit()

@@ -117,7 +117,7 @@
             rbtn_Wallpaper_None.ForeColor = blue
             rbtn_Wallpaper_Image.ForeColor = blue
             Try
-                picPreview_Wallpaper.Image = Image.FromFile(Application.StartupPath & "/res/common_controls/wallpapers/" & mainWindow.bgGif)
+                picPreview_Wallpaper.Image = Image.FromFile(Application.StartupPath & "/res/common_controls/wallpapers/" & utils.core_BackgroundGIF)
             Catch ex As Exception : End Try
         ElseIf utils.core_Wallpaper = "none" Then
             rbtn_Wallpaper_None.Checked = True

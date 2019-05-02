@@ -9,10 +9,10 @@ Public Class utils
     Public Shared detected_filehash As New List(Of String)()
 
     ' Declares: Locations
-    Public Shared dectected_malware_file As String = Application.StartupPath & "\data\detected.list"
-    Public Shared WSIR_file As String = Application.StartupPath & "\data\WSIR.list"
-    Public Shared pyModDir As String = Application.StartupPath & "\python_modules\"
-    Public Shared confDir As String = Application.StartupPath & "\data\config\"
+    Public Shared dectected_malware_file As String = Application.StartupPath & "/data/detected.list"
+    Public Shared WSIR_file As String = Application.StartupPath & "/data/WSIR.list"
+    Public Shared pyModDir As String = Application.StartupPath & "/python_modules/"
+    Public Shared confDir As String = Application.StartupPath & "/data/config/"
 
     ' Declares: Form Movement
     Public Shared isFormMovement As Boolean = False
@@ -192,7 +192,7 @@ Public Class utils
     Public Shared Function _online_status_() As Boolean
         Try
             Using client = New WebClient()
-                Using stream = client.OpenRead("https://https://duckduckgo.com/")
+                Using stream = client.OpenRead("https://duckduckgo.com/")
                     Return True
                 End Using
             End Using
