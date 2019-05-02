@@ -319,8 +319,8 @@
     End Sub
 
     Private Sub save_settings_invoke()
-        'utils.save_config(core,python,scanner)
-        'utils.refresh_app()
+        utils.save_config()
+        utils.refresh_app()
         MsgBox("UNDER PROGRESS - testing cycle")
     End Sub
 
@@ -367,7 +367,7 @@
 
     Private Sub Txt_python_path_TextChanged(sender As Object, e As EventArgs) Handles txt_python_path.TextChanged
         If Not String.IsNullOrEmpty(txt_python_path.Text) Then
-            utils.python_path = txt_python_path.Text
+            utils.python_Path = txt_python_path.Text
         End If
         settings_isChanged = True
     End Sub

@@ -13,6 +13,7 @@ Public Class mainWindow
         SetStyle(ControlStyles.UserPaint, True)
         SetStyle(ControlStyles.AllPaintingInWmPaint, True)
         toggle_tabControlOptions(False) ' toggle tab control and hide it
+        utils.read_config()
         init_setter() ' run the setting initialization before form loads
     End Sub
 
@@ -36,7 +37,7 @@ Public Class mainWindow
                 bgpic.Show() : bgpic.Visible = True
                 bgpic.Dock = DockStyle.Fill : bgpic.SendToBack()
             Catch ex As Exception
-                utils.invoke_msg(2, "Image Error", ex.Message.ToString)
+                utils.invoke_msg(2, "Image Error1", ex.Message.ToString)
             End Try
         ElseIf utils.core_Wallpaper = "none" Then ' if wallpaper is not named "none" & "gif" then,
             Me.BackgroundImage = Nothing ' background image empty
@@ -45,7 +46,7 @@ Public Class mainWindow
                 imgpath = Application.StartupPath & "/res/common_controls/wallpapers/" & utils.core_Wallpaper ' generate image path
                 Me.BackgroundImage = Image.FromFile(imgpath) ' apply image
             Catch ex As Exception
-                utils.invoke_msg(2, "Image Error", ex.Message.ToString)
+                utils.invoke_msg(2, "Image Error2", ex.Message.ToString)
             End Try ' end
         End If
     End Sub
@@ -388,6 +389,8 @@ Public Class mainWindow
 
     Private Sub BgWorker_FlowPopulus_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgWorker_FlowPopulus.DoWork
         ' common declares for file reading
+        Dim reader As StreamReader
+        Dim tempStr As String = Nothing
         Dim file_webutils As String = Application.StartupPath & "/data/webutils.list"
         Dim file_tools As String = Application.StartupPath & "/data/tools.list"
 
@@ -398,17 +401,16 @@ Public Class mainWindow
         Dim tools_paths As New List(Of String)()
 
         ' read items: web utils
-        utils.reader = New StreamReader(file_webutils)
-        utils.tempStr = Nothing
+        reader = New StreamReader(file_webutils)
         Do
-            utils.tempStr = utils.reader.ReadLine
-            If Not String.IsNullOrEmpty(utils.tempStr) Then
-                Dim tempArray As String() = utils.tempStr.Split(">")
+            tempStr = reader.ReadLine
+            If Not String.IsNullOrEmpty(tempStr) Then
+                Dim tempArray As String() = tempStr.Split(">")
                 utils_names.Add(tempArray(0))
                 utils_paths.Add(tempArray(1))
             End If
-        Loop Until utils.tempStr Is Nothing
-        utils.reader.Close()
+        Loop Until tempStr Is Nothing
+        reader.Close()
 
         ' populus webutils
         BeginInvoke(CType(Sub()
@@ -416,17 +418,17 @@ Public Class mainWindow
                           End Sub, MethodInvoker))
 
         ' read items: tools
-        utils.reader = New StreamReader(file_tools)
+        reader = New StreamReader(file_tools)
         Do
-            utils.tempStr = utils.reader.ReadLine
-            If Not String.IsNullOrEmpty(utils.tempStr) Then
-                Dim tempArray As String() = utils.tempStr.Split(">")
+            tempStr = reader.ReadLine
+            If Not String.IsNullOrEmpty(tempStr) Then
+                Dim tempArray As String() = tempStr.Split(">")
                 tools_names.Add(tempArray(0))
                 tools_paths.Add(tempArray(1))
             End If
-        Loop Until utils.tempStr Is Nothing
-        utils.reader.Close()
-        utils.reader.Dispose()
+        Loop Until tempStr Is Nothing
+        reader.Close()
+        reader.Dispose()
 
         ' populus tools
         BeginInvoke(CType(Sub()
@@ -503,30 +505,30 @@ Public Class mainWindow
     End Sub
 
     Private Sub bgWorker_Updater_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgWorker_Updater.DoWork
-        Dim line As String = Nothing
         Dim curversion, newversion As Integer
         Dim updater_version, updater_newversion As Integer
 
         ' check the current updater version
-        utils.reader = New StreamReader(Application.StartupPath & "/updater/versions.txt")
-        utils.tempStr = utils.reader.ReadToEnd
-        utils.tempStr = utils.tempStr.Replace(".", "")
-        updater_version = Int(utils.tempStr)
-        utils.reader.Close() : utils.reader.Dispose()
+        Dim reader As StreamReader
+        Dim tempStr As String = Nothing
+        reader = New StreamReader(Application.StartupPath & "/updater/versions.txt")
+        tempStr = reader.ReadToEnd
+        tempStr = tempStr.Replace(".", "")
+        updater_version = Int(tempStr)
+        reader.Close() : reader.Dispose()
 
         ' check the new updater version
         Dim address As String = "https://prohack.tech/Products/Security-Lite/updater_versions.txt"
         Dim client As WebClient = New WebClient()
         Try
-            utils.reader = New StreamReader(client.OpenRead(address))
+            reader = New StreamReader(client.OpenRead(address))
         Catch ex As Exception
             Exit Sub
         End Try
-        utils.tempStr = utils.reader.ReadToEnd
-        utils.tempStr = utils.tempStr.Replace(".", "")
-        updater_newversion = Int(utils.tempStr)
-        utils.reader.Close()
-        utils.reader.Dispose()
+        tempStr = reader.ReadToEnd
+        tempStr = tempStr.Replace(".", "")
+        updater_newversion = Int(tempStr)
+        reader.Close() : reader.Dispose()
 
         ' compare updater versions
         If updater_newversion > updater_version Then
@@ -560,21 +562,20 @@ Public Class mainWindow
         End If
 
         ' read current version
-        utils.reader = New StreamReader(Application.StartupPath & "/versions.txt")
-        utils.tempStr = utils.reader.ReadToEnd
-        utils.tempStr = utils.tempStr.Replace(".", "")
-        curversion = Int(utils.tempStr)
-        utils.reader.Close() : utils.reader.Dispose()
+        reader = New StreamReader(Application.StartupPath & "/versions.txt")
+        tempStr = reader.ReadToEnd
+        tempStr = tempStr.Replace(".", "")
+        curversion = Int(tempStr)
+        reader.Close() : reader.Dispose()
 
         ' read new version
         Dim address_mainread As String = "https://prohack.tech/Products/Security-Lite/versions.txt"
         Dim client_mainread As WebClient = New WebClient()
-        utils.reader = New StreamReader(client_mainread.OpenRead(address_mainread))
-        utils.tempStr = utils.reader.ReadToEnd
-        utils.tempStr = utils.tempStr.Replace(".", "")
-        newversion = Int(utils.tempStr)
-        utils.reader.Close()
-        utils.reader.Dispose()
+        reader = New StreamReader(client_mainread.OpenRead(address_mainread))
+        tempStr = reader.ReadToEnd
+        tempStr = tempStr.Replace(".", "")
+        newversion = Int(tempStr)
+        reader.Close() : reader.Dispose()
 
         ' compare versions
         If newversion > curversion Then

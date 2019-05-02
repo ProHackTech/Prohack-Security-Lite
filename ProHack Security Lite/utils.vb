@@ -25,9 +25,8 @@ Public Class utils
     Public Shared tempCounter As Integer
 
     ' Declares: Store Configurations
-    Public Shared core_conf As New List(Of String)()
-    Public Shared python_conf As New List(Of String)()
-    Public Shared scanner_conf As New List(Of String)()
+    Public Shared core_conf_names As New List(Of String)()
+    Public Shared core_conf_values As New List(Of String)()
 
     ' Declares: Configuration Variables
     ' Order 1: Core
@@ -50,56 +49,74 @@ Public Class utils
     Public Shared scanner_ShowDetectionsOnLoad As Boolean
 
     ' Method: To read application configurations
-    Public Shared Sub read_config(ByVal file_name As String)
-        ' form the file path
-        Dim file_path = confDir & file_name & ".conf"
-
+    Public Shared Sub read_config()
         tempStr = Nothing
-        reader = New StreamReader(file_path)
+        reader = New StreamReader(confDir & "core.conf")
         Do
             tempStr = reader.ReadLine
             If Not String.IsNullOrWhiteSpace(tempStr) Then
                 ' store 2 parts seperated by delimeter "=" into temporary array
                 Dim tempArray As String() = tempStr.Split("=")
                 ' replace the double quotes with nothing
-                tempArray(1) = tempArray(1).Replace("""", "")
-                ' decide which list to store the value in
-                ' depending on the file_name / config file
-                Select Case file_name
-                    Case "core"
-                        core_conf.Add(tempArray(0)) ' add name item
-                        core_conf.Add(tempArray(1)) ' add value item
-                    Case "python"
-                        python_conf.Add(tempArray(0)) ' add name item
-                        python_conf.Add(tempArray(1)) ' add value item
-                    Case "scanner"
-                        scanner_conf.Add(tempArray(0)) ' add name item
-                        scanner_conf.Add(tempArray(1)) ' add value item
-                End Select
+                tempArray(1) = tempArray(1).Replace("'", "")
+                core_conf_names.Add(tempArray(0)) ' add name item
+                core_conf_values.Add(tempArray(1)) ' add value item
             End If
         Loop Until tempStr Is Nothing
-        reader.Close()
-        reader.Dispose()
+        reader.Close() : reader.Dispose()
 
-        ' apply configurations based on file
-        ' even index = configuration name
-        ' odd index = configuration value
-        Select Case file_name
-            Case "core"
-                core_Theme = core_conf(1)
-                core_Wallpaper = core_conf(3)
-                core_FadeEffect = core_conf(5)
-                core_FadeEffectType = core_conf(7)
-                core_FadeEffectSpeed = core_conf(9)
-                core_MainWindowOptionHoverEffect = core_conf(11)
-                core_LoadingScreenTopmost = core_conf(13)
-                core_BackgroundGIF = core_conf(15)
-                core_RunFrom = core_conf(17)
-            Case "python"
-                python_Path = python_conf(1)
-            Case "scanner"
-                scanner_ShowDetectionsOnLoad = scanner_conf(1)
-        End Select
+        ' assign configuration to variables
+        core_Theme = core_conf_values(0)
+        core_Wallpaper = core_conf_values(1)
+        core_FadeEffect = core_conf_values(2)
+        core_FadeEffectType = core_conf_values(3)
+        core_FadeEffectSpeed = core_conf_values(4)
+        core_MainWindowOptionHoverEffect = core_conf_values(5)
+        core_LoadingScreenTopmost = core_conf_values(6)
+        core_BackgroundGIF = core_conf_values(7)
+        core_RunFrom = core_conf_values(8)
+        python_Path = core_conf_values(9)
+        scanner_ShowDetectionsOnLoad = core_conf_values(10)
+    End Sub
+
+    'Method: To save configurations
+    Public Shared Sub save_config()
+        ' assign configuration to variables
+        core_conf_values(0) = core_Theme
+        core_conf_values(1) = core_Wallpaper
+        core_conf_values(2) = core_FadeEffect
+        core_conf_values(3) = core_FadeEffectType
+        core_conf_values(4) = core_FadeEffectSpeed
+        core_conf_values(5) = core_MainWindowOptionHoverEffect
+        core_conf_values(6) = core_LoadingScreenTopmost
+        core_conf_values(7) = core_BackgroundGIF
+        core_conf_values(8) = core_RunFrom
+        core_conf_values(9) = python_Path
+        core_conf_values(10) = scanner_ShowDetectionsOnLoad
+
+        Dim file_path As String = confDir & "core.conf"
+        Dim backup_path As String = confDir & "backup_core.conf"
+        If File.Exists(file_path) Then
+            Try
+                File.Delete(file_path)
+            Catch ex As Exception : End Try
+        End If
+        Dim writer As New StreamWriter(confDir & "core.conf")
+        For x As Integer = 0 To core_conf_values.Count - 1
+            Dim lineStr As String = core_conf_names(x) & "=" & "'" & core_conf_values(x) & "'" + Environment.NewLine
+            writer.Write(lineStr)
+        Next
+        writer.Close() : writer.Dispose()
+
+        ' create backup of the conf file
+        If File.Exists(backup_path) Then
+            Try
+                File.Delete(backup_path)
+            Catch ex As Exception : End Try
+        End If
+        File.Copy(file_path, backup_path)
+
+        GC.Collect()
     End Sub
 
     'Method: To fade out form

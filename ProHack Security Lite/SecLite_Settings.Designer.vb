@@ -639,7 +639,7 @@ Partial Class SecLite_Settings
         Me.btn_browse_python_path.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_browse_python_path.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_browse_python_path.ForeColor = System.Drawing.Color.White
-        Me.btn_browse_python_path.Location = New System.Drawing.Point(575, 127)
+        Me.btn_browse_python_path.Location = New System.Drawing.Point(575, 132)
         Me.btn_browse_python_path.Name = "btn_browse_python_path"
         Me.btn_browse_python_path.Size = New System.Drawing.Size(107, 35)
         Me.btn_browse_python_path.TabIndex = 9
@@ -651,7 +651,7 @@ Partial Class SecLite_Settings
         '
         Me.lbl_python_path.AutoSize = True
         Me.lbl_python_path.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.lbl_python_path.Location = New System.Drawing.Point(17, 115)
+        Me.lbl_python_path.Location = New System.Drawing.Point(17, 120)
         Me.lbl_python_path.Name = "lbl_python_path"
         Me.lbl_python_path.Size = New System.Drawing.Size(168, 16)
         Me.lbl_python_path.TabIndex = 6
@@ -664,7 +664,7 @@ Partial Class SecLite_Settings
         Me.txt_python_path.BackColor = System.Drawing.Color.Gray
         Me.txt_python_path.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txt_python_path.ForeColor = System.Drawing.Color.Black
-        Me.txt_python_path.Location = New System.Drawing.Point(20, 134)
+        Me.txt_python_path.Location = New System.Drawing.Point(20, 139)
         Me.txt_python_path.Name = "txt_python_path"
         Me.txt_python_path.Size = New System.Drawing.Size(549, 23)
         Me.txt_python_path.TabIndex = 5
