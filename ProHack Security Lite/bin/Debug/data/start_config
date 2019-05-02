@@ -1,9 +1,0 @@
-Theme=dark
-Wallpaper=forest.png
-Fading Effect=on
-Main Window Options Button Hover Effect=off
-Is Loading Screen TopMost?=true
-Background GIF Animation=bg_pipes.gif
-Fade Effect Type=FadeLeft
-Fade Effect Speed(More means faster)=100
-Run From=debug

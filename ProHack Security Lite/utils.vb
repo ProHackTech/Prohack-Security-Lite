@@ -8,37 +8,137 @@ Public Class utils
     Public Shared detected_filepath As New List(Of String)()
     Public Shared detected_filehash As New List(Of String)()
 
-    ' Declares: Python Configuration
-    Public Shared python_path As String
-
     ' Declares: Locations
-    Public Shared dectected_malware_file As String = Application.StartupPath & "\data\detected.list"
-    Public Shared WSIR_file As String = Application.StartupPath & "\data\WSIR.list"
-    Public Shared pyModDir As String = Application.StartupPath & "\python_modules\"
+    Public Shared dectected_malware_file As String = Application.StartupPath & "/data/detected.list"
+    Public Shared WSIR_file As String = Application.StartupPath & "/data/WSIR.list"
+    Public Shared pyModDir As String = Application.StartupPath & "/python_modules/"
+    Public Shared confDir As String = Application.StartupPath & "/data/config/"
 
     ' Declares: Form Movement
     Public Shared isFormMovement As Boolean = False
     Public Shared MouseDownX, MouseDownY As Integer
 
+    ' Declares: Reusable
+    Public Shared reader As StreamReader
+    Public Shared writer As StreamWriter
+    Public Shared tempStr As String
+    Public Shared tempCounter As Integer
+
+    ' Declares: Store Configurations
+    Public Shared core_conf_names As New List(Of String)()
+    Public Shared core_conf_values As New List(Of String)()
+
+    ' Declares: Configuration Variables
+    ' Order 1: Core
+    ' Order 2: Python
+    ' Order 3: Scanner
+    '
+    ' -- core --
+    Public Shared core_Theme As String
+    Public Shared core_Wallpaper As String
+    Public Shared core_FadeEffect As Boolean
+    Public Shared core_FadeEffectType As String
+    Public Shared core_FadeEffectSpeed As Integer
+    Public Shared core_MainWindowOptionHoverEffect As Boolean
+    Public Shared core_LoadingScreenTopmost As Boolean
+    Public Shared core_BackgroundGIF As String
+    Public Shared core_RunFrom As String
+    ' -- python --
+    Public Shared python_Path As String
+    ' -- scanner --
+    Public Shared scanner_ShowDetectionsOnLoad As Boolean
+
+    ' Method: To read application configurations
+    Public Shared Sub read_config()
+        tempStr = Nothing
+        reader = New StreamReader(confDir & "core.conf")
+        Do
+            tempStr = reader.ReadLine
+            If Not String.IsNullOrWhiteSpace(tempStr) Then
+                ' store 2 parts seperated by delimeter "=" into temporary array
+                Dim tempArray As String() = tempStr.Split("=")
+                ' replace the double quotes with nothing
+                tempArray(1) = tempArray(1).Replace("'", "")
+                core_conf_names.Add(tempArray(0)) ' add name item
+                core_conf_values.Add(tempArray(1)) ' add value item
+            End If
+        Loop Until tempStr Is Nothing
+        reader.Close() : reader.Dispose()
+
+        ' assign configuration to variables
+        core_Theme = core_conf_values(0)
+        core_Wallpaper = core_conf_values(1)
+        core_FadeEffect = core_conf_values(2)
+        core_FadeEffectType = core_conf_values(3)
+        core_FadeEffectSpeed = core_conf_values(4)
+        core_MainWindowOptionHoverEffect = core_conf_values(5)
+        core_LoadingScreenTopmost = core_conf_values(6)
+        core_BackgroundGIF = core_conf_values(7)
+        core_RunFrom = core_conf_values(8)
+        python_Path = core_conf_values(9)
+        scanner_ShowDetectionsOnLoad = core_conf_values(10)
+    End Sub
+
+    'Method: To save configurations
+    Public Shared Sub save_config()
+        ' assign configuration to variables
+        core_conf_values(0) = core_Theme
+        core_conf_values(1) = core_Wallpaper
+        core_conf_values(2) = core_FadeEffect
+        core_conf_values(3) = core_FadeEffectType
+        core_conf_values(4) = core_FadeEffectSpeed
+        core_conf_values(5) = core_MainWindowOptionHoverEffect
+        core_conf_values(6) = core_LoadingScreenTopmost
+        core_conf_values(7) = core_BackgroundGIF
+        core_conf_values(8) = core_RunFrom
+        core_conf_values(9) = python_Path
+        core_conf_values(10) = scanner_ShowDetectionsOnLoad
+
+        Dim file_path As String = confDir & "core.conf"
+        Dim backup_path As String = confDir & "backup_core.conf"
+        If File.Exists(file_path) Then
+            Try
+                File.Delete(file_path)
+            Catch ex As Exception : End Try
+        End If
+        Dim writer As New StreamWriter(confDir & "core.conf")
+        For x As Integer = 0 To core_conf_values.Count - 1
+            Dim lineStr As String = core_conf_names(x) & "=" & "'" & core_conf_values(x) & "'" + Environment.NewLine
+            writer.Write(lineStr)
+        Next
+        writer.Close() : writer.Dispose()
+
+        ' create backup of the conf file
+        If File.Exists(backup_path) Then
+            Try
+                File.Delete(backup_path)
+            Catch ex As Exception : End Try
+        End If
+        File.Copy(file_path, backup_path)
+
+        GC.Collect()
+    End Sub
+
     'Method: To fade out form
     Public Shared Sub form_fadeOut(form As Form)
-        Dim count As Integer : Dim speed As Integer = mainWindow.fadeEffect_Speed
+        Dim count As Integer
+        Dim speed As Integer = core_FadeEffectSpeed
 
-        If mainWindow.fadeEffect_Type = "WindowsDefault" Then
+        If core_FadeEffectType = "WindowsDefault" Then
             For count = 100 To 0 Step -speed
                 form.Opacity = count / 100
                 form.Size = New Size(form.Width - (speed + 5), form.Height - (speed + 5))
                 form.Location = New Point(form.Location.X - (speed + 5), form.Location.Y + (speed + 5))
                 form.Refresh()
             Next
-        ElseIf mainWindow.fadeEffect_Type = "FadeLeft" Then
+        ElseIf core_FadeEffectType = "FadeLeft" Then
             For count = 100 To 0 Step -speed
                 form.Opacity = count / 100
                 form.Size = New Size(form.Width - (speed + 5), form.Height)
                 form.Location = New Point(form.Location.X - (speed + 5), form.Location.Y)
                 form.Refresh()
             Next
-        ElseIf mainWindow.fadeEffect_Type = "FadeTop" Then
+        ElseIf core_FadeEffectType = "FadeTop" Then
             For count = 100 To 0 Step -speed
                 form.Opacity = count / 100
                 form.Size = New Size(form.Width - (speed + 5), form.Height)
@@ -46,27 +146,29 @@ Public Class utils
                 form.Refresh()
             Next
         End If
+        GC.Collect()
     End Sub
 
     'Method: To fade in form
     Public Shared Sub form_fadeIn(form)
-        Dim count As Integer : Dim speed As Integer = mainWindow.fadeEffect_Speed
+        Dim count As Integer
+        Dim speed As Integer = core_FadeEffectSpeed
 
-        If mainWindow.fadeEffect_Type = "WindowsDefault" Then
+        If core_FadeEffectType = "WindowsDefault" Then
             For count = 0 To 100 Step speed
                 form.Opacity = count / 100
                 form.Size = New Size(form.Width + (speed + 5), form.Height + (speed + 5))
                 form.Location = New Point(form.Location.X + (speed + 5), form.Location.Y - (speed + 5))
                 form.Refresh()
             Next
-        ElseIf mainWindow.fadeEffect_Type = "FadeLeft" Then
+        ElseIf core_FadeEffectType = "FadeLeft" Then
             For count = 0 To 100 Step speed
                 form.Opacity = count / 100
                 form.Size = New Size(form.Width + (speed + 5), form.Height)
                 form.Location = New Point(form.Location.X + (speed + 5), form.Location.Y)
                 form.Refresh()
             Next
-        ElseIf mainWindow.fadeEffect_Type = "FadeTop" Then
+        ElseIf core_FadeEffectType = "FadeTop" Then
             For count = 100 To 0 Step -speed
                 form.Opacity = count / 100
                 form.Size = New Size(form.Width + (speed + 5), form.Height)
@@ -74,6 +176,7 @@ Public Class utils
                 form.Refresh()
             Next
         End If
+        GC.Collect()
     End Sub
 
     ' Form Movevement: On Mouse Down
@@ -106,7 +209,7 @@ Public Class utils
     Public Shared Function _online_status_() As Boolean
         Try
             Using client = New WebClient()
-                Using stream = client.OpenRead("https://https://duckduckgo.com/")
+                Using stream = client.OpenRead("https://duckduckgo.com/")
                     Return True
                 End Using
             End Using
@@ -172,22 +275,23 @@ Public Class utils
         detected_filehash.Clear()
         detected_filepath.Clear()
         ' read detections file
-        Dim reader As StreamReader = My.Computer.FileSystem.OpenTextFileReader(dectected_malware_file)
-        Dim line As String
+        reader = New StreamReader(dectected_malware_file)
+        tempStr = Nothing
         Do
-            line = reader.ReadLine
-            If Not String.IsNullOrEmpty(line) Then
-                Dim tempArray() As String = Split(line, " |+| ")
+            tempStr = reader.ReadLine
+            If Not String.IsNullOrEmpty(tempStr) Then
+                Dim tempArray() As String = Split(tempStr, " |+| ")
                 detected_filepath.Add(tempArray(0))
                 detected_filehash.Add(tempArray(1))
             End If
-        Loop Until line Is Nothing
+        Loop Until tempStr Is Nothing
         reader.Close()
         reader.Dispose()
         Dim totalDetections As Integer = detected_filehash.Count
         For x As Integer = 0 To totalDetections - 1
             createCards(detected_filepath(x), detected_filehash(x), x + 1)
         Next
+        GC.Collect()
     End Sub
 
     ' create UC_Detected controls in flowlayoutpanel for malware informer
@@ -203,6 +307,7 @@ Public Class utils
             utils.invoke_msg(3, "Worker Error", ex.Message.ToString)
         End Try
         malware_informer.flowDetections.ResumeLayout()
+        GC.Collect()
     End Sub
 
     ' remove UC_Detected controls from flowlayoutpanel for malware informer
@@ -222,58 +327,6 @@ Public Class utils
     Public Shared Sub refresh_app()
         Process.Start("starter.bat")
         Application.Exit()
-    End Sub
-
-    ' save application settings
-    Public Shared Sub save_settings()
-        Dim st As StreamWriter
-        Dim configpath As String
-
-        ' write start_config file
-        configpath = Application.StartupPath & "/data/start_config"
-        If File.Exists(configpath) Then
-            File.Delete(configpath)
-        End If
-        st = New StreamWriter(configpath)
-        st.WriteLine("Theme=" & mainWindow.theme)
-        st.WriteLine("Wallpaper=" & mainWindow.wallpaper)
-        st.WriteLine("Fading Effect=" & mainWindow.fadeEffect_Status)
-        st.WriteLine("Main Window Options Button Hover Effect=" & mainWindow.optionsHoverEffect_Status)
-        st.WriteLine("Is Loading Screen TopMost?=" & mainWindow.loadingScreenTopMost)
-        st.WriteLine("Background GIF Animation=" & mainWindow.bgGif)
-        st.WriteLine("Fade Effect Type=" & mainWindow.fadeEffect_Type)
-        st.WriteLine("Fade Effect Speed(More means faster)=" & mainWindow.fadeEffect_Speed)
-        st.WriteLine("Run From=" & mainWindow.run_from)
-        st.Close()
-
-        ' write py_config file
-        configpath = Application.StartupPath & "/data/py_config"
-        If File.Exists(configpath) Then
-            File.Delete(configpath)
-        End If
-        st = New StreamWriter(configpath)
-        st.WriteLine(utils.python_path)
-        st.Close()
-
-        st.Dispose()
-        GC.Collect()
-    End Sub
-
-    ' Method: For python config read
-    Public Shared Sub pyconfig()
-        Dim filepath As String = Application.StartupPath & "/data/py_config"
-        Dim configs As New List(Of String)()
-        Dim reader As StreamReader = New StreamReader(filepath)
-        Dim line As String = Nothing
-        Do
-            line = reader.ReadLine
-            If Not String.IsNullOrEmpty(line) Then
-                configs.Add(line)
-            End If
-        Loop Until line Is Nothing
-        reader.Close()
-
-        python_path = configs(0) ' set python path
     End Sub
 
 End Class

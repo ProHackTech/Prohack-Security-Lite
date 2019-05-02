@@ -71,9 +71,7 @@ Default messagebox was lacking needed features, so a quick custom form was made 
 
 Items in this section are to be made/fixed before doing anything else, hence *<b>F</b>irst<b>I</b>n<b>F</b>irst<b>O</b>ut* order of development:
 
-- Add force delete malware file (1) [core]
-- Add fade settings to custom_scanner on close (2) [ui]
-- Merge scanner code into seperate class for malware_scanner, custom_scanner (3) [optimization]
+- ProHack HostMan (1)
 
 Once the current to-do items are completed, the project will begin release cycles with version controls starting from v1.0.0.0 for both application and updater. Different branches will be created for each sub-project development.
 
@@ -115,7 +113,7 @@ SOFTWARE.
 
 > Git Clone: *https://github.com/YOUR_GITHUB/Prohack-Security-Lite.git*
 
-> Make Improvements, Fix Bugs, Add Features
+> Make Improvements, Fix Bugs, Add Features, Add utilities
 
 > Push changes to your forked repository
 

@@ -37,9 +37,9 @@ Public Class UC_Detected
     End Sub
 
     Private Sub Malware_Trash()
-        Dim tempfile As String = txtFile.Text
+        utils.tempStr = txtFile.Text
         ' find index of hash value (filename will be the same index)
-        Dim index As Integer = utils.detected_filepath.FindIndex(Function(x As String) x.Contains(tempfile))
+        Dim index As Integer = utils.detected_filepath.FindIndex(Function(x As String) x.Contains(utils.tempStr))
         ' try deleting the infected file from the system
         Try
             File.Delete(utils.detected_filepath(index))
@@ -50,22 +50,29 @@ Public Class UC_Detected
                 ' refresh detected file
                 File.Create(utils.dectected_malware_file).Dispose()
                 ' save list
-                Dim writer As New IO.StreamWriter(utils.dectected_malware_file)
+                utils.writer = New StreamWriter(utils.dectected_malware_file)
                 Dim lenDetections As Integer = utils.detected_filehash.Count
                 For x As Integer = 0 To lenDetections - 1
                     Dim tempString As String = utils.detected_filepath(x) & " |+| " & utils.detected_filehash(x)
-                    writer.WriteLine(tempString)
+                    utils.writer.WriteLine(tempString)
                 Next
-                writer.Close()
-                writer.Dispose()
+                utils.writer.Close()
+                utils.writer.Dispose()
                 utils.invoke_msg(1, "Success!", "Infected file was deleted from system successfully!")
                 malware_informer.refresher()
                 Me.Dispose() : GC.Collect()
             Catch ex As Exception
                 utils.invoke_msg(3, "File Delete Error", ex.Message.ToString)
             End Try
-        Catch ex As Exception
-            utils.invoke_msg(2, "Remove Error", ex.Message.ToString)
+        Catch ex1 As Exception
+            ' try to force delete using cmd -> 'DEL [args]'
+            Dim del_command = "/c DEL /F /Q /A " & utils.detected_filepath(index)
+            Try
+                ' run the cmd process with arguments
+                Process.Start("cmd", del_command)
+            Catch ex2 As Exception
+                utils.invoke_msg(2, "Remove Error", ex2.Message.ToString)
+            End Try
         End Try
     End Sub
 
@@ -90,14 +97,14 @@ Public Class UC_Detected
             ' refresh detected file
             File.Create(utils.dectected_malware_file).Dispose()
             ' save list
-            Dim writer As New IO.StreamWriter(utils.dectected_malware_file)
+            utils.writer = New StreamWriter(utils.dectected_malware_file)
             Dim lenDetections As Integer = utils.detected_filehash.Count
             For x As Integer = 0 To lenDetections - 1
                 Dim tempString As String = utils.detected_filepath(x) & " |+| " & utils.detected_filehash(x)
-                writer.WriteLine(tempString)
+                utils.writer.WriteLine(tempString)
             Next
-            writer.Close()
-            writer.Dispose()
+            utils.writer.Close()
+            utils.writer.Dispose()
             utils.invoke_msg(1, "Ignored!", "Selected file has been ignored for now..")
             malware_informer.refresher()
             Me.Dispose() : GC.Collect()
@@ -116,5 +123,15 @@ Public Class UC_Detected
 
     Private Sub picIgnore_Click(sender As Object, e As EventArgs) Handles picIgnore.Click
         Malware_Ignore()
+    End Sub
+
+    Private Sub TxtHash_DoubleClick(sender As Object, e As EventArgs) Handles txtHash.DoubleClick
+        ' copy the hash to clipboard
+        Clipboard.SetText(txtHash.Text)
+    End Sub
+
+    Private Sub TxtFile_DoubleClick(sender As Object, e As EventArgs) Handles txtFile.DoubleClick
+        ' copy the filepath to clipboard
+        Clipboard.SetText(txtFile.Text)
     End Sub
 End Class
