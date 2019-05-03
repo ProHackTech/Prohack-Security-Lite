@@ -23,7 +23,7 @@ This is a small anti-malware application made in VB.NET. All the hashes are coll
 
 > 2. Goto: *Prohack-Security-Lite\ProHack Security Lite\bin\Debug* (bin\Debug folder)
 
-> 3. Crete empty file named: "FIRST_TIME" (without quotes and extension) - This is to auto start the easy installer for dependencies
+> 3. Create empty file named: "FIRST_TIME" (without quotes and extension) - This is to auto start the easy installer for dependencies
 
 > 4. Run: ProHack Security Lite.exe
 
