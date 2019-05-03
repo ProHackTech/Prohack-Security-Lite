@@ -22,3 +22,4 @@ C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\D
 C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\ProHack Easy Install\ProHack Easy Install\obj\Debug\ProHack Easy Install.exe
 C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\ProHack Easy Install\ProHack Easy Install\obj\Debug\ProHack Easy Install.xml
 C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\ProHack Easy Install\ProHack Easy Install\obj\Debug\ProHack Easy Install.pdb
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\bin\Debug\ProHack Easy Install\ProHack Easy Install\obj\Debug\ProHack_Easy_Install.UC_Item.resources

@@ -22,169 +22,232 @@ Partial Class mainWIndow
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainWIndow))
-        Me.picLogo = New System.Windows.Forms.PictureBox()
-        Me.lblTitle = New System.Windows.Forms.Label()
-        Me.btnExit = New System.Windows.Forms.Button()
+        Me.picLoading = New System.Windows.Forms.PictureBox()
+        Me.progressDownload = New System.Windows.Forms.ProgressBar()
+        Me.btnDownload = New System.Windows.Forms.Button()
+        Me.lblSelectItems = New System.Windows.Forms.Label()
+        Me.flowItems = New System.Windows.Forms.FlowLayoutPanel()
+        Me.btnDownTray = New System.Windows.Forms.Button()
         Me.btnMinimize = New System.Windows.Forms.Button()
-        Me.lblProduct = New System.Windows.Forms.Label()
-        Me.checkList_Dependency = New System.Windows.Forms.CheckedListBox()
-        Me.lblExtraDependency = New System.Windows.Forms.Label()
-        Me.btnFinalize = New System.Windows.Forms.Button()
-        Me.txtProductName = New System.Windows.Forms.TextBox()
+        Me.btnExit = New System.Windows.Forms.Button()
+        Me.lblSubTitle = New System.Windows.Forms.Label()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.picLogo = New System.Windows.Forms.PictureBox()
+        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.bgworker_download = New System.ComponentModel.BackgroundWorker()
+        CType(Me.picLoading, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'picLogo
+        'picLoading
         '
-        Me.picLogo.Image = CType(resources.GetObject("picLogo.Image"), System.Drawing.Image)
-        Me.picLogo.Location = New System.Drawing.Point(12, 12)
-        Me.picLogo.Name = "picLogo"
-        Me.picLogo.Size = New System.Drawing.Size(35, 35)
-        Me.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.picLogo.TabIndex = 0
-        Me.picLogo.TabStop = False
+        Me.picLoading.BackColor = System.Drawing.Color.Transparent
+        Me.picLoading.Location = New System.Drawing.Point(273, 90)
+        Me.picLoading.Name = "picLoading"
+        Me.picLoading.Size = New System.Drawing.Size(250, 250)
+        Me.picLoading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picLoading.TabIndex = 21
+        Me.picLoading.TabStop = False
+        Me.picLoading.Visible = False
         '
-        'lblTitle
+        'progressDownload
         '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitle.Location = New System.Drawing.Point(53, 20)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(155, 20)
-        Me.lblTitle.TabIndex = 1
-        Me.lblTitle.Text = "ProHack Easy Install"
+        Me.progressDownload.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.progressDownload.Location = New System.Drawing.Point(42, 416)
+        Me.progressDownload.Name = "progressDownload"
+        Me.progressDownload.Size = New System.Drawing.Size(714, 10)
+        Me.progressDownload.TabIndex = 20
+        Me.progressDownload.Visible = False
         '
-        'btnExit
+        'btnDownload
         '
-        Me.btnExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnExit.FlatAppearance.BorderSize = 0
-        Me.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
-        Me.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke
-        Me.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnExit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExit.Location = New System.Drawing.Point(591, 0)
-        Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(43, 30)
-        Me.btnExit.TabIndex = 2
-        Me.btnExit.TabStop = False
-        Me.btnExit.Text = "[ x ]"
-        Me.btnExit.UseVisualStyleBackColor = True
+        Me.btnDownload.BackColor = System.Drawing.Color.RoyalBlue
+        Me.btnDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnDownload.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnDownload.FlatAppearance.BorderSize = 0
+        Me.btnDownload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btnDownload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDownload.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDownload.ForeColor = System.Drawing.Color.White
+        Me.btnDownload.Location = New System.Drawing.Point(206, 344)
+        Me.btnDownload.Name = "btnDownload"
+        Me.btnDownload.Size = New System.Drawing.Size(383, 36)
+        Me.btnDownload.TabIndex = 19
+        Me.btnDownload.TabStop = False
+        Me.btnDownload.Text = "DOWNLOAD"
+        Me.btnDownload.UseVisualStyleBackColor = False
+        '
+        'lblSelectItems
+        '
+        Me.lblSelectItems.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.lblSelectItems.AutoSize = True
+        Me.lblSelectItems.BackColor = System.Drawing.Color.Transparent
+        Me.lblSelectItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lblSelectItems.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSelectItems.ForeColor = System.Drawing.Color.Gray
+        Me.lblSelectItems.Location = New System.Drawing.Point(270, 90)
+        Me.lblSelectItems.Name = "lblSelectItems"
+        Me.lblSelectItems.Size = New System.Drawing.Size(248, 16)
+        Me.lblSelectItems.TabIndex = 18
+        Me.lblSelectItems.Text = "Select item to download:"
+        '
+        'flowItems
+        '
+        Me.flowItems.AutoScroll = True
+        Me.flowItems.BackColor = System.Drawing.Color.Transparent
+        Me.flowItems.Location = New System.Drawing.Point(206, 120)
+        Me.flowItems.Name = "flowItems"
+        Me.flowItems.Size = New System.Drawing.Size(383, 218)
+        Me.flowItems.TabIndex = 17
+        '
+        'btnDownTray
+        '
+        Me.btnDownTray.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDownTray.BackColor = System.Drawing.Color.Transparent
+        Me.btnDownTray.BackgroundImage = CType(resources.GetObject("btnDownTray.BackgroundImage"), System.Drawing.Image)
+        Me.btnDownTray.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnDownTray.FlatAppearance.BorderSize = 0
+        Me.btnDownTray.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnDownTray.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnDownTray.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDownTray.Location = New System.Drawing.Point(701, 11)
+        Me.btnDownTray.Name = "btnDownTray"
+        Me.btnDownTray.Size = New System.Drawing.Size(25, 25)
+        Me.btnDownTray.TabIndex = 16
+        Me.btnDownTray.TabStop = False
+        Me.btnDownTray.UseVisualStyleBackColor = False
         '
         'btnMinimize
         '
         Me.btnMinimize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMinimize.BackColor = System.Drawing.Color.Transparent
+        Me.btnMinimize.BackgroundImage = CType(resources.GetObject("btnMinimize.BackgroundImage"), System.Drawing.Image)
+        Me.btnMinimize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnMinimize.FlatAppearance.BorderSize = 0
-        Me.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
-        Me.btnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke
+        Me.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnMinimize.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMinimize.Location = New System.Drawing.Point(542, 0)
+        Me.btnMinimize.Location = New System.Drawing.Point(732, 11)
         Me.btnMinimize.Name = "btnMinimize"
-        Me.btnMinimize.Size = New System.Drawing.Size(43, 30)
-        Me.btnMinimize.TabIndex = 3
+        Me.btnMinimize.Size = New System.Drawing.Size(25, 25)
+        Me.btnMinimize.TabIndex = 15
         Me.btnMinimize.TabStop = False
-        Me.btnMinimize.Text = "[ _ ]"
-        Me.btnMinimize.UseVisualStyleBackColor = True
+        Me.btnMinimize.UseVisualStyleBackColor = False
         '
-        'lblProduct
+        'btnExit
         '
-        Me.lblProduct.AutoSize = True
-        Me.lblProduct.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProduct.Location = New System.Drawing.Point(259, 87)
-        Me.lblProduct.Name = "lblProduct"
-        Me.lblProduct.Size = New System.Drawing.Size(102, 20)
-        Me.lblProduct.TabIndex = 4
-        Me.lblProduct.Text = "Your Product"
+        Me.btnExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnExit.BackColor = System.Drawing.Color.Transparent
+        Me.btnExit.BackgroundImage = CType(resources.GetObject("btnExit.BackgroundImage"), System.Drawing.Image)
+        Me.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnExit.FlatAppearance.BorderSize = 0
+        Me.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExit.Location = New System.Drawing.Point(763, 11)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(25, 25)
+        Me.btnExit.TabIndex = 14
+        Me.btnExit.TabStop = False
+        Me.btnExit.UseVisualStyleBackColor = False
         '
-        'checkList_Dependency
+        'lblSubTitle
         '
-        Me.checkList_Dependency.BackColor = System.Drawing.Color.FromArgb(CType(CType(204, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(240, Byte), Integer))
-        Me.checkList_Dependency.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.checkList_Dependency.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkList_Dependency.ForeColor = System.Drawing.Color.Navy
-        Me.checkList_Dependency.FormattingEnabled = True
-        Me.checkList_Dependency.Items.AddRange(New Object() {".NET Framework 4.7.2 Runtime", "Python 3", "Universal C Runtime (For Poweshell Install)", "Powershell", "Git For Windows"})
-        Me.checkList_Dependency.Location = New System.Drawing.Point(17, 203)
-        Me.checkList_Dependency.Name = "checkList_Dependency"
-        Me.checkList_Dependency.ScrollAlwaysVisible = True
-        Me.checkList_Dependency.Size = New System.Drawing.Size(585, 147)
-        Me.checkList_Dependency.TabIndex = 0
+        Me.lblSubTitle.AutoSize = True
+        Me.lblSubTitle.BackColor = System.Drawing.Color.Transparent
+        Me.lblSubTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lblSubTitle.Font = New System.Drawing.Font("Lucida Console", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSubTitle.ForeColor = System.Drawing.Color.Olive
+        Me.lblSubTitle.Location = New System.Drawing.Point(61, 36)
+        Me.lblSubTitle.Name = "lblSubTitle"
+        Me.lblSubTitle.Size = New System.Drawing.Size(129, 19)
+        Me.lblSubTitle.TabIndex = 13
+        Me.lblSubTitle.Text = "Downloader"
         '
-        'lblExtraDependency
+        'lblTitle
         '
-        Me.lblExtraDependency.AutoSize = True
-        Me.lblExtraDependency.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblExtraDependency.Location = New System.Drawing.Point(13, 170)
-        Me.lblExtraDependency.Name = "lblExtraDependency"
-        Me.lblExtraDependency.Size = New System.Drawing.Size(112, 20)
-        Me.lblExtraDependency.TabIndex = 6
-        Me.lblExtraDependency.Text = "Dependencies"
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.BackColor = System.Drawing.Color.Transparent
+        Me.lblTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lblTitle.Font = New System.Drawing.Font("Lucida Console", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lblTitle.Location = New System.Drawing.Point(61, 12)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(115, 24)
+        Me.lblTitle.TabIndex = 12
+        Me.lblTitle.Text = "ProHack"
         '
-        'btnFinalize
+        'picLogo
         '
-        Me.btnFinalize.BackColor = System.Drawing.Color.RoyalBlue
-        Me.btnFinalize.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnFinalize.FlatAppearance.BorderSize = 0
-        Me.btnFinalize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.btnFinalize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.btnFinalize.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnFinalize.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFinalize.ForeColor = System.Drawing.Color.White
-        Me.btnFinalize.Location = New System.Drawing.Point(239, 356)
-        Me.btnFinalize.Name = "btnFinalize"
-        Me.btnFinalize.Size = New System.Drawing.Size(143, 39)
-        Me.btnFinalize.TabIndex = 7
-        Me.btnFinalize.Text = "Install"
-        Me.btnFinalize.UseVisualStyleBackColor = False
+        Me.picLogo.BackColor = System.Drawing.Color.Transparent
+        Me.picLogo.Image = CType(resources.GetObject("picLogo.Image"), System.Drawing.Image)
+        Me.picLogo.Location = New System.Drawing.Point(12, 12)
+        Me.picLogo.Name = "picLogo"
+        Me.picLogo.Size = New System.Drawing.Size(43, 43)
+        Me.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picLogo.TabIndex = 11
+        Me.picLogo.TabStop = False
         '
-        'txtProductName
+        'NotifyIcon1
         '
-        Me.txtProductName.BackColor = System.Drawing.Color.FromArgb(CType(CType(204, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(240, Byte), Integer))
-        Me.txtProductName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtProductName.Cursor = System.Windows.Forms.Cursors.Default
-        Me.txtProductName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtProductName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtProductName.Location = New System.Drawing.Point(17, 110)
-        Me.txtProductName.Name = "txtProductName"
-        Me.txtProductName.Size = New System.Drawing.Size(585, 19)
-        Me.txtProductName.TabIndex = 8
-        Me.txtProductName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.NotifyIcon1.BalloonTipText = "ProHack Installer Minified"
+        Me.NotifyIcon1.BalloonTipTitle = "ProHack Installer"
+        Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
+        Me.NotifyIcon1.Text = "NotifyIcon1"
+        '
+        'bgworker_download
+        '
+        Me.bgworker_download.WorkerReportsProgress = True
         '
         'mainWIndow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(204, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(240, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(632, 407)
-        Me.Controls.Add(Me.txtProductName)
-        Me.Controls.Add(Me.btnFinalize)
-        Me.Controls.Add(Me.lblExtraDependency)
-        Me.Controls.Add(Me.checkList_Dependency)
-        Me.Controls.Add(Me.lblProduct)
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(12, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.picLoading)
+        Me.Controls.Add(Me.progressDownload)
+        Me.Controls.Add(Me.btnDownload)
+        Me.Controls.Add(Me.lblSelectItems)
+        Me.Controls.Add(Me.flowItems)
+        Me.Controls.Add(Me.btnDownTray)
         Me.Controls.Add(Me.btnMinimize)
         Me.Controls.Add(Me.btnExit)
+        Me.Controls.Add(Me.lblSubTitle)
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.picLogo)
+        Me.DoubleBuffered = True
         Me.ForeColor = System.Drawing.Color.Black
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "mainWIndow"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ProHack Easy Install"
+        Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(12, Byte), Integer), CType(CType(115, Byte), Integer))
+        CType(Me.picLoading, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents picLogo As PictureBox
-    Friend WithEvents lblTitle As Label
-    Friend WithEvents btnExit As Button
+    Friend WithEvents picLoading As PictureBox
+    Friend WithEvents progressDownload As ProgressBar
+    Friend WithEvents btnDownload As Button
+    Friend WithEvents lblSelectItems As Label
+    Friend WithEvents flowItems As FlowLayoutPanel
+    Friend WithEvents btnDownTray As Button
     Friend WithEvents btnMinimize As Button
-    Friend WithEvents lblProduct As Label
-    Friend WithEvents checkList_Dependency As CheckedListBox
-    Friend WithEvents lblExtraDependency As Label
-    Friend WithEvents btnFinalize As Button
-    Friend WithEvents txtProductName As TextBox
+    Friend WithEvents btnExit As Button
+    Friend WithEvents lblSubTitle As Label
+    Friend WithEvents lblTitle As Label
+    Friend WithEvents picLogo As PictureBox
+    Friend WithEvents NotifyIcon1 As NotifyIcon
+    Friend WithEvents bgworker_download As System.ComponentModel.BackgroundWorker
 End Class
