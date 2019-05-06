@@ -1,4 +1,5 @@
-﻿Public Class SecLite_Settings
+﻿Imports System.IO
+Public Class SecLite_Settings
 
     Public settings_isChanged As Boolean
     Dim blue As Color = Color.FromArgb(0, 192, 192)
@@ -19,6 +20,19 @@
         GC.Collect()
         Me.Close()
         mainWindow.Show()
+    End Sub
+
+    Private Sub populate_chklstQuickScanFiles()
+        ' declares
+        Dim folder_path As String = Application.StartupPath & "/data/file_extensions_cat/"
+        Dim dirInfo As New DirectoryInfo(folder_path)
+        Dim getDirFiles As FileInfo() = dirInfo.GetFiles()
+
+        ' for each file in extensions store folder
+        For Each file_name As FileInfo In getDirFiles
+            ' add items to listbox
+            chklstQuickScan_ChooseExtFiles.Items.Add(file_name)
+        Next
     End Sub
 
     Private Sub BtnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
@@ -147,8 +161,34 @@
         '    End If
         'Next
 
-        ' -- load python configuration --'
+        ' python path
         txt_python_path.Text = utils.python_Path
+
+        ' quick scan: extension based
+        Select Case utils.scanner_QuickScan_ExtensionBased
+            Case "True"
+                chkQuickScan_ExtBased.CheckState = CheckState.Checked
+                chkQuickScan_ExtBased.ForeColor = lime
+            Case "False"
+                chkQuickScan_ExtBased.CheckState = CheckState.Unchecked
+                chkQuickScan_ExtBased.ForeColor = blue
+        End Select
+
+        ' quick scan: multiple extension files
+        Select Case utils.scanner_QuickScan_MultipleExtensionFiles
+            Case "True"
+                chkQuickScan_MultipleExtFiles.Checked = True
+                chkQuickScan_MultipleExtFiles.ForeColor = lime
+                chklstQuickScan_ChooseExtFiles.Enabled = True
+                btnQuickScan_ChooseExtFile.Enabled = False
+                txtQuickScan_ChooseExtFile.Enabled = False
+            Case "False"
+                chkQuickScan_MultipleExtFiles.Checked = False
+                chkQuickScan_MultipleExtFiles.ForeColor = blue
+                chklstQuickScan_ChooseExtFiles.Enabled = False
+                btnQuickScan_ChooseExtFile.Enabled = True
+                txtQuickScan_ChooseExtFile.Enabled = True
+        End Select
 
     End Sub
 
@@ -158,6 +198,7 @@
         form_loading.Close()
         Me.BackgroundImage = mainWindow.BackgroundImage
         settings_isChanged = False
+        populate_chklstQuickScanFiles()
     End Sub
 
     Private Sub Rbtn_Theme_Dark_CheckedChanged(sender As Object, e As EventArgs) Handles rbtn_Theme_Dark.CheckedChanged
@@ -368,6 +409,66 @@
     Private Sub Txt_python_path_TextChanged(sender As Object, e As EventArgs) Handles txt_python_path.TextChanged
         If Not String.IsNullOrEmpty(txt_python_path.Text) Then
             utils.python_Path = txt_python_path.Text
+        End If
+        settings_isChanged = True
+    End Sub
+
+    Private Sub ViewExtensionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewExtensionsToolStripMenuItem.Click
+        Dim file_name As String = Application.StartupPath & "\data\file_extensions_cat\" & chklstQuickScan_ChooseExtFiles.SelectedItem.ToString
+        ' open the file using notepad editor
+        Dim command As String = "notepad " & file_name
+        Try
+            If File.Exists(file_name) Then
+                Try
+                    Process.Start("notepad.exe", file_name)
+                Catch ex As Exception
+
+                End Try
+            Else
+                Dim msg As String = file_name & " not found!"
+                utils.invoke_msg(2, "FileNotFound", msg)
+            End If
+            'Process.Start(command)
+        Catch ex As Exception
+            Dim msg As String = ex.Message.ToString & ": " & file_name
+            utils.invoke_msg(2, "ProcOpenError", msg)
+        End Try
+    End Sub
+
+    Private Sub BtnQuickScan_ChooseExtFile_Click(sender As Object, e As EventArgs) Handles btnQuickScan_ChooseExtFile.Click
+        Dim ofd As New OpenFileDialog
+        ofd.FileName = String.Empty
+        ofd.Filter = "List File (*.list)|*.list"
+        ofd.InitialDirectory = Application.StartupPath & "\data\file_extensions_cat\"
+        If ofd.ShowDialog = DialogResult.OK Then
+            txtQuickScan_ChooseExtFile.Text = ofd.FileName
+        End If
+    End Sub
+
+    Private Sub ChkQuickScan_ExtBased_CheckedChanged(sender As Object, e As EventArgs) Handles chkQuickScan_ExtBased.CheckedChanged
+        If chkQuickScan_ExtBased.CheckState = CheckState.Checked Then
+            utils.scanner_QuickScan_ExtensionBased = "True"
+            chkQuickScan_ExtBased.ForeColor = lime
+        ElseIf chkQuickScan_ExtBased.CheckState = CheckState.Unchecked Then
+            utils.scanner_QuickScan_ExtensionBased = "False"
+            chkQuickScan_ExtBased.ForeColor = blue
+        End If
+        settings_isChanged = True
+    End Sub
+
+    Private Sub ChkQuickScan_MultipleExtFiles_CheckedChanged(sender As Object, e As EventArgs) Handles chkQuickScan_MultipleExtFiles.CheckedChanged
+        If chkQuickScan_MultipleExtFiles.CheckState = CheckState.Checked Then
+            utils.scanner_QuickScan_MultipleExtensionFiles = "True"
+            chkQuickScan_MultipleExtFiles.ForeColor = lime
+            chklstQuickScan_ChooseExtFiles.Enabled = True
+            btnQuickScan_ChooseExtFile.Enabled = False
+            txtQuickScan_ChooseExtFile.Enabled = False
+        ElseIf chkQuickScan_MultipleExtFiles.CheckState = CheckState.Unchecked Then
+            utils.scanner_QuickScan_MultipleExtensionFiles = "False"
+            chkQuickScan_MultipleExtFiles.ForeColor = blue
+            chklstQuickScan_ChooseExtFiles.Enabled = False
+            btnQuickScan_ChooseExtFile.Enabled = True
+            txtQuickScan_ChooseExtFile.Enabled = True
         End If
         settings_isChanged = True
     End Sub

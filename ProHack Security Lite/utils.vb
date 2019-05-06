@@ -36,17 +36,23 @@ Public Class utils
     ' -- core --
     Public Shared core_Theme As String
     Public Shared core_Wallpaper As String
-    Public Shared core_FadeEffect As Boolean
+    Public Shared core_FadeEffect As String
     Public Shared core_FadeEffectType As String
     Public Shared core_FadeEffectSpeed As Integer
-    Public Shared core_MainWindowOptionHoverEffect As Boolean
-    Public Shared core_LoadingScreenTopmost As Boolean
+    Public Shared core_MainWindowOptionHoverEffect As String
+    Public Shared core_LoadingScreenTopmost As String
     Public Shared core_BackgroundGIF As String
     Public Shared core_RunFrom As String
     ' -- python --
     Public Shared python_Path As String
     ' -- scanner --
-    Public Shared scanner_ShowDetectionsOnLoad As Boolean
+    Public Shared scanner_ShowDetectionsOnLoad As String
+    Public Shared scanner_QuickScan_ExtensionBased As String
+    Public Shared scanner_QuickScan_MultipleExtensionFiles As String
+    Public Shared scanner_QuickScan_ExtensionFileName As String
+    Public Shared scanner_QuickScan_ExtensionFileList As String
+    Public Shared scanner_DeepScan_ExtensionBased As String
+
 
     ' Method: To read application configurations
     Public Shared Sub read_config()
@@ -70,13 +76,18 @@ Public Class utils
         core_Wallpaper = core_conf_values(1)
         core_FadeEffect = core_conf_values(2)
         core_FadeEffectType = core_conf_values(3)
-        core_FadeEffectSpeed = core_conf_values(4)
+        core_FadeEffectSpeed = Int(core_conf_values(4))
         core_MainWindowOptionHoverEffect = core_conf_values(5)
         core_LoadingScreenTopmost = core_conf_values(6)
         core_BackgroundGIF = core_conf_values(7)
         core_RunFrom = core_conf_values(8)
         python_Path = core_conf_values(9)
         scanner_ShowDetectionsOnLoad = core_conf_values(10)
+        scanner_QuickScan_ExtensionBased = core_conf_values(11)
+        scanner_QuickScan_MultipleExtensionFiles = core_conf_values(12)
+        scanner_QuickScan_ExtensionFileName = core_conf_values(13)
+        scanner_QuickScan_ExtensionFileList = core_conf_values(14)
+        scanner_DeepScan_ExtensionBased = core_conf_values(15)
     End Sub
 
     'Method: To save configurations
@@ -93,6 +104,11 @@ Public Class utils
         core_conf_values(8) = core_RunFrom
         core_conf_values(9) = python_Path
         core_conf_values(10) = scanner_ShowDetectionsOnLoad
+        core_conf_values(11) = scanner_QuickScan_ExtensionBased
+        core_conf_values(12) = scanner_QuickScan_MultipleExtensionFiles
+        core_conf_values(13) = scanner_QuickScan_ExtensionFileName
+        core_conf_values(14) = scanner_QuickScan_ExtensionFileList
+        core_conf_values(15) = scanner_DeepScan_ExtensionBased
 
         Dim file_path As String = confDir & "core.conf"
         Dim backup_path As String = confDir & "backup_core.conf"

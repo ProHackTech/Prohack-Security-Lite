@@ -22,13 +22,16 @@ Partial Class SecLite_Settings
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SecLite_Settings))
         Me.lblSubTitle = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.picLogo = New System.Windows.Forms.PictureBox()
         Me.btnExit = New System.Windows.Forms.Button()
+        Me.ContextMenu_chklstQuickScan = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ViewExtensionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SmallTabControl1 = New ProHack_Security_Lite.smallTabControl()
-        Me.tabpage_startconfig = New System.Windows.Forms.TabPage()
+        Me.tabpage_start = New System.Windows.Forms.TabPage()
         Me.btnSaveSettings1 = New System.Windows.Forms.Button()
         Me.groupSettings_MainWindow_Wallpaper = New System.Windows.Forms.GroupBox()
         Me.rbtn_Wallpaper_None = New System.Windows.Forms.RadioButton()
@@ -62,15 +65,26 @@ Partial Class SecLite_Settings
         Me.lblSetting_Theme = New System.Windows.Forms.Label()
         Me.rbtn_Theme_Light = New System.Windows.Forms.RadioButton()
         Me.rbtn_Theme_Dark = New System.Windows.Forms.RadioButton()
-        Me.tabpage_pythonconfig = New System.Windows.Forms.TabPage()
+        Me.tabpage_python = New System.Windows.Forms.TabPage()
         Me.btnPythonPackageManager = New System.Windows.Forms.Button()
         Me.btnSaveSettings2 = New System.Windows.Forms.Button()
         Me.btn_browse_python_path = New System.Windows.Forms.Button()
         Me.lbl_python_path = New System.Windows.Forms.Label()
         Me.txt_python_path = New System.Windows.Forms.TextBox()
+        Me.tabpage_scanner = New System.Windows.Forms.TabPage()
+        Me.groupScanner_Quick = New System.Windows.Forms.GroupBox()
+        Me.btnQuickScan_ChooseExtFile = New System.Windows.Forms.Button()
+        Me.txtQuickScan_ChooseExtFile = New System.Windows.Forms.TextBox()
+        Me.lblQuickScan_ChooseExtFile = New System.Windows.Forms.Label()
+        Me.lblQuickScan_ChooseExtFiles = New System.Windows.Forms.Label()
+        Me.chklstQuickScan_ChooseExtFiles = New System.Windows.Forms.CheckedListBox()
+        Me.chkQuickScan_MultipleExtFiles = New System.Windows.Forms.CheckBox()
+        Me.chkQuickScan_ExtBased = New System.Windows.Forms.CheckBox()
+        Me.lblScanner_Quick = New System.Windows.Forms.Label()
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenu_chklstQuickScan.SuspendLayout()
         Me.SmallTabControl1.SuspendLayout()
-        Me.tabpage_startconfig.SuspendLayout()
+        Me.tabpage_start.SuspendLayout()
         Me.groupSettings_MainWindow_Wallpaper.SuspendLayout()
         CType(Me.picPreview_Wallpaper, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.groupSettings_LoadingScreen.SuspendLayout()
@@ -78,7 +92,9 @@ Partial Class SecLite_Settings
         Me.groupSettings_FadingEffect.SuspendLayout()
         Me.groupSettings_FadingEffect_EffectType.SuspendLayout()
         Me.groupSettings_Theme.SuspendLayout()
-        Me.tabpage_pythonconfig.SuspendLayout()
+        Me.tabpage_python.SuspendLayout()
+        Me.tabpage_scanner.SuspendLayout()
+        Me.groupScanner_Quick.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblSubTitle
@@ -137,13 +153,26 @@ Partial Class SecLite_Settings
         Me.btnExit.TabStop = False
         Me.btnExit.UseVisualStyleBackColor = False
         '
+        'ContextMenu_chklstQuickScan
+        '
+        Me.ContextMenu_chklstQuickScan.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewExtensionsToolStripMenuItem})
+        Me.ContextMenu_chklstQuickScan.Name = "ContextMenu_chklstQuickScan"
+        Me.ContextMenu_chklstQuickScan.Size = New System.Drawing.Size(158, 26)
+        '
+        'ViewExtensionsToolStripMenuItem
+        '
+        Me.ViewExtensionsToolStripMenuItem.Name = "ViewExtensionsToolStripMenuItem"
+        Me.ViewExtensionsToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.ViewExtensionsToolStripMenuItem.Text = "View Extensions"
+        '
         'SmallTabControl1
         '
-        Me.SmallTabControl1.Controls.Add(Me.tabpage_startconfig)
-        Me.SmallTabControl1.Controls.Add(Me.tabpage_pythonconfig)
+        Me.SmallTabControl1.Controls.Add(Me.tabpage_start)
+        Me.SmallTabControl1.Controls.Add(Me.tabpage_python)
+        Me.SmallTabControl1.Controls.Add(Me.tabpage_scanner)
         Me.SmallTabControl1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.SmallTabControl1.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SmallTabControl1.ItemSize = New System.Drawing.Size(250, 30)
+        Me.SmallTabControl1.ItemSize = New System.Drawing.Size(200, 30)
         Me.SmallTabControl1.Location = New System.Drawing.Point(0, 81)
         Me.SmallTabControl1.Name = "SmallTabControl1"
         Me.SmallTabControl1.SelectedIndex = 0
@@ -151,21 +180,21 @@ Partial Class SecLite_Settings
         Me.SmallTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.SmallTabControl1.TabIndex = 10
         '
-        'tabpage_startconfig
+        'tabpage_start
         '
-        Me.tabpage_startconfig.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
-        Me.tabpage_startconfig.Controls.Add(Me.btnSaveSettings1)
-        Me.tabpage_startconfig.Controls.Add(Me.groupSettings_MainWindow_Wallpaper)
-        Me.tabpage_startconfig.Controls.Add(Me.groupSettings_LoadingScreen)
-        Me.tabpage_startconfig.Controls.Add(Me.groupSettings_MainWindow_ContainerEffect)
-        Me.tabpage_startconfig.Controls.Add(Me.groupSettings_FadingEffect)
-        Me.tabpage_startconfig.Controls.Add(Me.groupSettings_Theme)
-        Me.tabpage_startconfig.Location = New System.Drawing.Point(4, 34)
-        Me.tabpage_startconfig.Name = "tabpage_startconfig"
-        Me.tabpage_startconfig.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabpage_startconfig.Size = New System.Drawing.Size(702, 357)
-        Me.tabpage_startconfig.TabIndex = 0
-        Me.tabpage_startconfig.Text = "Start Configuration"
+        Me.tabpage_start.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
+        Me.tabpage_start.Controls.Add(Me.btnSaveSettings1)
+        Me.tabpage_start.Controls.Add(Me.groupSettings_MainWindow_Wallpaper)
+        Me.tabpage_start.Controls.Add(Me.groupSettings_LoadingScreen)
+        Me.tabpage_start.Controls.Add(Me.groupSettings_MainWindow_ContainerEffect)
+        Me.tabpage_start.Controls.Add(Me.groupSettings_FadingEffect)
+        Me.tabpage_start.Controls.Add(Me.groupSettings_Theme)
+        Me.tabpage_start.Location = New System.Drawing.Point(4, 34)
+        Me.tabpage_start.Name = "tabpage_start"
+        Me.tabpage_start.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabpage_start.Size = New System.Drawing.Size(702, 357)
+        Me.tabpage_start.TabIndex = 0
+        Me.tabpage_start.Text = "Start"
         '
         'btnSaveSettings1
         '
@@ -573,20 +602,20 @@ Partial Class SecLite_Settings
         Me.rbtn_Theme_Dark.Text = "Dark"
         Me.rbtn_Theme_Dark.UseVisualStyleBackColor = True
         '
-        'tabpage_pythonconfig
+        'tabpage_python
         '
-        Me.tabpage_pythonconfig.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
-        Me.tabpage_pythonconfig.Controls.Add(Me.btnPythonPackageManager)
-        Me.tabpage_pythonconfig.Controls.Add(Me.btnSaveSettings2)
-        Me.tabpage_pythonconfig.Controls.Add(Me.btn_browse_python_path)
-        Me.tabpage_pythonconfig.Controls.Add(Me.lbl_python_path)
-        Me.tabpage_pythonconfig.Controls.Add(Me.txt_python_path)
-        Me.tabpage_pythonconfig.Location = New System.Drawing.Point(4, 34)
-        Me.tabpage_pythonconfig.Name = "tabpage_pythonconfig"
-        Me.tabpage_pythonconfig.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabpage_pythonconfig.Size = New System.Drawing.Size(702, 357)
-        Me.tabpage_pythonconfig.TabIndex = 1
-        Me.tabpage_pythonconfig.Text = "Python Configuration"
+        Me.tabpage_python.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
+        Me.tabpage_python.Controls.Add(Me.btnPythonPackageManager)
+        Me.tabpage_python.Controls.Add(Me.btnSaveSettings2)
+        Me.tabpage_python.Controls.Add(Me.btn_browse_python_path)
+        Me.tabpage_python.Controls.Add(Me.lbl_python_path)
+        Me.tabpage_python.Controls.Add(Me.txt_python_path)
+        Me.tabpage_python.Location = New System.Drawing.Point(4, 34)
+        Me.tabpage_python.Name = "tabpage_python"
+        Me.tabpage_python.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabpage_python.Size = New System.Drawing.Size(702, 357)
+        Me.tabpage_python.TabIndex = 1
+        Me.tabpage_python.Text = "Python"
         '
         'btnPythonPackageManager
         '
@@ -600,9 +629,9 @@ Partial Class SecLite_Settings
         Me.btnPythonPackageManager.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPythonPackageManager.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPythonPackageManager.ForeColor = System.Drawing.Color.White
-        Me.btnPythonPackageManager.Location = New System.Drawing.Point(20, 300)
+        Me.btnPythonPackageManager.Location = New System.Drawing.Point(8, 314)
         Me.btnPythonPackageManager.Name = "btnPythonPackageManager"
-        Me.btnPythonPackageManager.Size = New System.Drawing.Size(251, 35)
+        Me.btnPythonPackageManager.Size = New System.Drawing.Size(219, 35)
         Me.btnPythonPackageManager.TabIndex = 11
         Me.btnPythonPackageManager.TabStop = False
         Me.btnPythonPackageManager.Text = "Manage Packages"
@@ -619,9 +648,9 @@ Partial Class SecLite_Settings
         Me.btnSaveSettings2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveSettings2.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSaveSettings2.ForeColor = System.Drawing.Color.White
-        Me.btnSaveSettings2.Location = New System.Drawing.Point(349, 300)
+        Me.btnSaveSettings2.Location = New System.Drawing.Point(475, 314)
         Me.btnSaveSettings2.Name = "btnSaveSettings2"
-        Me.btnSaveSettings2.Size = New System.Drawing.Size(333, 35)
+        Me.btnSaveSettings2.Size = New System.Drawing.Size(219, 35)
         Me.btnSaveSettings2.TabIndex = 10
         Me.btnSaveSettings2.TabStop = False
         Me.btnSaveSettings2.Text = "Save and Refresh"
@@ -639,9 +668,9 @@ Partial Class SecLite_Settings
         Me.btn_browse_python_path.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_browse_python_path.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_browse_python_path.ForeColor = System.Drawing.Color.White
-        Me.btn_browse_python_path.Location = New System.Drawing.Point(575, 132)
+        Me.btn_browse_python_path.Location = New System.Drawing.Point(593, 168)
         Me.btn_browse_python_path.Name = "btn_browse_python_path"
-        Me.btn_browse_python_path.Size = New System.Drawing.Size(107, 35)
+        Me.btn_browse_python_path.Size = New System.Drawing.Size(101, 35)
         Me.btn_browse_python_path.TabIndex = 9
         Me.btn_browse_python_path.TabStop = False
         Me.btn_browse_python_path.Text = "Browse"
@@ -666,10 +695,141 @@ Partial Class SecLite_Settings
         Me.txt_python_path.ForeColor = System.Drawing.Color.Black
         Me.txt_python_path.Location = New System.Drawing.Point(20, 139)
         Me.txt_python_path.Name = "txt_python_path"
-        Me.txt_python_path.Size = New System.Drawing.Size(549, 23)
+        Me.txt_python_path.Size = New System.Drawing.Size(674, 23)
         Me.txt_python_path.TabIndex = 5
         Me.txt_python_path.TabStop = False
         Me.txt_python_path.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'tabpage_scanner
+        '
+        Me.tabpage_scanner.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
+        Me.tabpage_scanner.Controls.Add(Me.groupScanner_Quick)
+        Me.tabpage_scanner.Location = New System.Drawing.Point(4, 34)
+        Me.tabpage_scanner.Name = "tabpage_scanner"
+        Me.tabpage_scanner.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabpage_scanner.Size = New System.Drawing.Size(702, 357)
+        Me.tabpage_scanner.TabIndex = 2
+        Me.tabpage_scanner.Text = "Scanner"
+        '
+        'groupScanner_Quick
+        '
+        Me.groupScanner_Quick.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer), CType(CType(24, Byte), Integer))
+        Me.groupScanner_Quick.Controls.Add(Me.btnQuickScan_ChooseExtFile)
+        Me.groupScanner_Quick.Controls.Add(Me.txtQuickScan_ChooseExtFile)
+        Me.groupScanner_Quick.Controls.Add(Me.lblQuickScan_ChooseExtFile)
+        Me.groupScanner_Quick.Controls.Add(Me.lblQuickScan_ChooseExtFiles)
+        Me.groupScanner_Quick.Controls.Add(Me.chklstQuickScan_ChooseExtFiles)
+        Me.groupScanner_Quick.Controls.Add(Me.chkQuickScan_MultipleExtFiles)
+        Me.groupScanner_Quick.Controls.Add(Me.chkQuickScan_ExtBased)
+        Me.groupScanner_Quick.Controls.Add(Me.lblScanner_Quick)
+        Me.groupScanner_Quick.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.groupScanner_Quick.Location = New System.Drawing.Point(21, 22)
+        Me.groupScanner_Quick.Name = "groupScanner_Quick"
+        Me.groupScanner_Quick.Size = New System.Drawing.Size(659, 194)
+        Me.groupScanner_Quick.TabIndex = 4
+        Me.groupScanner_Quick.TabStop = False
+        Me.groupScanner_Quick.Text = "Theme"
+        '
+        'btnQuickScan_ChooseExtFile
+        '
+        Me.btnQuickScan_ChooseExtFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnQuickScan_ChooseExtFile.BackColor = System.Drawing.Color.RoyalBlue
+        Me.btnQuickScan_ChooseExtFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnQuickScan_ChooseExtFile.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnQuickScan_ChooseExtFile.FlatAppearance.BorderSize = 0
+        Me.btnQuickScan_ChooseExtFile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.btnQuickScan_ChooseExtFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black
+        Me.btnQuickScan_ChooseExtFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnQuickScan_ChooseExtFile.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuickScan_ChooseExtFile.ForeColor = System.Drawing.Color.White
+        Me.btnQuickScan_ChooseExtFile.Location = New System.Drawing.Point(438, 100)
+        Me.btnQuickScan_ChooseExtFile.Name = "btnQuickScan_ChooseExtFile"
+        Me.btnQuickScan_ChooseExtFile.Size = New System.Drawing.Size(101, 35)
+        Me.btnQuickScan_ChooseExtFile.TabIndex = 10
+        Me.btnQuickScan_ChooseExtFile.TabStop = False
+        Me.btnQuickScan_ChooseExtFile.Text = "Browse"
+        Me.btnQuickScan_ChooseExtFile.UseVisualStyleBackColor = False
+        '
+        'txtQuickScan_ChooseExtFile
+        '
+        Me.txtQuickScan_ChooseExtFile.BackColor = System.Drawing.Color.Black
+        Me.txtQuickScan_ChooseExtFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtQuickScan_ChooseExtFile.ForeColor = System.Drawing.Color.White
+        Me.txtQuickScan_ChooseExtFile.Location = New System.Drawing.Point(376, 154)
+        Me.txtQuickScan_ChooseExtFile.Name = "txtQuickScan_ChooseExtFile"
+        Me.txtQuickScan_ChooseExtFile.Size = New System.Drawing.Size(225, 23)
+        Me.txtQuickScan_ChooseExtFile.TabIndex = 8
+        Me.txtQuickScan_ChooseExtFile.TabStop = False
+        Me.txtQuickScan_ChooseExtFile.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblQuickScan_ChooseExtFile
+        '
+        Me.lblQuickScan_ChooseExtFile.AutoSize = True
+        Me.lblQuickScan_ChooseExtFile.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.lblQuickScan_ChooseExtFile.Location = New System.Drawing.Point(373, 66)
+        Me.lblQuickScan_ChooseExtFile.Name = "lblQuickScan_ChooseExtFile"
+        Me.lblQuickScan_ChooseExtFile.Size = New System.Drawing.Size(228, 16)
+        Me.lblQuickScan_ChooseExtFile.TabIndex = 7
+        Me.lblQuickScan_ChooseExtFile.Text = "Choose Extension File:"
+        '
+        'lblQuickScan_ChooseExtFiles
+        '
+        Me.lblQuickScan_ChooseExtFiles.AutoSize = True
+        Me.lblQuickScan_ChooseExtFiles.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.lblQuickScan_ChooseExtFiles.Location = New System.Drawing.Point(20, 66)
+        Me.lblQuickScan_ChooseExtFiles.Name = "lblQuickScan_ChooseExtFiles"
+        Me.lblQuickScan_ChooseExtFiles.Size = New System.Drawing.Size(258, 16)
+        Me.lblQuickScan_ChooseExtFiles.TabIndex = 6
+        Me.lblQuickScan_ChooseExtFiles.Text = "Choose Extension File(s):"
+        '
+        'chklstQuickScan_ChooseExtFiles
+        '
+        Me.chklstQuickScan_ChooseExtFiles.BackColor = System.Drawing.Color.Black
+        Me.chklstQuickScan_ChooseExtFiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.chklstQuickScan_ChooseExtFiles.ContextMenuStrip = Me.ContextMenu_chklstQuickScan
+        Me.chklstQuickScan_ChooseExtFiles.ForeColor = System.Drawing.Color.Silver
+        Me.chklstQuickScan_ChooseExtFiles.FormattingEnabled = True
+        Me.chklstQuickScan_ChooseExtFiles.Location = New System.Drawing.Point(23, 85)
+        Me.chklstQuickScan_ChooseExtFiles.Name = "chklstQuickScan_ChooseExtFiles"
+        Me.chklstQuickScan_ChooseExtFiles.Size = New System.Drawing.Size(265, 92)
+        Me.chklstQuickScan_ChooseExtFiles.TabIndex = 5
+        Me.chklstQuickScan_ChooseExtFiles.TabStop = False
+        '
+        'chkQuickScan_MultipleExtFiles
+        '
+        Me.chkQuickScan_MultipleExtFiles.AutoSize = True
+        Me.chkQuickScan_MultipleExtFiles.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.chkQuickScan_MultipleExtFiles.Location = New System.Drawing.Point(206, 32)
+        Me.chkQuickScan_MultipleExtFiles.Name = "chkQuickScan_MultipleExtFiles"
+        Me.chkQuickScan_MultipleExtFiles.Size = New System.Drawing.Size(277, 20)
+        Me.chkQuickScan_MultipleExtFiles.TabIndex = 4
+        Me.chkQuickScan_MultipleExtFiles.TabStop = False
+        Me.chkQuickScan_MultipleExtFiles.Text = "Multiple Extensions Files"
+        Me.chkQuickScan_MultipleExtFiles.UseVisualStyleBackColor = True
+        '
+        'chkQuickScan_ExtBased
+        '
+        Me.chkQuickScan_ExtBased.AutoSize = True
+        Me.chkQuickScan_ExtBased.Checked = True
+        Me.chkQuickScan_ExtBased.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkQuickScan_ExtBased.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.chkQuickScan_ExtBased.Location = New System.Drawing.Point(23, 32)
+        Me.chkQuickScan_ExtBased.Name = "chkQuickScan_ExtBased"
+        Me.chkQuickScan_ExtBased.Size = New System.Drawing.Size(177, 20)
+        Me.chkQuickScan_ExtBased.TabIndex = 3
+        Me.chkQuickScan_ExtBased.TabStop = False
+        Me.chkQuickScan_ExtBased.Text = "Extension Based"
+        Me.chkQuickScan_ExtBased.UseVisualStyleBackColor = True
+        '
+        'lblScanner_Quick
+        '
+        Me.lblScanner_Quick.AutoSize = True
+        Me.lblScanner_Quick.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.lblScanner_Quick.Location = New System.Drawing.Point(6, 0)
+        Me.lblScanner_Quick.Name = "lblScanner_Quick"
+        Me.lblScanner_Quick.Size = New System.Drawing.Size(108, 16)
+        Me.lblScanner_Quick.TabIndex = 2
+        Me.lblScanner_Quick.Text = "Quick Scan"
         '
         'SecLite_Settings
         '
@@ -689,8 +849,9 @@ Partial Class SecLite_Settings
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "SecLite_Settings"
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenu_chklstQuickScan.ResumeLayout(False)
         Me.SmallTabControl1.ResumeLayout(False)
-        Me.tabpage_startconfig.ResumeLayout(False)
+        Me.tabpage_start.ResumeLayout(False)
         Me.groupSettings_MainWindow_Wallpaper.ResumeLayout(False)
         Me.groupSettings_MainWindow_Wallpaper.PerformLayout()
         CType(Me.picPreview_Wallpaper, System.ComponentModel.ISupportInitialize).EndInit()
@@ -704,8 +865,11 @@ Partial Class SecLite_Settings
         Me.groupSettings_FadingEffect_EffectType.PerformLayout()
         Me.groupSettings_Theme.ResumeLayout(False)
         Me.groupSettings_Theme.PerformLayout()
-        Me.tabpage_pythonconfig.ResumeLayout(False)
-        Me.tabpage_pythonconfig.PerformLayout()
+        Me.tabpage_python.ResumeLayout(False)
+        Me.tabpage_python.PerformLayout()
+        Me.tabpage_scanner.ResumeLayout(False)
+        Me.groupScanner_Quick.ResumeLayout(False)
+        Me.groupScanner_Quick.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -716,8 +880,8 @@ Partial Class SecLite_Settings
     Private WithEvents picLogo As PictureBox
     Private WithEvents btnExit As Button
     Friend WithEvents SmallTabControl1 As smallTabControl
-    Friend WithEvents tabpage_startconfig As TabPage
-    Friend WithEvents tabpage_pythonconfig As TabPage
+    Friend WithEvents tabpage_start As TabPage
+    Friend WithEvents tabpage_python As TabPage
     Friend WithEvents rbtn_Theme_Dark As RadioButton
     Friend WithEvents rbtn_Theme_Light As RadioButton
     Friend WithEvents lblSetting_Theme As Label
@@ -756,4 +920,16 @@ Partial Class SecLite_Settings
     Friend WithEvents btn_browse_python_path As Button
     Friend WithEvents btnSaveSettings2 As Button
     Friend WithEvents btnPythonPackageManager As Button
+    Friend WithEvents tabpage_scanner As TabPage
+    Friend WithEvents groupScanner_Quick As GroupBox
+    Friend WithEvents lblScanner_Quick As Label
+    Friend WithEvents chkQuickScan_ExtBased As CheckBox
+    Friend WithEvents chkQuickScan_MultipleExtFiles As CheckBox
+    Friend WithEvents chklstQuickScan_ChooseExtFiles As CheckedListBox
+    Friend WithEvents lblQuickScan_ChooseExtFiles As Label
+    Friend WithEvents lblQuickScan_ChooseExtFile As Label
+    Friend WithEvents txtQuickScan_ChooseExtFile As TextBox
+    Friend WithEvents btnQuickScan_ChooseExtFile As Button
+    Friend WithEvents ContextMenu_chklstQuickScan As ContextMenuStrip
+    Friend WithEvents ViewExtensionsToolStripMenuItem As ToolStripMenuItem
 End Class
