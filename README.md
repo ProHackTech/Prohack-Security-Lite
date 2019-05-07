@@ -32,19 +32,17 @@ Non-Newbs will have Visual Studio, .NET Framework 4.7.2 installed and Python 3x 
 
 ## Features
 
-### Planning (Unordered)
+### Planned
 
-- Basic signature based scanning
-- Simple web protection: using host file modifying. Blocking IP's
-- Task blocker and active task blocker: add tasks to block list and allow force blocking
-- Create Quick, Deep & Custom scan options
-- Plan WebUtils, Tools
-- Create logging
-- Add python scripts support
-- Add CLI version for non-gui scanning (python)
-- Create scalable settings menu, replace current
-- Create small GUI python package manager (package list from pypi)
-- Add support for ClamAV signature database
+- Quick Scan           [ Done > Improving ]
+- Deep Scan            [ Done > Improving ]
+- Custom Scan          [ Done > Completed ]
+- Python support       [  Partially Done  ]
+- Real Time Scan       [     To Start     ]
+- MalwareDB Update     [     To Start     ]
+- WebUtils             [     To Start     ]
+- Tools                [     To Start     ]
+
 
 ### Completed Features
 
@@ -84,15 +82,24 @@ Default messagebox was lacking needed features, so a quick custom form was made 
 
 - Webutils, Tools
 - Malware Signatures updater
-- Replace 'Easy Install' with better app installer
-- Create powershell support scripts (later)
-- Create gui python package installer
+- Create powershell support scripts (last priority)
+- Create gui python package installer (last priority)
 
 ### FIFO Order
 
+#### Priority Levels
+
+(1) = Urgent
+(2) = To complete after urgent tasks
+(3) = Not urgent, but last to do in the FIFO list
+
 Items in this section are to be made/fixed before doing anything else, hence *<b>F</b>irst<b>I</b>n<b>F</b>irst<b>O</b>ut* order of development:
 
-- ProHack HostMan (1)
+- Make malware signature updater (1) [core]
+- Make scheduler for malware signature updater (1) [core]
+- Make ommon scan engine for 'VirusShare-DB' and 'ClamAV-DB' support (2) [core]
+- Fix python file lister script (3) [bug]
+- Let starter.bat start the .NET 4.7.2 installer on first time use, then open Easy Installer (3) [bug]
 
 Once the current to-do items are completed, the project will begin release cycles with version controls starting from v1.0.0.0 for both application and updater. Different branches will be created for each sub-project development.
 
