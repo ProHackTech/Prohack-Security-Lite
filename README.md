@@ -95,9 +95,9 @@ Default messagebox was lacking needed features, so a quick custom form was made 
 
 Items in this section are to be made/fixed before doing anything else, hence *<b>F</b>irst<b>I</b>n<b>F</b>irst<b>O</b>ut* order of development:
 
-- Make malware signature updater (1) [core]
-- Make scheduler for malware signature updater (1) [core]
-- Make ommon scan engine for 'VirusShare-DB' and 'ClamAV-DB' support (2) [core]
+- Malware signature updater (1) [core]
+- Scheduler for malware signature updater (1) [core]
+- Common scan engine for 'VirusShare-DB' and 'ClamAV-DB' support (2) [core]
 - Fix python file lister script (3) [bug]
 - Let starter.bat start the .NET 4.7.2 installer on first time use, then open Easy Installer (3) [bug]
 
