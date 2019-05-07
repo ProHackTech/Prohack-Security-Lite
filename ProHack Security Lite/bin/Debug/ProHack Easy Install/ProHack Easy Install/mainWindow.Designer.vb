@@ -37,6 +37,7 @@ Partial Class mainWIndow
         Me.picLogo = New System.Windows.Forms.PictureBox()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.bgworker_download = New System.ComponentModel.BackgroundWorker()
+        Me.btnDownloadAndRun = New System.Windows.Forms.Button()
         CType(Me.picLoading, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -44,7 +45,7 @@ Partial Class mainWIndow
         'picLoading
         '
         Me.picLoading.BackColor = System.Drawing.Color.Transparent
-        Me.picLoading.Location = New System.Drawing.Point(273, 90)
+        Me.picLoading.Location = New System.Drawing.Point(273, 70)
         Me.picLoading.Name = "picLoading"
         Me.picLoading.Size = New System.Drawing.Size(250, 250)
         Me.picLoading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -73,12 +74,12 @@ Partial Class mainWIndow
         Me.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDownload.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDownload.ForeColor = System.Drawing.Color.White
-        Me.btnDownload.Location = New System.Drawing.Point(206, 344)
+        Me.btnDownload.Location = New System.Drawing.Point(206, 324)
         Me.btnDownload.Name = "btnDownload"
         Me.btnDownload.Size = New System.Drawing.Size(383, 36)
         Me.btnDownload.TabIndex = 19
         Me.btnDownload.TabStop = False
-        Me.btnDownload.Text = "DOWNLOAD"
+        Me.btnDownload.Text = "JUST DOWNLOAD"
         Me.btnDownload.UseVisualStyleBackColor = False
         '
         'lblSelectItems
@@ -99,7 +100,7 @@ Partial Class mainWIndow
         '
         Me.flowItems.AutoScroll = True
         Me.flowItems.BackColor = System.Drawing.Color.Transparent
-        Me.flowItems.Location = New System.Drawing.Point(206, 120)
+        Me.flowItems.Location = New System.Drawing.Point(206, 100)
         Me.flowItems.Name = "flowItems"
         Me.flowItems.Size = New System.Drawing.Size(383, 218)
         Me.flowItems.TabIndex = 17
@@ -203,6 +204,25 @@ Partial Class mainWIndow
         '
         Me.bgworker_download.WorkerReportsProgress = True
         '
+        'btnDownloadAndRun
+        '
+        Me.btnDownloadAndRun.BackColor = System.Drawing.Color.RoyalBlue
+        Me.btnDownloadAndRun.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnDownloadAndRun.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnDownloadAndRun.FlatAppearance.BorderSize = 0
+        Me.btnDownloadAndRun.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btnDownloadAndRun.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.btnDownloadAndRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDownloadAndRun.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDownloadAndRun.ForeColor = System.Drawing.Color.White
+        Me.btnDownloadAndRun.Location = New System.Drawing.Point(206, 366)
+        Me.btnDownloadAndRun.Name = "btnDownloadAndRun"
+        Me.btnDownloadAndRun.Size = New System.Drawing.Size(383, 36)
+        Me.btnDownloadAndRun.TabIndex = 22
+        Me.btnDownloadAndRun.TabStop = False
+        Me.btnDownloadAndRun.Text = "DOWNLOAD and RUN"
+        Me.btnDownloadAndRun.UseVisualStyleBackColor = False
+        '
         'mainWIndow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -211,6 +231,7 @@ Partial Class mainWIndow
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.btnDownloadAndRun)
         Me.Controls.Add(Me.picLoading)
         Me.Controls.Add(Me.progressDownload)
         Me.Controls.Add(Me.btnDownload)
@@ -250,4 +271,5 @@ Partial Class mainWIndow
     Friend WithEvents picLogo As PictureBox
     Friend WithEvents NotifyIcon1 As NotifyIcon
     Friend WithEvents bgworker_download As System.ComponentModel.BackgroundWorker
+    Friend WithEvents btnDownloadAndRun As Button
 End Class

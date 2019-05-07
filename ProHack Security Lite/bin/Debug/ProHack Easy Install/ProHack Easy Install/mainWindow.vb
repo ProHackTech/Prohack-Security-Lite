@@ -6,6 +6,7 @@ Public Class mainWIndow
     Public itemNames As New List(Of String)()
     Public itemLinks As New List(Of String)()
     Public downloadableURLS As New List(Of String)()
+    Private isRun As Boolean
 
     Sub New()
         InitializeComponent()
@@ -187,15 +188,21 @@ Public Class mainWIndow
         create_flowItemControls()
     End Sub
 
-    Private Sub BtnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
+    Private Sub start_download()
         progressDownload.Visible = True
         If Not bgworker_download.IsBusy Then
             bgworker_download.RunWorkerAsync()
             btnDownload.Visible = False
+            btnDownloadAndRun.Visible = False
             picLoading.Visible = True
             picLoading.Image = Image.FromFile(Application.StartupPath & "/res/loading.gif")
             flowItems.Visible = False
         End If
+    End Sub
+
+    Private Sub BtnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
+        start_download()
+        isRun = False
     End Sub
 
     Private Sub Bgworker_download_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgworker_download.DoWork
@@ -221,6 +228,13 @@ Public Class mainWIndow
                 Dim client As New WebClient
                 client.DownloadFile(downloadURL, downloadName)
             Catch ex As Exception : End Try
+            If isRun = True Then
+                Try
+                    Process.Start(downloadName)
+                Catch ex As Exception
+                    MsgBox(ex.Message.ToString)
+                End Try
+            End If
             count += 1
             bgworker_download.ReportProgress(count * 100 / numDownloads)
         Next
@@ -236,11 +250,17 @@ Public Class mainWIndow
 
     Private Sub Bgworker_download_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgworker_download.RunWorkerCompleted
         btnDownload.Visible = True
+        btnDownloadAndRun.Visible = True
         picLoading.Image = Nothing
         picLoading.Visible = False
         flowItems.Visible = True
         progressDownload.Value = 0
         progressDownload.Visible = False
         MsgBox("Downloaded!")
+    End Sub
+
+    Private Sub BtnDownloadAndRun_Click(sender As Object, e As EventArgs) Handles btnDownloadAndRun.Click
+        start_download()
+        isRun = True
     End Sub
 End Class
