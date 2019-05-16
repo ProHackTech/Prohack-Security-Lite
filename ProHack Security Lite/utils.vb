@@ -288,8 +288,7 @@ Public Class utils
     Public Shared Sub _check_detections_()
         ' perform clear
         removeCards()
-        detected_filehash.Clear()
-        detected_filepath.Clear()
+        detected_filehash.Clear() : detected_filepath.Clear()
         ' read detections file
         reader = New StreamReader(dectected_malware_file)
         tempStr = Nothing
@@ -301,8 +300,7 @@ Public Class utils
                 detected_filehash.Add(tempArray(1))
             End If
         Loop Until tempStr Is Nothing
-        reader.Close()
-        reader.Dispose()
+        reader.Close() : reader.Dispose()
         Dim totalDetections As Integer = detected_filehash.Count
         For x As Integer = 0 To totalDetections - 1
             createCards(detected_filepath(x), detected_filehash(x), x + 1)

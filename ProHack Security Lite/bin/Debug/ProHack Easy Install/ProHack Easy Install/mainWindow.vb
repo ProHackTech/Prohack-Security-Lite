@@ -110,6 +110,9 @@ Public Class mainWIndow
     Private Sub xfce_type_border_toggle()
         Dim sizeH As Integer = Me.Size.Height
 
+        flowItems.Hide()
+        SuspendLayout()
+
         If sizeH = 450 Then
             For sizeH = 450 To 65 Step -10
                 Me.Size = New Size(Me.Size.Width, sizeH)
@@ -121,6 +124,9 @@ Public Class mainWIndow
             Next
             Me.Size = New Size(Me.Size.Width, 450)
         End If
+
+        flowItems.Show()
+        ResumeLayout()
     End Sub
 
     Private Sub BtnExit_MouseEnter(sender As Object, e As EventArgs) Handles btnExit.MouseEnter
@@ -186,10 +192,12 @@ Public Class mainWIndow
 
     Private Sub MainWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         create_flowItemControls()
+        lblDownloadStatus.Hide()
     End Sub
 
     Private Sub start_download()
         progressDownload.Visible = True
+        lblDownloadStatus.Show()
         If Not bgworker_download.IsBusy Then
             bgworker_download.RunWorkerAsync()
             btnDownload.Visible = False
@@ -206,15 +214,18 @@ Public Class mainWIndow
     End Sub
 
     Private Sub Bgworker_download_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgworker_download.DoWork
-        Dim downloadURL As String
+        Dim downloadURL As Uri
         Dim downloadName As String
         Dim numDownloads As Integer = downloadableURLS.Count
 
         Dim count As Integer = 0
+
+        ' download the files
         For Each url In downloadableURLS
-            downloadURL = url
+            downloadURL = New Uri(url, UriKind.Absolute)
             Dim tempArr() As String = Split(url, "/")
             downloadName = Application.StartupPath & "/downloads/" & tempArr(tempArr.Count - 1)
+
             If File.Exists(downloadName) Then
                 Try
                     File.Delete(downloadName)
@@ -256,6 +267,7 @@ Public Class mainWIndow
         flowItems.Visible = True
         progressDownload.Value = 0
         progressDownload.Visible = False
+        lblDownloadStatus.Hide()
         MsgBox("Downloaded!")
     End Sub
 
