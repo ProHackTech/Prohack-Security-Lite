@@ -38,6 +38,7 @@ Partial Class mainWIndow
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.bgworker_download = New System.ComponentModel.BackgroundWorker()
         Me.btnDownloadAndRun = New System.Windows.Forms.Button()
+        Me.lblDownloadStatus = New System.Windows.Forms.Label()
         CType(Me.picLoading, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -45,9 +46,9 @@ Partial Class mainWIndow
         'picLoading
         '
         Me.picLoading.BackColor = System.Drawing.Color.Transparent
-        Me.picLoading.Location = New System.Drawing.Point(273, 70)
+        Me.picLoading.Location = New System.Drawing.Point(278, 100)
         Me.picLoading.Name = "picLoading"
-        Me.picLoading.Size = New System.Drawing.Size(250, 250)
+        Me.picLoading.Size = New System.Drawing.Size(245, 220)
         Me.picLoading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.picLoading.TabIndex = 21
         Me.picLoading.TabStop = False
@@ -89,12 +90,12 @@ Partial Class mainWIndow
         Me.lblSelectItems.BackColor = System.Drawing.Color.Transparent
         Me.lblSelectItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.lblSelectItems.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSelectItems.ForeColor = System.Drawing.Color.Gray
-        Me.lblSelectItems.Location = New System.Drawing.Point(270, 90)
+        Me.lblSelectItems.ForeColor = System.Drawing.Color.White
+        Me.lblSelectItems.Location = New System.Drawing.Point(203, 81)
         Me.lblSelectItems.Name = "lblSelectItems"
-        Me.lblSelectItems.Size = New System.Drawing.Size(248, 16)
+        Me.lblSelectItems.Size = New System.Drawing.Size(208, 16)
         Me.lblSelectItems.TabIndex = 18
-        Me.lblSelectItems.Text = "Select item to download:"
+        Me.lblSelectItems.Text = "Select Toggle Items:"
         '
         'flowItems
         '
@@ -223,6 +224,20 @@ Partial Class mainWIndow
         Me.btnDownloadAndRun.Text = "DOWNLOAD and RUN"
         Me.btnDownloadAndRun.UseVisualStyleBackColor = False
         '
+        'lblDownloadStatus
+        '
+        Me.lblDownloadStatus.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.lblDownloadStatus.AutoSize = True
+        Me.lblDownloadStatus.BackColor = System.Drawing.Color.Transparent
+        Me.lblDownloadStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lblDownloadStatus.Font = New System.Drawing.Font("Lucida Console", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDownloadStatus.ForeColor = System.Drawing.Color.White
+        Me.lblDownloadStatus.Location = New System.Drawing.Point(39, 397)
+        Me.lblDownloadStatus.Name = "lblDownloadStatus"
+        Me.lblDownloadStatus.Size = New System.Drawing.Size(158, 16)
+        Me.lblDownloadStatus.TabIndex = 23
+        Me.lblDownloadStatus.Text = "Download Status"
+        '
         'mainWIndow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -231,6 +246,7 @@ Partial Class mainWIndow
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.lblDownloadStatus)
         Me.Controls.Add(Me.btnDownloadAndRun)
         Me.Controls.Add(Me.picLoading)
         Me.Controls.Add(Me.progressDownload)
@@ -272,4 +288,5 @@ Partial Class mainWIndow
     Friend WithEvents NotifyIcon1 As NotifyIcon
     Friend WithEvents bgworker_download As System.ComponentModel.BackgroundWorker
     Friend WithEvents btnDownloadAndRun As Button
+    Friend WithEvents lblDownloadStatus As Label
 End Class
