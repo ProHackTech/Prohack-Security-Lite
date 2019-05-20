@@ -140,6 +140,12 @@ Public Class utils
         Dim count As Integer
         Dim speed As Integer = core_FadeEffectSpeed
 
+        ' hide each control on form
+        For Each cntrl As Control In form.Controls
+            cntrl.Hide()
+        Next
+        form.SuspendLayout()
+
         If core_FadeEffectType = "WindowsDefault" Then
             For count = 100 To 0 Step -speed
                 form.Opacity = count / 100
@@ -162,7 +168,8 @@ Public Class utils
                 form.Refresh()
             Next
         End If
-        GC.Collect()
+
+        form.ResumeLayout()
     End Sub
 
     'Method: To fade in form
@@ -192,7 +199,12 @@ Public Class utils
                 form.Refresh()
             Next
         End If
-        GC.Collect()
+
+        ' show each control of form
+        For Each cntrl As Control In form.Controls
+            cntrl.Show()
+        Next
+
     End Sub
 
     ' Form Movevement: On Mouse Down
@@ -332,9 +344,9 @@ Public Class utils
                 Dim c As Control = malware_informer.flowDetections.Controls(i)
                 c.Dispose()
             Next
-            GC.Collect()
         End If
         malware_informer.flowDetections.ResumeLayout()
+        GC.Collect()
     End Sub
 
     ' refresh application

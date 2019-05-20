@@ -500,6 +500,7 @@ Public Class mainWindow
         If Me.WindowState = FormWindowState.Normal Then
             utils.form_fadeIn(Me)
             Me.Opacity = 1
+            toggle_tabControlOptions(False)
             check_focused.Stop()
         End If
     End Sub
@@ -510,6 +511,7 @@ Public Class mainWindow
 
         ' check the current updater version
         Dim reader As StreamReader
+        Dim writer As StreamWriter
         Dim tempStr As String = Nothing
         reader = New StreamReader(Application.StartupPath & "/updater/versions.txt")
         tempStr = reader.ReadToEnd
@@ -594,6 +596,51 @@ Public Class mainWindow
                 End If
             End If
         End If
+
+        ' -- check malware_db update
+        ' ask for update after a week from last update
+
+        ' read last update date
+        Dim last_update_date As Date : Dim current_datetime As DateTime = DateTime.Now
+        Dim last_update_filepath As String = Application.StartupPath & "/data/last_db_update.txt"
+        If File.Exists(last_update_filepath) Then
+            reader = New StreamReader(last_update_filepath)
+            Do
+                tempStr = reader.ReadLine()
+                If Not String.IsNullOrWhiteSpace(tempStr) Then
+                    last_update_date = Convert.ToDateTime(tempStr)
+                End If
+            Loop Until tempStr Is Nothing
+            reader.Close() : reader.Dispose()
+        End If
+        ' compare dates
+        Dim timespan As TimeSpan = current_datetime.Subtract(last_update_date)
+        ' if more than 7 days
+        If Convert.ToInt32(timespan.Days) >= 7 Then
+            ' ask to update malware db
+            Dim askresult = MessageBox.Show("New Malware Definitions Available! Update?", "Update DB?", MessageBoxButtons.YesNoCancel)
+            If askresult = DialogResult.Yes Then
+                ' start malware db updater
+                ' start python script
+                Dim command As String = utils.pyModDir & "malware_db_updater.py"
+                Try
+                    'MsgBox(utils.python_Path & " " & """" & command & """")
+                    Process.Start(utils.python_Path, """" & command & """").WaitForExit()
+
+                    ' update the date
+                    writer = New StreamWriter(Application.StartupPath & "/data/last_db_update.txt")
+                    writer.WriteLine(DateTime.Now.ToString)
+                    writer.Close() : writer.Dispose()
+                Catch ex As Exception
+                    MsgBox(ex.Message.ToString)
+                    BeginInvoke(CType(Sub()
+                                          SecLite_Settings.Show()
+                                          SecLite_Settings.SmallTabControl1.SelectedIndex = 1
+                                      End Sub, MethodInvoker))
+                End Try
+            End If
+        End If
+
     End Sub
 
     Private Sub Schedule_WSIR_Query_Tick(sender As Object, e As EventArgs) Handles Schedule_WSIR_Query.Tick

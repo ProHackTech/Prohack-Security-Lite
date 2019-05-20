@@ -304,7 +304,9 @@ Public Class SecLite_Settings
                 Dim imgpathArray As String() = Split(imgpath, "\")
                 Dim imgpathArrLen As Integer = imgpathArray.Length()
                 Dim imagename As String = imgpathArray(imgpathArrLen - 1)
-                System.IO.File.Copy(imgpath, wallpaperDir & imagename)
+                If Not System.IO.File.Exists(wallpaperDir & imagename) Then
+                    System.IO.File.Copy(imgpath, wallpaperDir & imagename)
+                End If
                 utils.core_Wallpaper = imagename
                 picPreview_Wallpaper.Image = Image.FromFile(wallpaperDir & imagename)
                 rbtn_Wallpaper_Image.ForeColor = blue

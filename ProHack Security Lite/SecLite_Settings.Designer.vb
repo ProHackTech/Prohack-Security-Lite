@@ -102,11 +102,11 @@ Partial Class SecLite_Settings
         Me.lblSubTitle.AutoSize = True
         Me.lblSubTitle.BackColor = System.Drawing.Color.Transparent
         Me.lblSubTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.lblSubTitle.Font = New System.Drawing.Font("Arial Nova", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSubTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSubTitle.ForeColor = System.Drawing.Color.Goldenrod
         Me.lblSubTitle.Location = New System.Drawing.Point(78, 45)
         Me.lblSubTitle.Name = "lblSubTitle"
-        Me.lblSubTitle.Size = New System.Drawing.Size(147, 26)
+        Me.lblSubTitle.Size = New System.Drawing.Size(158, 25)
         Me.lblSubTitle.TabIndex = 8
         Me.lblSubTitle.Text = "Lite : Settings"
         '
@@ -115,11 +115,11 @@ Partial Class SecLite_Settings
         Me.lblTitle.AutoSize = True
         Me.lblTitle.BackColor = System.Drawing.Color.Transparent
         Me.lblTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.lblTitle.Font = New System.Drawing.Font("Arial Nova", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitle.ForeColor = System.Drawing.Color.Olive
         Me.lblTitle.Location = New System.Drawing.Point(77, 12)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(235, 33)
+        Me.lblTitle.Size = New System.Drawing.Size(241, 31)
         Me.lblTitle.TabIndex = 7
         Me.lblTitle.Text = "ProHack Security"
         '

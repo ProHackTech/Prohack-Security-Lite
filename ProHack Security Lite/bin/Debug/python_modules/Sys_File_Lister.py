@@ -1,72 +1,62 @@
 from __future__ import print_function
-
-import os
-import sys
-
 from os import listdir, walk, system
 from os.path import isfile, join, realpath, dirname
-
 from tqdm import tqdm
 
-from core import *
+# import terminal beauty
+from core.colors import c_white, c_green, c_red, c_yellow, c_blue
+
+# saving all the gathered filepaths into list
+total_files = []
+
+curpath = dirname(realpath(__file__)) # get the folder in which the current python script is located
+
+# save the list into file
+def save_files(filelist):
+	filepath = curpath + "/data/File_List.list" # make the file path for file name to save
+	with open(filepath, 'w') as f: # open file
+		for file in total_files: # for each item in total_items list
+			try: # try (addded becasue some file paths have codec issue, so we ignore them)
+				f.write(f"{file}\n") # write into file and add newline
+			except: # if error
+				pass # pass/continues
+
+# get the files from folder ( didn't want to make a recurrsive function right now :/ )
+def get_files(dir):
+	tempfiles = [f for f in listdir(dir) if isfile(join(dir, f))] # list comprehension
+	for temp_file in tempfiles: # for each item in tempfiles list
+		finalfile = dir + "/" + temp_file # generate the file name
+		total_files.append(finalfile) # append into list
+
+# starting function
+def init(init_dir):
+	system('cls') # clear screen (windows specific)
+	print(f"{c_green} Gathering FileSystem Directories from {init_dir}..")
+	dirs = [] # initialize the list
+	for x in walk(init_dir):
+		dirs.append(x[0])
+		print(f"Gathered Directory: {c_white}{x[0]}{c_green}")
+	print(f"{c_white} Gathering files in {c_blue} {len(dirs)} {c_white} directories.. {c_blue}")
+	pbar = tqdm(total=len(dirs)) # initialize the progressbar
+	for dir in dirs: # for each directory in list of directories
+		dir = dir.replace("\\", "/")
+		get_files(dir) # start the get files function
+		pbar.update(1) # update the progressbar
+	print(f"{c_blue} Saving file list...{c_white}")
+	# start the save file function
+	save_files(total_files)
 
 
-class Files:
-    total = []
-
-    def __init__(self) -> None:
-        self.current_directory = dirname(realpath(__file__))
-        self.is_python_idle = sys.stdin.isatty()
-
-    def save_files(self, output_errors: bool = False, output_location: str = "data/file_list.list") -> "Files":
-        output_location = output_location.replace("/", "\\")
-        if (output_location[1] != ":"):  # Make sure the beginning of the directory is a drive, such as C:
-            output_location = os.path.join(self.current_directory, output_location)
-        output_directory = os.path.split(output_location)[0]
-        if not os.path.exists(output_directory):
-            os.makedirs(output_directory)
-        with open(output_location, "w+") as f:
-            for file in self.total:
-                try:
-                    f.write("{}\n".format(file))
-                except Exception as e:
-                    if (output_errors):
-                        print(e)
-        return self
-
-    def get_files(self, directory: str) -> list:
-        # Todo: Maybe check if the beginning of the directory is a location?
-        files_found = list()
-        temp_files = [f for f in listdir(directory) if isfile(join(directory, f))]
-        for temp_file in temp_files:
-            final_file = directory + "/" + temp_file
-            files_found.append(final_file)
-        return files_found
-
-    def main(self, directory: str = None) -> "Files":
-        if not directory:
-            directory = self.current_directory
-        if not self.is_python_idle:
-            system("cls")
-            print("{} Gathering FileSystem Directories from {}...".format(colors.c_green, directory))
-            directories = list()
-            for file_name in walk(directory):
-                directories.append(file_name[0])
-                print("Gathered Directory: {}{}{}".format(colors.c_white, file_name[0], colors.c_green))
-            print("{} Gathering files in {} {} {} directories.. {}".format(colors.c_white,
-                                                                           colors.c_blue,
-                                                                           len(directories),
-                                                                           colors.c_white,
-                                                                           colors.c_blue))
-            progress_bar = tqdm(total=len(directories))
-            for directory in directories:
-                directory = directory.replace("\\", "/")
-                self.total = self.get_files(directory)
-                progress_bar.update(1)
-        return self
-
-
-if __name__ == "__main__":
-    files = Files()
-    files.main()
-    files.save_files()
+# check the list_from configuration
+list_conf_path = "list_from.txt"
+list_conf = ""
+if isfile(list_conf_path):
+	with open(list_conf_path, 'r') as f:
+		list_conf = f.readline().strip()
+	print(list_conf)
+	if list_conf == "quick":
+		init("C:/Program Files/")
+	elif list_conf == "deep":
+		init("C:/")
+else:
+	init("C:/")

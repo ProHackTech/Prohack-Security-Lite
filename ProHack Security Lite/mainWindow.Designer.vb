@@ -81,11 +81,11 @@ Partial Class mainWindow
         Me.lblSubTitle.AutoSize = True
         Me.lblSubTitle.BackColor = System.Drawing.Color.Transparent
         Me.lblSubTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.lblSubTitle.Font = New System.Drawing.Font("Arial Nova", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSubTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSubTitle.ForeColor = System.Drawing.Color.Goldenrod
         Me.lblSubTitle.Location = New System.Drawing.Point(128, 68)
         Me.lblSubTitle.Name = "lblSubTitle"
-        Me.lblSubTitle.Size = New System.Drawing.Size(49, 26)
+        Me.lblSubTitle.Size = New System.Drawing.Size(51, 25)
         Me.lblSubTitle.TabIndex = 5
         Me.lblSubTitle.Text = "Lite"
         '
@@ -94,11 +94,11 @@ Partial Class mainWindow
         Me.lblTitle.AutoSize = True
         Me.lblTitle.BackColor = System.Drawing.Color.Transparent
         Me.lblTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.lblTitle.Font = New System.Drawing.Font("Arial Nova", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitle.ForeColor = System.Drawing.Color.Olive
         Me.lblTitle.Location = New System.Drawing.Point(127, 35)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(235, 33)
+        Me.lblTitle.Size = New System.Drawing.Size(241, 31)
         Me.lblTitle.TabIndex = 4
         Me.lblTitle.Text = "ProHack Security"
         '
