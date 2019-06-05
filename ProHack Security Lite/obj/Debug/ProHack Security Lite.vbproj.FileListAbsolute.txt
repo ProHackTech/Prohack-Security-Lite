@@ -19,4 +19,4 @@ C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\D
 C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.UC_Extras.resources
 C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.custom_scanner.resources
 C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack Security Lite.vbprojAssemblyReference.cache
-C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.ProMSG_YesNo.resources
+C:\Users\da74\Documents\GitHub\Prohack-Security-Lite\ProHack Security Lite\obj\Debug\ProHack_Security_Lite.ProMSG.resources
