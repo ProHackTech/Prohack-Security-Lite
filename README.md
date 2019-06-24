@@ -15,7 +15,7 @@ I hope this archive helps someone learning about Windows API and how some featur
 
 ## What I enjoyed most?
 
-I enjoyed optimizing the visual fade effects more than anything because they were random lol. Everytime I debugged the application, I would feel my own disgust at the copy pasted algorithm for fade effects. Then finally I decided to not be a skid and improve it. It was more than anything else because it cured my frustration withing hours of coding a better algorithm. I would love if someone responded to those StackOverflow questions about "fade effect in vb.net/c#" with fading effects here. I know there are programming who have made more optimized versions, but would be nice to see not the same code copies everywhere in most of the blogs and forum posts.
+I enjoyed optimizing the visual fade effects more than anything because they were random lol. Everytime I debugged the application, I would feel my own disgust at the copy pasted algorithm for fade effects. Then finally I decided to not be a skid and improve it. It was more than anything else because it cured my frustration withing hours of coding a better algorithm. I would love if someone responded to those StackOverflow questions about "fade effect in vb.net/c#" with fading effects here. I know there are programmers who have made more optimized versions, but would be nice to not see the same code copied everywhere in most of the blogs and forum posts.
 
 This is an anti-malware application made in VB.NET. All the hashes are collected from <a href="https://virusshare.com/">Virus Share Website</a>. Currently under development.
 
