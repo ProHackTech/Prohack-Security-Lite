@@ -5,9 +5,19 @@
 	Prohack Security Lite
 </h1>
 
-<h3 align="center">Under Development</h3>
+<h3 align="center">This Is Archived. New one under development!</h3>
 
-This is a small anti-malware application made in VB.NET. All the hashes are collected from <a href="https://virusshare.com/">Virus Share Website</a>. Currently under development.
+## New Roadmap
+
+This project is abondoned because of core design faults. There are some features that cannot be implemented becuase the logic is a bit faulty for what I had in mind. There are also some big improvements to make which can be made easily in the new repository for this project. Right now this will be archived and not removed, for showcase purposes. No new improvements for this repository. This was so fun. I loved every moment of spending my time on this and bought back a lot of memories about making winforms applications before I started my university degree.
+
+I hope this archive helps someone learning about Windows API and how some features work, for example querying search indexer easily and extracting file information from results. Some other stuff too. 
+
+## What I enjoyed most?
+
+I enjoyed optimizing the visual fade effects more than anything because they were random lol. Everytime I debugged the application, I would feel my own disgust at the copy pasted algorithm for fade effects. Then finally I decided to not be a skid and improve it. It was more than anything else because it cured my frustration withing hours of coding a better algorithm. I would love if someone responded to those StackOverflow questions about "fade effect in vb.net/c#" with fading effects here. I know there are programming who have made more optimized versions, but would be nice to see not the same code copies everywhere in most of the blogs and forum posts.
+
+This is an anti-malware application made in VB.NET. All the hashes are collected from <a href="https://virusshare.com/">Virus Share Website</a>. Currently under development.
 
 ## Test It Out
 
