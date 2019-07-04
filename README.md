@@ -5,6 +5,11 @@
 	Prohack Security Lite
 </h1>
 
+<h2 align="center">
+	Discontinued
+	<br>
+</h2>
+
 <h1 align="center">
 	<br>
 	<img src="https://raw.githubusercontent.com/ProHackTech/Prohack-Security-Lite/master/poster.PNG" alt="ProHack-Security-Lite Poster">
