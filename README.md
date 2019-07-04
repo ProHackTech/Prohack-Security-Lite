@@ -7,7 +7,7 @@
 
 <h1 align="center">
 	<br>
-	<img src="https://raw.githubusercontent.com/ProHackTech/Prohack-Security-Lite/master/poster.png" alt="ProHack-Security-Lite Poster">
+	<img src="https://raw.githubusercontent.com/ProHackTech/Prohack-Security-Lite/master/poster.PNG" alt="ProHack-Security-Lite Poster">
 	<br>
 </h1>
 
