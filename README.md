@@ -20,7 +20,7 @@
 
 ## New Roadmap
 
-This project is abondoned because of core design faults. There are some features that cannot be implemented becuase the logic is a bit faulty for what I had in mind. There are also some big improvements to make which can be made easily in the new repository for this project. Right now this will be archived and not removed, for showcase purposes. No new improvements for this repository. This was so fun. I loved every moment of spending my time on this and bought back a lot of memories about making winforms applications before I started my university degree.
+This project is abandoned because of core design faults. There are some features that cannot be implemented becuase the logic is a bit faulty for what I had in mind. There are also some big improvements to make which can be made easily in the new repository for this project. Right now this will be archived and not removed, for showcase purposes. No new improvements for this repository. This was so fun. I loved every moment of spending my time on this and bought back a lot of memories about making winforms applications before I started my university degree.
 
 I hope this archive helps someone learning about Windows API and how some features work, for example querying search indexer easily and extracting file information from results. Some other stuff too. 
 
